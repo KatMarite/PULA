@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PŪLA — Highland-Crafted Conditioning Beard Oil | Maseru, Lesotho</title>
+  <meta name="description" content="PŪLA Conditioning Beard Oil. Small-batch, 100% natural botanical beard care cold-pressed with Jojoba, Argan & Marula in Maseru, Lesotho." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Tailwind Design Tokens for PŪLA Artisan Apothecary System -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#F5F1E8',
+            'cream-dark': '#EDE7DB',
+            'cream-light': '#FAF8F3',
+            charcoal: '#1C1B1B',
+            stone: '#4A4845',
+            ochre: '#C86D1F',
+            'ochre-dark': '#A85814',
+            slatebg: '#161514',
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace'],
+          },
+          letterSpacing: {
+            wordmark: '0.32em',
+            apothecary: '0.16em',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(8px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-4px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.45' },
+              '50%': { opacity: '0.7' },
+            },
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.35s ease-out forwards',
+            'float-slow': 'floatSlow 5s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 4.5s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased selection:bg-ochre selection:text-cream overflow-x-hidden">
+
+  <!-- ===================================================================== -->
+  <!-- TOP MICRO-ANNOUNCEMENT BAR                                            -->
+  <!-- ===================================================================== -->
+  <div class="bg-charcoal text-cream border-b border-charcoal px-4 py-2 text-center">
+    <p class="font-mono text-[11px] sm:text-xs tracking-apothecary uppercase">
+      <span class="text-ochre font-bold">BATCH 001 NOW POURING</span>
+      <span class="mx-2 opacity-40">|</span>
+      SMALL-BATCH IN MASERU, LESOTHO
+      <span class="hidden sm:inline mx-2 opacity-40">|</span>
+      <span class="hidden sm:inline">FREE MASERU CBD PICKUP</span>
+    </p>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. STICKY APOTHECARY NAVIGATION BAR                                   -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-[72px]">
+        <!-- Left: Widely-spaced PŪLA Wordmark -->
+        <a href="#top" class="flex items-center gap-3 group focus:outline-none" aria-label="PŪLA Grooming Home">
+          <span class="font-display font-bold text-xl sm:text-2xl tracking-wordmark text-charcoal group-hover:text-ochre transition-colors">
+            PŪLA
+          </span>
+          <span class="hidden md:inline-block border-l border-charcoal/40 pl-3 font-mono text-[10px] tracking-apothecary text-stone uppercase">
+            Apothecary 01
+          </span>
+        </a>
+
+        <!-- Center: Uppercase Mono Navigation Links (Desktop) -->
+        <nav class="hidden md:flex items-center gap-8" aria-label="Primary Navigation">
+          <a href="#story" class="font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre transition-colors py-2">Story</a>
+          <a href="#formula" class="font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre transition-colors py-2">Formula</a>
+          <a href="#ritual" class="font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre transition-colors py-2">Ritual</a>
+          <a href="#barbershops" class="font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre transition-colors py-2">Stockists</a>
+          <a href="#editions" class="font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre transition-colors py-2">Shop</a>
+        </nav>
+
+        <!-- Right: Live Order Drawer Button + Mobile Menu Toggle -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            onclick="openOrderDrawer()"
+            class="inline-flex items-center gap-2 bg-charcoal text-cream hover:bg-ochre transition-colors px-4 py-2.5 rounded-sm font-mono text-xs tracking-apothecary uppercase font-bold cursor-pointer focus:outline-none focus:ring-2 focus:ring-ochre focus:ring-offset-2 focus:ring-offset-cream"
+            aria-label="Open order bag"
+          >
+            <span>ORDER</span>
+            <span id="nav-cart-count" class="bg-cream text-charcoal px-1.5 py-0.5 rounded-sm text-[11px] leading-none">0</span>
+          </button>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            onclick="toggleMobileMenu()"
+            class="md:hidden inline-flex items-center justify-center p-2.5 border border-charcoal rounded-sm text-charcoal hover:bg-cream-dark transition-colors"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu"
+          >
+            <svg id="icon-menu-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Slide-Down Nav Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-charcoal bg-cream-dark">
+      <nav class="px-4 py-4 flex flex-col divide-y divide-charcoal/20" aria-label="Mobile Navigation">
+        <a href="#story" onclick="closeMobileMenu()" class="py-3 font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre">01 / Story &amp; Heritage</a>
+        <a href="#formula" onclick="closeMobileMenu()" class="py-3 font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre">02 / Formula &amp; INCI</a>
+        <a href="#ritual" onclick="closeMobileMenu()" class="py-3 font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre">03 / Daily Ritual &amp; Drop Calc</a>
+        <a href="#barbershops" onclick="closeMobileMenu()" class="py-3 font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre">04 / Maseru Stockists</a>
+        <a href="#editions" onclick="closeMobileMenu()" class="py-3 font-mono text-xs uppercase tracking-apothecary text-charcoal hover:text-ochre">05 / Shop Batch 001</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- =================================================================== -->
+    <!-- 2. ARCHITECTURAL HERO SECTION (2-COLUMN FRAMED GRID)                -->
+    <!-- =================================================================== -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <div class="border border-charcoal bg-cream rounded-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+
+        <!-- LEFT COLUMN: Apothecary Editorial Copy & CTAs -->
+        <div class="lg:col-span-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-charcoal">
+          <!-- Top Metadata Bar -->
+          <div class="px-6 sm:px-8 py-4 border-b border-charcoal bg-cream-dark/60 flex flex-wrap items-center justify-between gap-2">
+            <span class="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs tracking-apothecary uppercase text-charcoal font-bold">
+              <span class="w-2 h-2 rounded-full bg-ochre inline-block"></span>
+              BATCH 001 • MASERU, LESOTHO
+            </span>
+            <span class="font-mono text-[11px] text-ochre font-bold tracking-wider uppercase">
+              01 • FRESH CITRUS &amp; WOODS
+            </span>
+          </div>
+
+          <!-- Hero Main Content -->
+          <div class="px-6 sm:px-8 lg:px-10 py-10 sm:py-12 lg:py-14 flex-1 flex flex-col justify-center">
+            <p class="font-mono text-xs uppercase tracking-apothecary text-stone mb-4">
+              Conditioning Beard Oil — Artisan Botanical Blend
+            </p>
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl xl:text-[54px] leading-[1.06] tracking-tight text-charcoal mb-6">
+              Highland-Crafted Botanical Beard Care.
+            </h1>
+            <p class="text-stone text-base sm:text-lg leading-relaxed max-w-xl mb-8">
+              Formulated in small batches in Maseru with cold-pressed African <strong class="text-charcoal font-semibold">Marula, Jojoba, and Argan</strong> oils. Built to soften coarse hair, calm dry highland skin, and absorb cleanly with zero synthetic fillers.
+            </p>
+
+            <!-- Primary & Secondary CTAs -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <button
+                type="button"
+                onclick="addItemAndOpen('single')"
+                class="inline-flex items-center justify-center gap-2.5 bg-charcoal text-cream hover:bg-ochre transition-colors px-6 py-4 rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold cursor-pointer shadow-sm"
+              >
+                <span>Order 01 Fresh Citrus &amp; Woods — M220</span>
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </button>
+
+              <a
+                href="#formula"
+                class="inline-flex items-center justify-center border border-charcoal bg-transparent hover:bg-cream-dark text-charcoal transition-colors px-6 py-4 rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold"
+              >
+                Explore the Formula
+              </a>
+            </div>
+
+            <!-- Micro trust note -->
+            <p class="mt-5 font-mono text-[11px] text-stone flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span>✓ Hand-poured in Lesotho</span>
+              <span>✓ Order via WhatsApp or Instagram DM</span>
+              <span>✓ 2–3 Month Supply</span>
+            </p>
+          </div>
+
+          <!-- 3-Cell Apothecary Spec Strip -->
+          <div class="grid grid-cols-3 border-t border-charcoal divide-x divide-charcoal bg-cream-dark/40">
+            <div class="px-3 sm:px-5 py-4 text-center">
+              <p class="font-mono text-[10px] text-stone uppercase tracking-wider mb-1">Net Volume</p>
+              <p class="font-mono text-[11px] sm:text-xs font-bold text-charcoal">30 ML / 1.0 FL. OZ.</p>
+            </div>
+            <div class="px-3 sm:px-5 py-4 text-center">
+              <p class="font-mono text-[10px] text-stone uppercase tracking-wider mb-1">Purity</p>
+              <p class="font-mono text-[11px] sm:text-xs font-bold text-charcoal">100% NATURAL</p>
+            </div>
+            <div class="px-3 sm:px-5 py-4 text-center">
+              <p class="font-mono text-[10px] text-stone uppercase tracking-wider mb-1">Extraction</p>
+              <p class="font-mono text-[11px] sm:text-xs font-bold text-charcoal">COLD-PRESSED</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Realistic Studio Product Photography Showcase & Interactive Switcher -->
+        <div class="lg:col-span-6 bg-cream-dark/35 flex flex-col justify-between">
+          <!-- Top Apothecary Metadata Strip -->
+          <div class="px-5 sm:px-6 py-3.5 border-b border-charcoal bg-cream flex flex-wrap items-center justify-between gap-2">
+            <span id="hero-meta-left" class="font-mono text-[10px] sm:text-[11px] tracking-apothecary text-charcoal font-bold uppercase">
+              BATCH 001 • 30 ML / 1.0 FL. OZ.
+            </span>
+            <span id="hero-meta-right" class="font-mono text-[10px] sm:text-[11px] tracking-apothecary text-ochre font-bold uppercase">
+              01 • FRESH CITRUS &amp; WOODS
+            </span>
+          </div>
+
+          <!-- Primary Framed Hero Studio Photograph Stage -->
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-center">
+            <div
+              id="hero-photo-frame"
+              ondragover="handlePhotoDragOver(event)"
+              ondragleave="handlePhotoDragLeave(event)"
+              ondrop="handlePhotoDrop(event, getActiveHeroPhotoId())"
+              class="relative w-full aspect-[4/3] border border-charcoal bg-slatebg rounded-sm overflow-hidden group cursor-zoom-in"
+              onclick="openLightbox(activeHeroIndex)"
+              role="button"
+              tabindex="0"
+              aria-label="Zoom active PŪLA product photograph"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(activeHeroIndex);}"
+            >
+              <!-- Active Realistic Hero Photograph -->
+              <img
+                id="hero-main-img"
+                src="watermarked_img_6778882664256068068.jpg"
+                alt="PŪLA Conditioning Beard Oil 30ml amber glass bottle beside matching cream textured retail box on dark slate"
+                data-photo-id="hero-box"
+                data-src-idx="0"
+                onload="handleImageLoad(this, 'hero-fallback-bar')"
+                onerror="handleImageError(this, this.dataset.photoId, 'hero-fallback-bar')"
+                class="w-full h-full object-cover transition-opacity duration-300 ease-out"
+              />
+
+              <!-- Subtle Bottom Legibility Gradient -->
+              <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal/80 via-charcoal/25 to-transparent"></div>
+
+              <!-- Top-Left Corner Apothecary Tag -->
+              <div class="pointer-events-none absolute top-3 left-3 bg-cream/95 border border-charcoal px-2.5 py-1 rounded-sm">
+                <span id="hero-corner-index" class="font-mono text-[10px] font-bold tracking-apothecary text-charcoal uppercase">
+                  01 / 06 • BOTTLE &amp; RETAIL BOX
+                </span>
+              </div>
+
+              <!-- Top-Right Subtle Zoom Indicator -->
+              <div class="pointer-events-none absolute top-3 right-3 bg-charcoal/85 text-cream border border-cream/25 px-2.5 py-1 rounded-sm flex items-center gap-1.5 opacity-90 group-hover:bg-ochre group-hover:border-ochre transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0zM11 8v6m-3-3h6" />
+                </svg>
+                <span class="font-mono text-[10px] tracking-wider uppercase">Zoom</span>
+              </div>
+
+              <!-- Bottom Caption Overlay -->
+              <div class="pointer-events-none absolute inset-x-0 bottom-0 px-4 py-3 flex items-end justify-between gap-3">
+                <p id="hero-caption" class="font-mono text-[11px] text-cream/95 leading-snug max-w-md">
+                  30ml amber glass dropper bottle beside matching textured cream retail carton on dark slate.
+                </p>
+              </div>
+
+              <!-- Discreet Local Photo Fallback Bar (ONLY shown if image fails to load) -->
+              <div
+                id="hero-fallback-bar"
+                onclick="event.stopPropagation()"
+                class="hidden absolute inset-0 bg-charcoal/85 backdrop-blur-xs flex flex-col items-center justify-center p-5 text-center"
+              >
+                <p class="font-mono text-[11px] uppercase tracking-apothecary text-ochre font-bold mb-1.5">
+                  Local Photo Not Found
+                </p>
+                <p class="text-xs text-cream/80 max-w-xs mb-4 leading-relaxed">
+                  Keep the image file in the same folder, drop a photo here, or select a local file to display.
+                </p>
+                <button
+                  type="button"
+                  onclick="triggerLocalPhotoReplace(getActiveHeroPhotoId())"
+                  class="px-4 py-2 bg-cream text-charcoal hover:bg-ochre hover:text-cream transition-colors border border-charcoal rounded-sm font-mono text-[11px] uppercase tracking-wider font-bold cursor-pointer"
+                >
+                  Replace Local Photo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive 6-Photo Apothecary Thumbnail Switcher -->
+          <div class="px-4 sm:px-5 pb-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono text-[10px] uppercase tracking-apothecary text-stone font-bold">
+                Gallery Switcher — 6 Views
+              </span>
+              <div class="flex items-center gap-3">
+                <button
+                  type="button"
+                  onclick="openLightbox(activeHeroIndex)"
+                  class="font-mono text-[10px] uppercase tracking-wider text-stone hover:text-charcoal underline underline-offset-2 cursor-pointer"
+                >
+                  Fullscreen
+                </button>
+                <button
+                  type="button"
+                  onclick="addItemAndOpen('single')"
+                  class="font-mono text-[10px] uppercase tracking-apothecary text-ochre hover:text-charcoal transition-colors font-bold cursor-pointer"
+                >
+                  + Quick Add (M220)
+                </button>
+              </div>
+            </div>
+
+            <div id="hero-thumbnails" class="grid grid-cols-3 sm:grid-cols-6 gap-2" role="tablist" aria-label="Product photograph gallery">
+              <!-- Thumbnails populated cleanly by JS from GALLERY_IMAGES -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 3. BRAND PHILOSOPHY STRIP ("PŪLA [POO-LAH] — SESOTHO FOR RAIN")     -->
+    <!-- =================================================================== -->
+    <section id="story" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div class="border border-charcoal bg-cream-dark/45 rounded-sm overflow-hidden">
+        <!-- Section Top Header -->
+        <div class="px-6 sm:px-8 py-4 border-b border-charcoal flex flex-wrap items-center justify-between gap-2 bg-cream-dark">
+          <span class="font-mono text-xs uppercase tracking-apothecary font-bold text-charcoal">
+            01 / BRAND PHILOSOPHY &amp; HIGHLAND HERITAGE
+          </span>
+          <span class="font-mono text-xs text-ochre font-bold">
+            29.3151° S, 27.4869° E — MASERU
+          </span>
+        </div>
+
+        <!-- 3-Column Editorial Story + Copperplate Mountain & Raincloud Engravings -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-charcoal">
+
+          <!-- Left Engraving Panel: Maloti Mountains -->
+          <div class="lg:col-span-3 p-6 sm:p-8 flex flex-col items-center justify-center bg-cream text-center">
+            <svg viewBox="0 0 180 140" class="w-44 sm:w-48 h-auto mb-3" stroke="#1C1B1B" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Copperplate woodcut engraving of Maloti mountain peaks and summit mist">
+              <!-- Summit Mist & Rain Clouds -->
+              <path d="M 18,32 C 30,20 48,20 60,29 C 70,22 86,23 94,32" stroke-width="1.0" />
+              <path d="M 108,24 C 120,15 138,16 150,25 C 158,20 168,23 172,30" stroke-width="0.95" />
+              <path d="M 10,64 C 24,57 40,59 50,66" stroke-width="0.8" />
+              <path d="M 134,58 C 148,51 162,53 174,60" stroke-width="0.8" />
+              <!-- Subtle Rain Threads over Peaks -->
+              <g stroke="#C86D1F" stroke-width="0.85" opacity="0.85">
+                <line x1="42" y1="32" x2="36" y2="46" />
+                <line x1="56" y1="31" x2="50" y2="45" />
+                <line x1="126" y1="27" x2="120" y2="41" />
+                <line x1="140" y1="28" x2="134" y2="42" />
+              </g>
+              <!-- Jagged Maloti Mountain Escarpment -->
+              <path d="M 8,124 L 36,80 L 48,90 L 66,54 L 78,66 L 98,24 L 118,62 L 130,50 L 152,86 L 162,76 L 174,124 Z" stroke-width="1.5" />
+              <!-- Primary Structural Ridge Spines -->
+              <path d="M 98,24 L 92,52 L 100,74 L 90,98 L 98,124" stroke-width="1.25" />
+              <path d="M 66,54 L 70,80 L 60,104 L 66,124" stroke-width="1.0" />
+              <path d="M 130,50 L 124,78 L 134,100 L 126,124" stroke-width="1.0" />
+              <path d="M 36,80 L 40,102 L 32,124" stroke-width="0.9" />
+              <path d="M 152,86 L 146,106 L 154,124" stroke-width="0.9" />
+              <!-- Dense Copperplate Woodcut Hatching on Shaded Slopes -->
+              <g stroke-width="0.72">
+                <line x1="96" y1="34" x2="84" y2="48" />
+                <line x1="94" y1="44" x2="78" y2="62" />
+                <line x1="93" y1="54" x2="74" y2="74" />
+                <line x1="96" y1="64" x2="70" y2="90" />
+                <line x1="98" y1="74" x2="68" y2="104" />
+                <line x1="95" y1="86" x2="70" y2="112" />
+                <line x1="93" y1="98" x2="74" y2="118" />
+                <line x1="95" y1="108" x2="82" y2="122" />
+                <!-- Cross-Hatch Counter Strokes -->
+                <line x1="80" y1="64" x2="94" y2="74" />
+                <line x1="74" y1="80" x2="92" y2="94" />
+                <line x1="72" y1="96" x2="90" y2="110" />
+                <!-- Left Shoulder Hatching -->
+                <line x1="65" y1="64" x2="50" y2="82" />
+                <line x1="67" y1="74" x2="46" y2="98" />
+                <line x1="66" y1="86" x2="44" y2="112" />
+                <line x1="62" y1="100" x2="46" y2="120" />
+                <!-- Far Left Foothill -->
+                <line x1="35" y1="90" x2="20" y2="108" />
+                <line x1="37" y1="102" x2="16" y2="122" />
+                <!-- Right Peak Shadow Face -->
+                <line x1="128" y1="60" x2="116" y2="74" />
+                <line x1="126" y1="72" x2="110" y2="90" />
+                <line x1="128" y1="84" x2="108" y2="108" />
+                <line x1="131" y1="96" x2="110" y2="120" />
+                <line x1="150" y1="96" x2="136" y2="114" />
+              </g>
+              <!-- Stipple Rock Texture -->
+              <g fill="#1C1B1B" stroke="none">
+                <circle cx="105" cy="48" r="0.9" /><circle cx="109" cy="64" r="0.9" /><circle cx="104" cy="82" r="0.9" />
+                <circle cx="111" cy="96" r="0.9" /><circle cx="138" cy="78" r="0.9" /><circle cx="141" cy="96" r="0.9" />
+                <circle cx="48" cy="108" r="0.9" /><circle cx="76" cy="92" r="0.9" />
+              </g>
+            </svg>
+            <span class="font-mono text-[10px] tracking-apothecary uppercase text-stone">Fig 01. Maloti Escarpment</span>
+          </div>
+
+          <!-- Center Editorial Manifesto -->
+          <div class="lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-center bg-cream">
+            <div class="inline-flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4">
+              <h2 class="font-display font-bold text-2xl sm:text-3xl tracking-wide text-charcoal">
+                PŪLA <span class="font-mono font-normal text-base sm:text-lg text-stone tracking-normal">[POO-LAH]</span>
+              </h2>
+              <span class="font-mono italic text-sm sm:text-base text-ochre font-bold">
+                — Sesotho for "Rain"
+              </span>
+            </div>
+            <p class="text-stone text-base leading-relaxed mb-4">
+              In the Mountain Kingdom, rain is more than weather—it is renewal, blessing, and life returning to dry earth. High-altitude winters and dry winds in Lesotho demand more than perfumed mineral oils that merely coat the surface.
+            </p>
+            <p class="text-stone text-base leading-relaxed">
+              Every bottle of <strong class="text-charcoal font-semibold">PŪLA Conditioning Beard Oil</strong> is blended by hand in Maseru using unrefined, cold-pressed Southern African and botanical oils that mimic your skin's natural sebum—hydrating deeply from follicle to tip while leaving a crisp, grounded aroma of bergamot, eucalyptus, and cedarwood.
+            </p>
+          </div>
+
+          <!-- Right Engraving Panel: Cumulus Raincloud over Highland Hills -->
+          <div class="lg:col-span-3 p-6 sm:p-8 flex flex-col items-center justify-center bg-cream text-center">
+            <svg viewBox="0 0 180 140" class="w-44 sm:w-48 h-auto mb-3" stroke="#1C1B1B" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Copperplate woodcut engraving of billowing cumulus raincloud showering over highland hills">
+              <!-- Billowing Cumulus Cloud Outer Silhouette -->
+              <path d="M 38,68 C 22,68 12,58 14,45 C 16,34 27,27 38,28 C 42,16 54,8 68,9 C 76,3 89,3 98,9 C 109,15 115,25 114,35 C 120,31 128,30 135,32 C 146,35 154,44 154,54 C 165,56 171,66 168,75 C 165,83 156,88 146,88 L 36,88 C 25,88 18,79 21,69" stroke-width="1.4" />
+              <!-- Inner Billowing Cloud Contours -->
+              <path d="M 42,28 C 50,18 64,15 76,18" stroke-width="0.9" />
+              <path d="M 76,13 C 88,9 100,13 106,22" stroke-width="0.9" />
+              <path d="M 108,38 C 118,35 130,37 136,44" stroke-width="0.85" />
+              <path d="M 28,50 C 37,43 50,43 58,50" stroke-width="0.85" />
+              <path d="M 64,48 C 76,40 92,41 102,49" stroke-width="0.85" />
+              <!-- Under-Cloud Engraved Horizontal Hatching -->
+              <g stroke-width="0.7">
+                <line x1="25" y1="64" x2="156" y2="64" stroke-dasharray="14 4 8 4" />
+                <line x1="22" y1="70" x2="162" y2="70" />
+                <line x1="21" y1="76" x2="162" y2="76" stroke-dasharray="20 4 10 4" />
+                <line x1="24" y1="82" x2="158" y2="82" />
+              </g>
+              <!-- Diagonal Engraved Rain Showers -->
+              <g stroke-width="0.95">
+                <line x1="36" y1="92" x2="26" y2="118" />
+                <line x1="50" y1="92" x2="39" y2="122" />
+                <line x1="64" y1="92" x2="54" y2="119" />
+                <line x1="78" y1="92" x2="67" y2="123" />
+                <line x1="92" y1="92" x2="82" y2="119" />
+                <line x1="106" y1="92" x2="95" y2="122" />
+                <line x1="120" y1="92" x2="110" y2="118" />
+                <line x1="134" y1="92" x2="124" y2="120" />
+                <line x1="146" y1="92" x2="137" y2="115" />
+              </g>
+              <!-- Secondary Fine Rain Threads -->
+              <g stroke-width="0.55" stroke-dasharray="6 4">
+                <line x1="43" y1="94" x2="33" y2="120" />
+                <line x1="71" y1="94" x2="61" y2="121" />
+                <line x1="99" y1="94" x2="89" y2="121" />
+                <line x1="127" y1="94" x2="117" y2="119" />
+              </g>
+              <!-- Rolling Highland Hills Beneath Rain -->
+              <path d="M 10,132 Q 46,112 86,125 Q 124,111 170,132" stroke-width="1.25" />
+              <path d="M 24,132 Q 60,121 98,131" stroke-width="0.7" />
+              <path d="M 108,130 Q 138,122 162,132" stroke-width="0.7" />
+            </svg>
+            <span class="font-mono text-[10px] tracking-apothecary uppercase text-stone">Fig 02. Highland Rain (Pūla)</span>
+          </div>
+        </div>
+
+        <!-- 4 Clean Brand Pillars Strip -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 border-t border-charcoal divide-y sm:divide-y-0 divide-x divide-charcoal bg-cream-dark/50">
+          <div class="p-5 sm:p-6">
+            <p class="font-mono text-[11px] text-ochre font-bold mb-1">01</p>
+            <h3 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal mb-1">Zero Silicones</h3>
+            <p class="text-xs text-stone leading-relaxed">No dimethicone or synthetic film-formers that suffocate follicles.</p>
+          </div>
+          <div class="p-5 sm:p-6">
+            <p class="font-mono text-[11px] text-ochre font-bold mb-1">02</p>
+            <h3 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal mb-1">Zero Mineral Oil</h3>
+            <p class="text-xs text-stone leading-relaxed">Free from petroleum byproducts and pore-clogging cheap fillers.</p>
+          </div>
+          <div class="p-5 sm:p-6 border-t lg:border-t-0 border-charcoal">
+            <p class="font-mono text-[11px] text-ochre font-bold mb-1">03</p>
+            <h3 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal mb-1">100% Plant-Derived</h3>
+            <p class="text-xs text-stone leading-relaxed">Pure cold-pressed nut &amp; seed oils scented strictly with essential oils.</p>
+          </div>
+          <div class="p-5 sm:p-6 border-t lg:border-t-0 border-charcoal">
+            <p class="font-mono text-[11px] text-ochre font-bold mb-1">04</p>
+            <h3 class="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal mb-1">Small-Batch Craft</h3>
+            <p class="text-xs text-stone leading-relaxed">Measured, blended, and bottled fresh in Maseru for peak potency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 4. INTERACTIVE FORMULA & SCENT PROFILE EXPLORER                     -->
+    <!-- =================================================================== -->
+    <section id="formula" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div class="border border-charcoal bg-cream rounded-sm overflow-hidden">
+
+        <!-- Section Header + Tab Switcher -->
+        <div class="p-6 sm:p-8 border-b border-charcoal bg-cream-dark/50 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-apothecary text-ochre font-bold mb-2">
+              02 / APOTHECARY FORMULATION
+            </p>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-charcoal tracking-tight">
+              Nothing Hidden. Every Drop Earns Its Place.
+            </h2>
+          </div>
+
+          <!-- Segmented Explorer Tabs -->
+          <div class="inline-flex border border-charcoal rounded-sm overflow-hidden bg-cream p-1 gap-1 self-start lg:self-auto" role="tablist" aria-label="Formula explorer tabs">
+            <button
+              type="button"
+              id="tab-btn-carrier"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-carrier"
+              onclick="switchFormulaTab('carrier')"
+              class="px-4 sm:px-5 py-2.5 rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold transition-colors bg-charcoal text-cream cursor-pointer"
+            >
+              Cold-Pressed Carrier Base
+            </button>
+            <button
+              type="button"
+              id="tab-btn-scent"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-scent"
+              onclick="switchFormulaTab('scent')"
+              class="px-4 sm:px-5 py-2.5 rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold transition-colors text-charcoal hover:bg-cream-dark cursor-pointer"
+            >
+              01 • Fresh Citrus &amp; Woods Notes
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB PANEL A: COLD-PRESSED CARRIER BASE (5 Botanicals) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-charcoal">
+
+          <!-- LEFT: Realistic Raw Botanicals Flat Lay Photography Showcase -->
+          <div class="lg:col-span-4 bg-cream-dark/30 flex flex-col justify-between">
+            <div class="p-5 sm:p-6">
+              <div
+                ondragover="handlePhotoDragOver(event)"
+                ondragleave="handlePhotoDragLeave(event)"
+                ondrop="handlePhotoDrop(event, 'botanicals')"
+                onclick="openLightboxById('botanicals')"
+                role="button"
+                tabindex="0"
+                aria-label="Zoom Raw Botanicals flat lay photograph"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightboxById('botanicals');}"
+                class="relative w-full aspect-[4/3] border border-charcoal rounded-sm overflow-hidden bg-slatebg group cursor-zoom-in"
+              >
+                <img
+                  src="watermarked_img_945027329055691337.jpg"
+                  alt="Raw botanical ingredients flat lay featuring PŪLA bottle, glass dropper, Marula nuts, cedarwood chips, eucalyptus leaves, and citrus peel"
+                  data-photo-id="botanicals"
+                  data-src-idx="0"
+                  onload="handleImageLoad(this, 'fallback-botanicals')"
+                  onerror="handleImageError(this, 'botanicals', 'fallback-botanicals')"
+                  class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                />
+                <div class="pointer-events-none absolute top-2.5 left-2.5 bg-cream/95 border border-charcoal px-2 py-0.5 rounded-sm">
+                  <span class="font-mono text-[9px] font-bold tracking-apothecary text-charcoal uppercase">RAW BOTANICALS</span>
+                </div>
+                <div class="pointer-events-none absolute bottom-2.5 right-2.5 bg-charcoal/85 text-cream px-2 py-0.5 rounded-sm font-mono text-[9px] uppercase tracking-wider">
+                  Click to Zoom
+                </div>
+                <!-- Discreet Fallback (Hidden unless load fails) -->
+                <div
+                  id="fallback-botanicals"
+                  onclick="event.stopPropagation()"
+                  class="hidden absolute inset-0 bg-charcoal/85 flex flex-col items-center justify-center p-4 text-center"
+                >
+                  <p class="font-mono text-[10px] text-ochre uppercase font-bold mb-2">Photo Unavailable</p>
+                  <button
+                    type="button"
+                    onclick="triggerLocalPhotoReplace('botanicals')"
+                    class="px-3 py-1.5 bg-cream text-charcoal hover:bg-ochre hover:text-cream rounded-sm font-mono text-[10px] uppercase font-bold cursor-pointer"
+                  >
+                    Replace Local Photo
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-2">
+                <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-apothecary text-stone">
+                  <span>COLD-PRESSED PROOF</span>
+                  <span class="text-ochre font-bold">ZERO FILLERS</span>
+                </div>
+                <p class="text-xs sm:text-sm text-stone leading-relaxed">
+                  Unrefined Southern African Marula, golden Jojoba, Moroccan Argan, fresh Eucalyptus leaves, Calabrian Bergamot rind, and Virginian Cedarwood—nothing synthetic touches the glass.
+                </p>
+              </div>
+            </div>
+
+            <!-- Subtle Botanical Copperplate Footer Strip -->
+            <div class="px-5 sm:px-6 py-3.5 border-t border-charcoal/30 bg-cream-dark/50 flex items-center justify-between">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                100% Plant-Derived Oils
+              </span>
+              <span class="font-mono text-[10px] text-stone">30 ml Amber Glass</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: Tabbed Explorer Panels (Carrier Base vs 01 Scent Notes) -->
+          <div class="lg:col-span-8">
+            <div id="panel-carrier" role="tabpanel" aria-labelledby="tab-btn-carrier" class="animate-fade-up h-full">
+              <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-charcoal h-full">
+
+                <!-- 1. Jojoba -->
+                <article class="p-6 flex flex-col justify-between border-b sm:border-r border-charcoal hover:bg-cream-dark/35 transition-colors">
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="font-mono text-[11px] text-ochre font-bold">BASE 01</span>
+                      <span class="font-mono text-[10px] px-2 py-0.5 border border-charcoal/40 rounded-sm text-stone uppercase">Sebum Match</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-charcoal mb-0.5">Golden Jojoba</h3>
+                    <p class="font-mono italic text-[11px] text-stone mb-2.5">Simmondsia Chinensis</p>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Biologically closest to human skin's natural sebum. Absorbs rapidly without heavy grease to balance dry, flaky skin beneath dense beards.
+                    </p>
+                  </div>
+                  <p class="mt-4 pt-3 border-t border-charcoal/20 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                    Role: Weightless Absorption
+                  </p>
+                </article>
+
+                <!-- 2. Marula -->
+                <article class="p-6 flex flex-col justify-between border-b border-charcoal hover:bg-cream-dark/35 transition-colors">
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="font-mono text-[11px] text-ochre font-bold">BASE 02</span>
+                      <span class="font-mono text-[10px] px-2 py-0.5 border border-charcoal/40 rounded-sm text-stone uppercase">Southern Africa</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-charcoal mb-0.5">Virgin Marula</h3>
+                    <p class="font-mono italic text-[11px] text-stone mb-2.5">Sclerocarya Birrea</p>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Southern Africa's prized antioxidant-rich elixir. Packed with oleic acid and omega-9 to shield coarse hair from harsh, dry highland wind.
+                    </p>
+                  </div>
+                  <p class="mt-4 pt-3 border-t border-charcoal/20 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                    Role: Moisture Lock &amp; Glow
+                  </p>
+                </article>
+
+                <!-- 3. Argan -->
+                <article class="p-6 flex flex-col justify-between border-b sm:border-r border-charcoal hover:bg-cream-dark/35 transition-colors">
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="font-mono text-[11px] text-ochre font-bold">BASE 03</span>
+                      <span class="font-mono text-[10px] px-2 py-0.5 border border-charcoal/40 rounded-sm text-stone uppercase">Deep Softener</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-charcoal mb-0.5">Moroccan Argan</h3>
+                    <p class="font-mono italic text-[11px] text-stone mb-2.5">Argania Spinosa</p>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Rich in linoleic acid and sterols that tame wiry flyaways, soften coarse curls, and reduce split ends for easier daily combing.
+                    </p>
+                  </div>
+                  <p class="mt-4 pt-3 border-t border-charcoal/20 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                    Role: Coarse Hair Conditioning
+                  </p>
+                </article>
+
+                <!-- 4. Sweet Almond -->
+                <article class="p-6 flex flex-col justify-between border-b border-charcoal hover:bg-cream-dark/35 transition-colors">
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="font-mono text-[11px] text-ochre font-bold">BASE 04</span>
+                      <span class="font-mono text-[10px] px-2 py-0.5 border border-charcoal/40 rounded-sm text-stone uppercase">Skin Soother</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-charcoal mb-0.5">Sweet Almond</h3>
+                    <p class="font-mono italic text-[11px] text-stone mb-2.5">Prunus Amygdalus Dulcis</p>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Silky, nutrient-dense emollient loaded with magnesium and fatty acids to calm post-trim irritation, beard itch, and redness.
+                    </p>
+                  </div>
+                  <p class="mt-4 pt-3 border-t border-charcoal/20 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                    Role: Anti-Itch Relief
+                  </p>
+                </article>
+
+                <!-- 5. Vitamin E (Full-Width Bottom Strip inside 2-Col Grid) -->
+                <article class="p-6 sm:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-cream-dark/35 transition-colors">
+                  <div>
+                    <div class="flex items-center gap-3 mb-1.5">
+                      <span class="font-mono text-[11px] text-ochre font-bold">BASE 05</span>
+                      <h3 class="font-display font-bold text-lg text-charcoal">Natural Vitamin E</h3>
+                      <span class="font-mono italic text-[11px] text-stone">Tocopherol</span>
+                    </div>
+                    <p class="text-sm text-stone leading-relaxed max-w-2xl">
+                      Nourishes follicle health while naturally preserving the cold-pressed carrier oils so every bottle stays fresh for 12 months.
+                    </p>
+                  </div>
+                  <span class="shrink-0 font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 border border-charcoal/40 rounded-sm text-charcoal font-bold self-start sm:self-center">
+                    Role: Antioxidant Freshness
+                  </span>
+                </article>
+              </div>
+            </div>
+
+            <!-- TAB PANEL B: 01 • FRESH CITRUS & WOODS SCENT PROFILE -->
+            <div id="panel-scent" role="tabpanel" aria-labelledby="tab-btn-scent" class="hidden animate-fade-up h-full">
+              <div class="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-charcoal h-full">
+                <!-- Left Botanical Eucalyptus Engraving Accent -->
+                <div class="md:col-span-4 p-6 flex flex-col items-center justify-center bg-cream-dark/25 text-center">
+                  <svg viewBox="0 0 180 210" class="w-36 sm:w-40 h-auto mb-3" stroke="#1C1B1B" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Copperplate botanical engraving of a eucalyptus sprig">
+                    <path d="M 88,198 C 90,154 96,102 104,28" stroke-width="2.0" />
+                    <path d="M 91,198 C 92,155 98,104 105,34" stroke-width="0.85" />
+                    <g>
+                      <path d="M 89,166 C 60,174 30,158 24,132 C 48,118 78,132 90,160" stroke-width="1.4" />
+                      <path d="M 88,163 C 66,154 46,144 27,134" stroke-width="0.95" />
+                      <line x1="72" y1="156" x2="62" y2="164" stroke-width="0.7" />
+                      <line x1="58" y1="149" x2="46" y2="158" stroke-width="0.7" />
+                      <line x1="44" y1="142" x2="34" y2="150" stroke-width="0.7" />
+                    </g>
+                    <g>
+                      <path d="M 93,146 C 122,152 152,136 158,110 C 134,96 104,110 94,140" stroke-width="1.4" />
+                      <path d="M 94,143 C 115,134 135,124 155,112" stroke-width="0.95" />
+                      <line x1="112" y1="135" x2="122" y2="143" stroke-width="0.7" />
+                      <line x1="126" y1="128" x2="138" y2="136" stroke-width="0.7" />
+                    </g>
+                    <g stroke-width="1.1">
+                      <path d="M 90,126 L 74,118" />
+                      <path d="M 74,118 L 68,113 L 65,120 L 72,123 Z" />
+                      <path d="M 97,104 L 114,96" />
+                      <path d="M 114,96 L 120,91 L 123,98 L 116,101 Z" />
+                    </g>
+                    <g>
+                      <path d="M 94,114 C 66,120 38,104 34,80 C 56,66 84,80 95,108" stroke-width="1.35" />
+                      <path d="M 94,111 C 74,102 54,92 37,82" stroke-width="0.9" />
+                    </g>
+                    <g>
+                      <path d="M 98,90 C 125,94 150,80 154,56 C 132,44 108,58 99,84" stroke-width="1.35" />
+                      <path d="M 99,87 C 118,78 136,68 151,58" stroke-width="0.9" />
+                    </g>
+                    <g>
+                      <path d="M 100,62 C 76,66 54,54 51,34 C 70,22 92,34 101,56" stroke-width="1.3" />
+                      <path d="M 103,42 C 122,44 139,33 141,16 C 125,7 108,18 104,37" stroke-width="1.25" />
+                      <path d="M 104,28 C 100,14 109,4 119,4 C 125,14 118,26 104,29" stroke-width="1.2" />
+                    </g>
+                  </svg>
+                  <span class="font-mono text-[10px] tracking-apothecary uppercase text-stone mb-1">Fig 03. Eucalyptus Smithii</span>
+                  <p class="font-mono text-[11px] text-ochre font-bold">Pure Essential Oils Only</p>
+                </div>
+
+                <!-- Right 3-Tier Fragrance Pyramid -->
+                <div class="md:col-span-8 divide-y divide-charcoal flex flex-col justify-between">
+                  <!-- Top Notes -->
+                  <div class="p-6">
+                    <span class="inline-block font-mono text-[10px] uppercase tracking-apothecary px-2 py-0.5 bg-ochre/15 text-ochre font-bold rounded-sm mb-2">
+                      Top Note • First Impression
+                    </span>
+                    <div class="flex flex-wrap items-baseline gap-x-2 mb-1.5">
+                      <h3 class="font-display font-bold text-lg text-charcoal">Calabrian Bergamot</h3>
+                      <span class="font-mono italic text-[11px] text-stone">Citrus Aurantium Bergamia</span>
+                    </div>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Opens immediately with bright, sun-ripened citrus rind and crisp green zest—clean, uplifting, and never sweet or overpowering.
+                    </p>
+                  </div>
+
+                  <!-- Heart Notes -->
+                  <div class="p-6">
+                    <span class="inline-block font-mono text-[10px] uppercase tracking-apothecary px-2 py-0.5 bg-charcoal/10 text-charcoal font-bold rounded-sm mb-2">
+                      Heart Note • Mid Dry-Down
+                    </span>
+                    <div class="flex flex-wrap items-baseline gap-x-2 mb-1.5">
+                      <h3 class="font-display font-bold text-lg text-charcoal">Highland Eucalyptus</h3>
+                      <span class="font-mono italic text-[11px] text-stone">Eucalyptus Smithii</span>
+                    </div>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Gentle, crisp botanical freshness reminiscent of cool mountain air after rain. Naturally invigorating for skin underneath the beard.
+                    </p>
+                  </div>
+
+                  <!-- Base Notes -->
+                  <div class="p-6">
+                    <span class="inline-block font-mono text-[10px] uppercase tracking-apothecary px-2 py-0.5 bg-charcoal text-cream font-bold rounded-sm mb-2">
+                      Base Note • Lasting Trail
+                    </span>
+                    <div class="flex flex-wrap items-baseline gap-x-2 mb-1.5">
+                      <h3 class="font-display font-bold text-lg text-charcoal">Cedarwood &amp; Frankincense</h3>
+                      <span class="font-mono italic text-[11px] text-stone">Juniperus Virginiana &amp; Boswellia Serrata</span>
+                    </div>
+                    <p class="text-sm text-stone leading-relaxed">
+                      Settles into a refined, dry woody warmth with resinous spice that stays close to the skin for hours—pairing effortlessly with any cologne.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPANDABLE FULL INCI TRANSPARENCY & CAUTION ACCORDION -->
+        <div class="border-t border-charcoal bg-cream-dark/40">
+          <button
+            type="button"
+            id="inci-toggle-btn"
+            onclick="toggleInciAccordion()"
+            aria-expanded="false"
+            aria-controls="inci-content"
+            class="w-full px-6 sm:px-8 py-5 flex items-center justify-between text-left hover:bg-cream-dark/80 transition-colors cursor-pointer"
+          >
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="font-mono text-xs sm:text-sm font-bold uppercase tracking-apothecary text-charcoal">
+                Full INCI Transparency &amp; Safety Caution
+              </span>
+              <span class="font-mono text-[10px] uppercase px-2 py-0.5 border border-charcoal/40 rounded-sm text-stone">
+                Exact Label Declaration
+              </span>
+            </div>
+            <span id="inci-icon" class="w-7 h-7 rounded-sm border border-charcoal flex items-center justify-center font-mono text-base font-bold text-charcoal shrink-0 transition-transform">
+              +
+            </span>
+          </button>
+
+          <div id="inci-content" class="hidden border-t border-charcoal/30 px-6 sm:px-8 py-6 bg-cream animate-fade-up">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+              <div class="lg:col-span-7">
+                <h4 class="font-mono text-xs font-bold uppercase tracking-apothecary text-charcoal mb-2">
+                  Ingredients (INCI)
+                </h4>
+                <p class="font-mono text-xs sm:text-[13px] leading-relaxed text-charcoal">
+                  Simmondsia Chinensis (Jojoba) Seed Oil, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Argania Spinosa (Argan) Kernel Oil, Sclerocarya Birrea (Marula) Seed Oil, Tocopherol, Citrus Aurantium Bergamia (Bergamot) Fruit Oil, Juniperus Virginiana (Cedarwood) Wood Oil, Eucalyptus Smithii (Eucalyptus) Leaf Oil, Boswellia Serrata (Frankincense) Oil, <em class="italic">Limonene*</em>, <em class="italic">Linalool*</em>.
+                </p>
+                <p class="mt-2.5 font-mono italic text-[11px] text-stone">
+                  *Naturally occurring aromatic components in pure essential oils.
+                </p>
+              </div>
+              <div class="lg:col-span-5 lg:border-l lg:border-charcoal/30 lg:pl-8">
+                <h4 class="font-mono text-xs font-bold uppercase tracking-apothecary text-ochre mb-2">
+                  Caution &amp; Storage
+                </h4>
+                <p class="text-xs sm:text-sm text-stone leading-relaxed">
+                  For external use only. <strong class="text-charcoal font-semibold">Contains tree nut oils (Sweet Almond).</strong> Perform a patch test on your inner forearm 24 hours before first use; discontinue if irritation occurs. Avoid direct eye contact. Store tightly sealed in a cool, dark place away from direct sunlight. Best used within 12 months of opening (12M PAO).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 5. THE DAILY RITUAL + INTERACTIVE BEARD DROP CALCULATOR             -->
+    <!-- =================================================================== -->
+    <section id="ritual" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+
+        <!-- LEFT: Realistic Daily Bathroom Ritual Photo + 3-Step Apothecary Routine -->
+        <div class="lg:col-span-6 border border-charcoal bg-cream rounded-sm flex flex-col justify-between overflow-hidden">
+          <div class="px-6 sm:px-8 py-5 border-b border-charcoal bg-cream-dark/50 flex items-center justify-between gap-3">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-apothecary text-ochre font-bold mb-1">
+                03 / THE DAILY RITUAL
+              </p>
+              <h2 class="font-display font-bold text-2xl sm:text-3xl text-charcoal tracking-tight">
+                Three Steps After Every Shower.
+              </h2>
+            </div>
+          </div>
+
+          <!-- Realistic Daily Bathroom Ritual Lifestyle Photograph -->
+          <div class="p-4 sm:p-5 border-b border-charcoal bg-cream-dark/25">
+            <div
+              ondragover="handlePhotoDragOver(event)"
+              ondragleave="handlePhotoDragLeave(event)"
+              ondrop="handlePhotoDrop(event, 'ritual')"
+              onclick="openLightboxById('ritual')"
+              role="button"
+              tabindex="0"
+              aria-label="Zoom The Daily Ritual lifestyle photograph"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightboxById('ritual');}"
+              class="relative w-full aspect-[16/10] border border-charcoal rounded-sm overflow-hidden bg-slatebg group cursor-zoom-in"
+            >
+              <img
+                src="0e5012cb.jpeg"
+                alt="PŪLA Conditioning Beard Oil bottle with water droplets beside a wooden beard comb on a stone bathroom vanity"
+                data-photo-id="ritual"
+                data-src-idx="0"
+                onload="handleImageLoad(this, 'fallback-ritual')"
+                onerror="handleImageError(this, 'ritual', 'fallback-ritual')"
+                class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+              />
+              <div class="pointer-events-none absolute top-2.5 left-2.5 bg-cream/95 border border-charcoal px-2.5 py-0.5 rounded-sm">
+                <span class="font-mono text-[9px] font-bold tracking-apothecary text-charcoal uppercase">MORNING RITUAL • DAMP APPLICATION</span>
+              </div>
+              <div class="pointer-events-none absolute bottom-2.5 right-2.5 bg-charcoal/85 text-cream px-2 py-0.5 rounded-sm font-mono text-[9px] uppercase tracking-wider">
+                Click to Zoom
+              </div>
+              <!-- Discreet Fallback (Hidden unless load fails) -->
+              <div
+                id="fallback-ritual"
+                onclick="event.stopPropagation()"
+                class="hidden absolute inset-0 bg-charcoal/85 flex flex-col items-center justify-center p-4 text-center"
+              >
+                <p class="font-mono text-[10px] text-ochre uppercase font-bold mb-2">Photo Unavailable</p>
+                <button
+                  type="button"
+                  onclick="triggerLocalPhotoReplace('ritual')"
+                  class="px-3 py-1.5 bg-cream text-charcoal hover:bg-ochre hover:text-cream rounded-sm font-mono text-[10px] uppercase font-bold cursor-pointer"
+                >
+                  Replace Local Photo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="divide-y divide-charcoal flex-1 flex flex-col justify-center">
+            <!-- Step 01 -->
+            <div class="p-5 sm:p-6 flex gap-4">
+              <div class="w-10 h-10 rounded-sm border border-charcoal bg-cream-dark flex items-center justify-center font-mono text-xs font-bold text-charcoal shrink-0">
+                01
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base sm:text-lg text-charcoal mb-0.5">Cleanse &amp; Dampen</h3>
+                <p class="text-sm text-stone leading-relaxed">
+                  Pat your beard towel-dry after a warm shower. Slightly damp hair and open pores allow cold-pressed oils to lock in hydration up to twice as effectively.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 02 -->
+            <div class="p-5 sm:p-6 flex gap-4">
+              <div class="w-10 h-10 rounded-sm border border-charcoal bg-cream-dark flex items-center justify-center font-mono text-xs font-bold text-charcoal shrink-0">
+                02
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base sm:text-lg text-charcoal mb-0.5">Warm Between Palms</h3>
+                <p class="text-sm text-stone leading-relaxed">
+                  Measure your recommended drops with the glass pipette into your palm. Rub hands together briskly for 3 seconds to awaken the bergamot &amp; cedar notes.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 03 -->
+            <div class="p-5 sm:p-6 flex gap-4">
+              <div class="w-10 h-10 rounded-sm border border-charcoal bg-cream-dark flex items-center justify-center font-mono text-xs font-bold text-charcoal shrink-0">
+                03
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base sm:text-lg text-charcoal mb-0.5">Massage &amp; Comb</h3>
+                <p class="text-sm text-stone leading-relaxed">
+                  Work fingers upward into the skin beneath your beard first, then smooth downward through the length with a wooden comb or boar-bristle brush.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Interactive Beard Length Drop Calculator -->
+        <div class="lg:col-span-6 border border-charcoal bg-cream-dark/45 rounded-sm flex flex-col justify-between overflow-hidden">
+          <div class="px-6 sm:px-8 py-6 border-b border-charcoal bg-charcoal text-cream flex items-center justify-between gap-4">
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-apothecary text-ochre font-bold mb-1">
+                INTERACTIVE DOSAGE GUIDE
+              </p>
+              <h2 class="font-display font-bold text-2xl sm:text-[26px] tracking-tight">
+                Beard Length Drop Calculator
+              </h2>
+            </div>
+            <span class="hidden sm:inline-block font-mono text-[11px] border border-cream/30 px-2.5 py-1 rounded-sm text-cream/80">
+              30ML ≈ 600 DROPS
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+            <!-- Stage Selector Buttons -->
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-apothecary text-stone font-bold mb-3">
+                Select Your Current Beard Stage:
+              </label>
+              <div class="grid grid-cols-2 gap-2.5 mb-7" role="radiogroup" aria-label="Beard length stage">
+                <button
+                  type="button"
+                  data-stage="stubble"
+                  onclick="selectBeardStage('stubble')"
+                  class="stage-btn text-left p-3.5 border border-charcoal rounded-sm transition-all cursor-pointer bg-cream hover:bg-cream-dark"
+                >
+                  <span class="block font-mono text-[10px] text-ochre font-bold uppercase">Stage 01</span>
+                  <span class="block font-display font-bold text-sm sm:text-base text-charcoal">Stubble</span>
+                  <span class="block font-mono text-[10px] text-stone">1–4 mm</span>
+                </button>
+
+                <button
+                  type="button"
+                  data-stage="short"
+                  onclick="selectBeardStage('short')"
+                  class="stage-btn text-left p-3.5 border border-charcoal rounded-sm transition-all cursor-pointer bg-cream hover:bg-cream-dark"
+                >
+                  <span class="block font-mono text-[10px] text-ochre font-bold uppercase">Stage 02</span>
+                  <span class="block font-display font-bold text-sm sm:text-base text-charcoal">Short Beard</span>
+                  <span class="block font-mono text-[10px] text-stone">5–15 mm</span>
+                </button>
+
+                <button
+                  type="button"
+                  data-stage="medium"
+                  onclick="selectBeardStage('medium')"
+                  class="stage-btn text-left p-3.5 border border-charcoal rounded-sm transition-all cursor-pointer bg-charcoal text-cream"
+                >
+                  <span class="block font-mono text-[10px] text-ochre font-bold uppercase">Stage 03</span>
+                  <span class="block font-display font-bold text-sm sm:text-base">Medium Beard</span>
+                  <span class="block font-mono text-[10px] text-cream/75">1.5–4 cm</span>
+                </button>
+
+                <button
+                  type="button"
+                  data-stage="full"
+                  onclick="selectBeardStage('full')"
+                  class="stage-btn text-left p-3.5 border border-charcoal rounded-sm transition-all cursor-pointer bg-cream hover:bg-cream-dark"
+                >
+                  <span class="block font-mono text-[10px] text-ochre font-bold uppercase">Stage 04</span>
+                  <span class="block font-display font-bold text-sm sm:text-base text-charcoal">Full Highland</span>
+                  <span class="block font-mono text-[10px] text-stone">4 cm+</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Calculated Output Card -->
+            <div class="border border-charcoal bg-cream rounded-sm p-5 sm:p-6">
+              <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-4 border-b border-charcoal/25">
+                <div>
+                  <p class="font-mono text-[10px] uppercase tracking-apothecary text-stone mb-1">Recommended Daily Dose</p>
+                  <p id="calc-drops-label" class="font-display font-extrabold text-3xl sm:text-4xl text-charcoal">
+                    4–5 Drops
+                  </p>
+                </div>
+                <div class="text-left sm:text-right">
+                  <p class="font-mono text-[10px] uppercase tracking-apothecary text-stone mb-1">30ml Bottle Lasts</p>
+                  <p id="calc-days-label" class="font-mono font-bold text-lg text-ochre">
+                    ~120–150 Days
+                  </p>
+                </div>
+              </div>
+
+              <!-- Visual Golden Droplet Row -->
+              <div class="flex items-center gap-2 mb-4" aria-hidden="true">
+                <span class="font-mono text-[10px] uppercase text-stone mr-1">Pipette:</span>
+                <div id="calc-droplet-icons" class="flex items-center gap-1.5">
+                  <!-- Populated dynamically by JS -->
+                </div>
+              </div>
+
+              <!-- Tailored Application Tip -->
+              <p class="font-mono text-[10px] uppercase tracking-apothecary text-charcoal font-bold mb-1">
+                Apothecary Tip:
+              </p>
+              <p id="calc-tip-text" class="text-sm text-stone leading-relaxed">
+                Massage 3 drops directly into the skin along your jawline and chin, then run the remaining 1–2 drops over the outer beard with a wooden comb for a satin, non-greasy sheen.
+              </p>
+            </div>
+
+            <!-- Quick CTA below calculator -->
+            <div class="mt-5 flex items-center justify-between gap-3">
+              <span class="font-mono text-[11px] text-stone">Ready to start your ritual?</span>
+              <button
+                type="button"
+                onclick="addItemAndOpen('single')"
+                class="font-mono text-xs uppercase tracking-wider font-bold text-charcoal hover:text-ochre underline underline-offset-4 cursor-pointer"
+              >
+                Add 30ml Bottle (M220) →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 6. BATCH 001 EDITIONS / DIRECT SHOP STRIP                           -->
+    <!-- =================================================================== -->
+    <section id="editions" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div class="border border-charcoal bg-cream rounded-sm overflow-hidden">
+        <div class="px-6 sm:px-8 py-6 border-b border-charcoal bg-cream-dark/50 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-apothecary text-ochre font-bold mb-2">
+              04 / ORDER BATCH 001
+            </p>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-charcoal tracking-tight">
+              Choose Your Set.
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-stone">
+            Prices in Lesotho Loti (M) • Free Maseru Pickup Available
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-charcoal">
+
+          <!-- Product 1: Single Bottle -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between hover:bg-cream-dark/25 transition-colors">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-[11px] text-stone uppercase tracking-wider">EDITION 01</span>
+                <span class="font-mono text-[10px] px-2 py-0.5 border border-charcoal rounded-sm font-bold text-charcoal">30 ML</span>
+              </div>
+              <h3 class="font-display font-bold text-xl text-charcoal mb-1">Single Bottle</h3>
+              <p class="font-mono text-xs text-ochre font-bold mb-3">01 • Fresh Citrus &amp; Woods</p>
+              <p class="text-sm text-stone leading-relaxed mb-6">
+                One 30ml UV-protective amber glass dropper bottle in our textured cream retail carton. Ideal for daily grooming (3–4 months supply).
+              </p>
+            </div>
+            <div>
+              <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-charcoal/20">
+                <span class="font-display font-extrabold text-2xl text-charcoal">M220</span>
+                <span class="font-mono text-[11px] text-stone">30 ml / 1.0 fl. oz.</span>
+              </div>
+              <button
+                type="button"
+                onclick="addItemAndOpen('single')"
+                class="w-full py-3.5 px-4 bg-charcoal text-cream hover:bg-ochre transition-colors rounded-sm font-mono text-xs uppercase tracking-apothecary font-bold cursor-pointer"
+              >
+                Add to Order — M220
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 2: Twin Pack (Best Value) -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between bg-cream-dark/30 hover:bg-cream-dark/50 transition-colors">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-[11px] text-ochre uppercase tracking-wider font-bold">EDITION 02</span>
+                <span class="font-mono text-[10px] px-2 py-0.5 bg-ochre text-cream rounded-sm font-bold uppercase">Save M30</span>
+              </div>
+              <h3 class="font-display font-bold text-xl text-charcoal mb-1">The Twin Pack</h3>
+              <p class="font-mono text-xs text-ochre font-bold mb-3">2 × 30ml Fresh Citrus &amp; Woods</p>
+              <p class="text-sm text-stone leading-relaxed mb-6">
+                Two full-size 30ml boxed bottles. Keep one on your bathroom vanity and one in your travel bag—or split with a brother.
+              </p>
+            </div>
+            <div>
+              <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-charcoal/20">
+                <div class="flex items-baseline gap-2">
+                  <span class="font-display font-extrabold text-2xl text-charcoal">M410</span>
+                  <span class="font-mono text-xs text-stone line-through">M440</span>
+                </div>
+                <span class="font-mono text-[11px] text-stone">60 ml total</span>
+              </div>
+              <button
+                type="button"
+                onclick="addItemAndOpen('twin')"
+                class="w-full py-3.5 px-4 bg-ochre text-cream hover:bg-charcoal transition-colors rounded-sm font-mono text-xs uppercase tracking-apothecary font-bold cursor-pointer"
+              >
+                Add Twin Pack — M410
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 3: The Ritual Gift Kit -->
+          <div class="p-6 sm:p-8 flex flex-col justify-between hover:bg-cream-dark/25 transition-colors">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-[11px] text-stone uppercase tracking-wider">EDITION 03</span>
+                <span class="font-mono text-[10px] px-2 py-0.5 border border-charcoal rounded-sm font-bold text-charcoal">GIFT READY</span>
+              </div>
+              <h3 class="font-display font-bold text-xl text-charcoal mb-1">The Ritual Gift Kit</h3>
+              <p class="font-mono text-xs text-ochre font-bold mb-3">30ml Oil + Anti-Static Wooden Comb</p>
+              <p class="text-sm text-stone leading-relaxed mb-6">
+                Our flagship 30ml boxed oil paired with a smooth, natural hardwood pocket beard comb to detangle coarse hair without static.
+              </p>
+            </div>
+            <div>
+              <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-charcoal/20">
+                <span class="font-display font-extrabold text-2xl text-charcoal">M320</span>
+                <span class="font-mono text-[11px] text-stone">Oil + Comb Bundle</span>
+              </div>
+              <button
+                type="button"
+                onclick="addItemAndOpen('kit')"
+                class="w-full py-3.5 px-4 bg-charcoal text-cream hover:bg-ochre transition-colors rounded-sm font-mono text-xs uppercase tracking-apothecary font-bold cursor-pointer"
+              >
+                Add Gift Kit — M320
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 7. MASERU BARBERSHOP & WHOLESALE PARTNER SECTION                    -->
+    <!-- =================================================================== -->
+    <section id="barbershops" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div class="border border-charcoal bg-charcoal text-cream rounded-sm overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+
+          <!-- Left Pitch Content -->
+          <div class="lg:col-span-7 p-7 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-cream/20">
+          <!-- Right Architectural Trade Card Summary + Realistic Maseru Barbershop Photo -->
+          <div class="lg:col-span-5 bg-cream/5 flex flex-col justify-between">
+            <!-- Realistic Maseru Barbershop Photography Frame -->
+            <div class="p-6 sm:p-7 pb-0">
+              <div
+                ondragover="handlePhotoDragOver(event)"
+                ondragleave="handlePhotoDragLeave(event)"
+                ondrop="handlePhotoDrop(event, 'barbershop')"
+                onclick="openLightboxById('barbershop')"
+                role="button"
+                tabindex="0"
+                aria-label="Zoom Maseru Barbershop photograph"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightboxById('barbershop');}"
+                class="relative w-full aspect-[16/10] border border-cream/30 rounded-sm overflow-hidden bg-slatebg group cursor-zoom-in"
+              >
+                <img
+                  src="5d5225b7.jpeg"
+                  alt="PŪLA Conditioning Beard Oil sitting on a wooden barber station in Maseru while a barber massages oil into a client's beard"
+                  data-photo-id="barbershop"
+                  data-src-idx="0"
+                  onload="handleImageLoad(this, 'fallback-barbershop')"
+                  onerror="handleImageError(this, 'barbershop', 'fallback-barbershop')"
+                  class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                />
+                <div class="pointer-events-none absolute top-2.5 left-2.5 bg-charcoal/90 border border-cream/30 px-2.5 py-0.5 rounded-sm">
+                  <span class="font-mono text-[9px] font-bold tracking-apothecary text-ochre uppercase">ON THE STATION • MASERU</span>
+                </div>
+                <div class="pointer-events-none absolute bottom-2.5 right-2.5 bg-charcoal/85 text-cream px-2 py-0.5 rounded-sm font-mono text-[9px] uppercase tracking-wider">
+                  Click to Zoom
+                </div>
+                <!-- Discreet Fallback (Hidden unless load fails) -->
+                <div
+                  id="fallback-barbershop"
+                  onclick="event.stopPropagation()"
+                  class="hidden absolute inset-0 bg-charcoal/90 flex flex-col items-center justify-center p-4 text-center"
+                >
+                  <p class="font-mono text-[10px] text-ochre uppercase font-bold mb-2">Photo Unavailable</p>
+                  <button
+                    type="button"
+                    onclick="triggerLocalPhotoReplace('barbershop')"
+                    class="px-3 py-1.5 bg-cream text-charcoal hover:bg-ochre hover:text-cream rounded-sm font-mono text-[10px] uppercase font-bold cursor-pointer"
+                  >
+                    Replace Local Photo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <p class="font-mono text-[11px] uppercase tracking-apothecary text-cream/60 mb-4 pb-3 border-b border-cream/20">
+                  STOCKIST SPEC SHEET — BATCH 001
+                </p>
+                <dl class="space-y-3.5 font-mono text-xs">
+                  <div class="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt class="text-cream/65">RETAIL RRP</dt>
+                    <dd class="text-cream font-bold">M220 / 30ml Boxed</dd>
+                  </div>
+                  <div class="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt class="text-cream/65">SHELF FOOTPRINT</dt>
+                    <dd class="text-cream font-bold">38 × 38 × 110 mm</dd>
+                  </div>
+                  <div class="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt class="text-cream/65">STARTER CASE</dt>
+                    <dd class="text-cream font-bold">From 5 Units + 1 Tester</dd>
+                  </div>
+                  <div class="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt class="text-cream/65">DELIVERY ZONES</dt>
+                    <dd class="text-cream font-bold text-right">Maseru, Roma, Mazenod</dd>
+                  </div>
+                  <div class="flex justify-between gap-4">
+                    <dt class="text-cream/65">DIRECT TRADE DESK</dt>
+                    <dd class="text-ochre font-bold">@pulagrooming</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div class="mt-6 pt-5 border-t border-cream/20 flex items-center gap-4">
+                <div class="w-11 h-11 rounded-full border border-cream/40 flex items-center justify-center font-display font-bold text-sm tracking-widest text-cream shrink-0">
+                  PŪ
+                </div>
+                <p class="text-xs text-cream/75 leading-relaxed">
+                  "Clean matte packaging that pops on a wooden barber station—and smells like fresh citrus and cedar, not cheap perfume."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 8. EDITORIAL FOOTER WITH MONOGRAM SEAL STAMP & 12M PAO ICON           -->
+  <!-- ===================================================================== -->
+  <footer class="mt-10 border-t border-charcoal bg-cream-dark/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center pb-10 border-b border-charcoal/30">
+
+        <!-- Left: Circular PŪ Monogram Seal Stamp SVG -->
+        <div class="md:col-span-4 flex flex-col sm:flex-row items-center md:items-center gap-5 text-center sm:text-left">
+          <svg viewBox="0 0 180 180" class="w-28 h-28 sm:w-32 sm:h-32 shrink-0" role="img" aria-label="Circular PŪLA Grooming Maseru Lesotho monogram seal stamp">
+            <defs>
+              <!-- Circular Text Paths -->
+              <path id="topArc" d="M 32,90 A 58,58 0 1,1 148,90" />
+              <path id="bottomArc" d="M 148,92 A 58,58 0 1,1 32,92" />
+            </defs>
+
+            <!-- Outer Double Stamp Rings -->
+            <circle cx="90" cy="90" r="85" fill="#F5F1E8" stroke="#1C1B1B" stroke-width="2.6" />
+            <circle cx="90" cy="90" r="79" fill="none" stroke="#1C1B1B" stroke-width="1.1" />
+            <circle cx="90" cy="90" r="74" fill="none" stroke="#1C1B1B" stroke-width="1.2" stroke-dasharray="1.8 4.2" stroke-linecap="round" />
+            <circle cx="90" cy="90" r="50" fill="none" stroke="#1C1B1B" stroke-width="1.1" />
+
+            <!-- Curved Top Text: PŪLA • GROOMING -->
+            <text font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="11.5" letter-spacing="3.2" fill="#1C1B1B">
+              <textPath href="#topArc" startOffset="50%" text-anchor="middle">PŪLA • GROOMING</textPath>
+            </text>
+
+            <!-- Curved Bottom Text: MASERU • LESOTHO -->
+            <text font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="10.8" letter-spacing="2.8" fill="#1C1B1B">
+              <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">MASERU • LESOTHO</textPath>
+            </text>
+
+            <!-- Mini Side Botanical Sprigs at 9 & 3 O'Clock -->
+            <g stroke="#1C1B1B" fill="none" stroke-width="0.9" stroke-linecap="round">
+              <!-- Left Sprig -->
+              <path d="M 27,96 Q 27,89 27,82" />
+              <path d="M 27,92 C 23,90 23,86 27,87" />
+              <path d="M 27,89 C 31,87 31,83 27,84" />
+              <!-- Right Sprig -->
+              <path d="M 153,96 Q 153,89 153,82" />
+              <path d="M 153,92 C 149,90 149,86 153,87" />
+              <path d="M 153,89 C 157,87 157,83 153,84" />
+            </g>
+
+            <!-- Center Monogram: PŪ -->
+            <text x="90" y="102" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="38" letter-spacing="2" fill="#1C1B1B">PŪ</text>
+
+            <!-- Mini Highland Peak & Raindrop Below Monogram -->
+            <g stroke="#1C1B1B" fill="none" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 76,120 L 84,111 L 87,114 L 90,109 L 94,114 L 97,111 L 104,120" />
+              <path d="M 90,118 C 90,118 86.2,123.4 86.2,126.2 C 86.2,128.4 87.9,130 90,130 C 92.1,130 93.8,128.4 93.8,126.2 C 93.8,123.4 90,118 90,118 Z" fill="#F5F1E8" />
+            </g>
+          </svg>
+
+          <div>
+            <p class="font-display font-bold text-xl tracking-wordmark text-charcoal mb-1">PŪLA</p>
+            <p class="font-mono text-xs text-stone mb-2">Highland-Crafted Grooming</p>
+            <p class="font-mono text-[11px] text-ochre font-bold uppercase tracking-wider">Maseru, Lesotho</p>
+          </div>
+        </div>
+
+        <!-- Middle: Navigation & Socials -->
+        <div class="md:col-span-5 grid grid-cols-2 gap-6 text-sm">
+          <div>
+            <h3 class="font-mono text-[11px] font-bold uppercase tracking-apothecary text-charcoal mb-3">Apothecary</h3>
+            <ul class="space-y-2 font-mono text-xs text-stone">
+              <li><a href="#story" class="hover:text-ochre transition-colors">Our Story</a></li>
+              <li><a href="#formula" class="hover:text-ochre transition-colors">Formula &amp; INCI</a></li>
+              <li><a href="#ritual" class="hover:text-ochre transition-colors">Drop Calculator</a></li>
+              <li><a href="#barbershops" class="hover:text-ochre transition-colors">Barber Wholesale</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-mono text-[11px] font-bold uppercase tracking-apothecary text-charcoal mb-3">Connect</h3>
+            <ul class="space-y-2 font-mono text-xs text-stone">
+              <li>
+                <a href="https://instagram.com/pulagrooming" target="_blank" rel="noopener noreferrer" class="hover:text-ochre transition-colors">
+                  Instagram: @pulagrooming
+                </a>
+              </li>
+              <li>
+                <button type="button" onclick="openOrderDrawer()" class="hover:text-ochre transition-colors cursor-pointer text-left">
+                  WhatsApp Direct Order
+                </button>
+              </li>
+              <li>
+                <button type="button" onclick="openBarberModal('wholesale')" class="hover:text-ochre transition-colors cursor-pointer text-left">
+                  Stockist Inquiries
+                </button>
+              </li>
+              <li class="text-charcoal/70 pt-1">Maseru, Kingdom of Lesotho</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Compliance & 12M PAO Vector Icon -->
+        <div class="md:col-span-3 flex flex-row md:flex-col items-center md:items-end justify-between gap-4">
+          <!-- Vector 12M PAO Open Jar Symbol -->
+          <div class="flex items-center gap-3 border border-charcoal bg-cream px-4 py-3 rounded-sm">
+            <svg viewBox="0 0 42 42" class="w-9 h-9 shrink-0" stroke="#1C1B1B" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="12M Period After Opening symbol">
+              <!-- Open Angled Lid -->
+              <path d="M 6,13 L 34,5" />
+              <!-- Jar Body -->
+              <path d="M 7,17 L 35,17 L 32,37 L 10,37 Z" />
+              <text x="21" y="31" text-anchor="middle" stroke="none" fill="#1C1B1B" font-family="'Inter', sans-serif" font-weight="700" font-size="10.5">12M</text>
+            </svg>
+            <div>
+              <p class="font-mono text-[10px] font-bold uppercase text-charcoal">Period After Opening</p>
+              <p class="font-mono text-[10px] text-stone">30 ml e • Cruelty-Free</p>
+            </div>
+          </div>
+
+          <p class="font-mono text-[11px] text-stone md:text-right">
+            100% Natural • Zero Synthetics
+          </p>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Batch Signoff -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] text-stone">
+        <p>© 2026 PŪLA Grooming. Crafted in Maseru, Lesotho.</p>
+        <p class="uppercase tracking-apothecary font-bold text-charcoal">
+          Batch 001 — Small-Batch Grooming
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE ORDER DRAWER / CART MODAL (SLIDE-OVER)                    -->
+  <!-- ===================================================================== -->
+  <div id="order-drawer-overlay" class="fixed inset-0 z-50 hidden" aria-modal="true" role="dialog" aria-labelledby="order-drawer-title">
+    <!-- Backdrop -->
+    <div onclick="closeOrderDrawer()" class="fixed inset-0 bg-charcoal/70 backdrop-blur-xs transition-opacity"></div>
+
+    <!-- Drawer Panel -->
+    <div class="fixed inset-y-0 right-0 max-w-full w-full sm:w-[460px] bg-cream border-l border-charcoal shadow-2xl flex flex-col">
+      <!-- Drawer Header -->
+      <div class="px-6 py-4 border-b border-charcoal bg-charcoal text-cream flex items-center justify-between">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-apothecary text-ochre font-bold">BATCH 001 • DIRECT ORDER</p>
+          <h2 id="order-drawer-title" class="font-display font-bold text-lg tracking-wide">Your PŪLA Order</h2>
+        </div>
+        <button
+          type="button"
+          onclick="closeOrderDrawer()"
+          class="p-2 border border-cream/30 hover:bg-cream/10 rounded-sm text-cream transition-colors cursor-pointer"
+          aria-label="Close order drawer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable Drawer Body -->
+      <div class="flex-1 overflow-y-auto px-6 py-5 space-y-6">
+
+        <!-- Product Selection List -->
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-apothecary text-stone font-bold mb-3">
+            Select Items &amp; Quantities
+          </p>
+          <div id="drawer-product-list" class="space-y-3">
+            <!-- Dynamically rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Fulfillment Method Toggle: Maseru Pickup vs Local Delivery -->
+        <div class="pt-4 border-t border-charcoal/25">
+          <p class="font-mono text-[11px] uppercase tracking-apothecary text-stone font-bold mb-3">
+            Fulfillment in Lesotho
+          </p>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button
+              type="button"
+              id="fulfill-pickup"
+              onclick="setFulfillment('pickup')"
+              class="p-3 border border-charcoal rounded-sm text-left bg-charcoal text-cream transition-colors cursor-pointer"
+            >
+              <span class="block font-mono text-xs font-bold uppercase">Maseru Pickup</span>
+              <span class="block font-mono text-[10px] opacity-80 mt-0.5">Pioneer / CBD • FREE</span>
+            </button>
+            <button
+              type="button"
+              id="fulfill-delivery"
+              onclick="setFulfillment('delivery')"
+              class="p-3 border border-charcoal rounded-sm text-left bg-cream hover:bg-cream-dark text-charcoal transition-colors cursor-pointer"
+            >
+              <span class="block font-mono text-xs font-bold uppercase">Local Delivery</span>
+              <span class="block font-mono text-[10px] text-stone mt-0.5">Maseru Area • +M30</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Customer Name & Area Inputs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="customer-name" class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-1.5">
+              Your Name
+            </label>
+            <input
+              type="text"
+              id="customer-name"
+              oninput="updateOrderSummary()"
+              placeholder="e.g. Thabo M."
+              class="w-full px-3 py-2.5 bg-cream-light border border-charcoal rounded-sm text-sm text-charcoal placeholder:text-stone/50 focus:outline-none focus:ring-1 focus:ring-ochre focus:border-ochre"
+            />
+          </div>
+          <div>
+            <label for="customer-area" class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-1.5">
+              Area / Suburb
+            </label>
+            <input
+              type="text"
+              id="customer-area"
+              oninput="updateOrderSummary()"
+              placeholder="e.g. Maseru West / Roma"
+              class="w-full px-3 py-2.5 bg-cream-light border border-charcoal rounded-sm text-sm text-charcoal placeholder:text-stone/50 focus:outline-none focus:ring-1 focus:ring-ochre focus:border-ochre"
+            />
+          </div>
+        </div>
+
+        <!-- Live Formatted WhatsApp / Instagram DM Order Summary Preview -->
+        <div class="pt-4 border-t border-charcoal/25">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-mono text-[10px] uppercase tracking-apothecary text-stone font-bold">
+              Order Message Preview (@pulagrooming)
+            </span>
+            <span class="font-mono text-[10px] text-ochre font-bold">Ready to Send</span>
+          </div>
+          <pre id="order-message-preview" class="p-3.5 bg-cream-dark/70 border border-charcoal/40 rounded-sm font-mono text-[11px] leading-relaxed text-charcoal whitespace-pre-wrap break-words"></pre>
+        </div>
+
+        <!-- Inline Drawer Validation Notice (replaces alert()) -->
+        <div id="drawer-warning" class="hidden p-3 border border-ochre bg-ochre/10 rounded-sm font-mono text-xs text-ochre font-bold">
+          Please add at least 1 item to your order before sending.
+        </div>
+      </div>
+
+      <!-- Sticky Drawer Footer: Subtotal & Action Buttons -->
+      <div class="px-6 py-4 border-t border-charcoal bg-cream-dark">
+        <div class="space-y-1.5 mb-4 font-mono text-xs">
+          <div class="flex justify-between text-stone">
+            <span>Items Subtotal</span>
+            <span id="drawer-subtotal">M0</span>
+          </div>
+          <div class="flex justify-between text-stone">
+            <span id="drawer-shipping-label">Maseru Pickup (Pioneer / CBD)</span>
+            <span id="drawer-shipping-cost">FREE</span>
+          </div>
+          <div class="flex justify-between text-base font-bold text-charcoal pt-2 border-t border-charcoal/30">
+            <span>TOTAL (LSL)</span>
+            <span id="drawer-total">M0</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <button
+            type="button"
+            onclick="copyOrderMessage()"
+            class="py-3 px-4 border border-charcoal bg-cream hover:bg-cream-light text-charcoal rounded-sm font-mono text-xs uppercase tracking-wider font-bold transition-colors cursor-pointer"
+          >
+            Copy Order Message
+          </button>
+          <button
+            type="button"
+            onclick="sendOrderViaWhatsApp()"
+            class="py-3 px-4 bg-charcoal hover:bg-ochre text-cream rounded-sm font-mono text-xs uppercase tracking-wider font-bold transition-colors cursor-pointer"
+          >
+            Send via WhatsApp
+          </button>
+        </div>
+        <p class="mt-2.5 text-center font-mono text-[10px] text-stone">
+          Payment via M-Pesa, EcoCash, EFT, or Cash on Collection.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- BARBERSHOP PARTNER & WHOLESALE REQUEST MODAL                          -->
+  <!-- ===================================================================== -->
+  <div id="barber-modal-overlay" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" aria-modal="true" role="dialog" aria-labelledby="barber-modal-title">
+    <div onclick="closeBarberModal()" class="fixed inset-0 bg-charcoal/75 backdrop-blur-xs"></div>
+
+    <div class="relative z-10 w-full max-w-lg bg-cream border border-charcoal rounded-sm shadow-2xl overflow-hidden animate-fade-up">
+      <div class="px-6 py-4 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-apothecary text-ochre font-bold">MASERU &amp; ROMA TRADE DESK</p>
+          <h3 id="barber-modal-title" class="font-display font-bold text-lg">Barbershop Partner Inquiry</h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeBarberModal()"
+          class="p-2 border border-cream/30 hover:bg-cream/10 rounded-sm text-cream cursor-pointer"
+          aria-label="Close barbershop modal"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <form id="barber-inquiry-form" onsubmit="handleBarberSubmit(event)" class="p-6 space-y-4">
+        <!-- Request Type Toggle -->
+        <div>
+          <label class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-2">
+            What would you like to request?
+          </label>
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              id="req-type-tester"
+              onclick="setBarberRequestType('tester')"
+              class="py-2.5 px-3 border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold bg-charcoal text-cream cursor-pointer"
+            >
+              Free 5ml Barber Tester
+            </button>
+            <button
+              type="button"
+              id="req-type-wholesale"
+              onclick="setBarberRequestType('wholesale')"
+              class="py-2.5 px-3 border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold bg-cream text-charcoal hover:bg-cream-dark cursor-pointer"
+            >
+              Wholesale Rate Card
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="barber-shop-name" class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-1">
+              Barbershop Name *
+            </label>
+            <input
+              type="text"
+              id="barber-shop-name"
+              required
+              placeholder="e.g. Kingdom Cuts"
+              class="w-full px-3 py-2.5 bg-cream-light border border-charcoal rounded-sm text-sm text-charcoal focus:outline-none focus:ring-1 focus:ring-ochre"
+            />
+          </div>
+          <div>
+            <label for="barber-contact-name" class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-1">
+              Your Name *
+            </label>
+            <input
+              type="text"
+              id="barber-contact-name"
+              required
+              placeholder="e.g. Lerato / Master Barber"
+              class="w-full px-3 py-2.5 bg-cream-light border border-charcoal rounded-sm text-sm text-charcoal focus:outline-none focus:ring-1 focus:ring-ochre"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="barber-location" class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-1">
+              Location *
+            </label>
+            <select
+              id="barber-location"
+              class="w-full px-3 py-2.5 bg-cream-light border border-charcoal rounded-sm text-sm text-charcoal focus:outline-none focus:ring-1 focus:ring-ochre"
+            >
+              <option value="Maseru CBD">Maseru CBD</option>
+              <option value="Pioneer / Maseru West">Pioneer / Maseru West</option>
+              <option value="Hillsview / Europa">Hillsview / Europa</option>
+              <option value="Roma">Roma</option>
+              <option value="Other Lesotho Town">Other Lesotho Town</option>
+            </select>
+          </div>
+          <div>
+            <label for="barber-chairs" class="block font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-1">
+              Active Barber Chairs
+            </label>
+            <select
+              id="barber-chairs"
+              class="w-full px-3 py-2.5 bg-cream-light border border-charcoal rounded-sm text-sm text-charcoal focus:outline-none focus:ring-1 focus:ring-ochre"
+            >
+              <option value="1–2 Chairs">1–2 Chairs</option>
+              <option value="3–5 Chairs" selected>3–5 Chairs</option>
+              <option value="6+ Chairs">6+ Chairs</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Inline Confirmation Panel (Shown after Submit) -->
+        <div id="barber-confirm-box" class="hidden p-4 border border-charcoal bg-cream-dark/70 rounded-sm space-y-3">
+          <p class="font-mono text-xs font-bold text-ochre uppercase">
+            ✓ Inquiry Formatted — Ready to Send
+          </p>
+          <pre id="barber-message-output" class="font-mono text-[11px] text-charcoal whitespace-pre-wrap leading-relaxed"></pre>
+          <div class="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onclick="copyBarberInquiry()"
+              class="flex-1 py-2.5 px-3 border border-charcoal bg-cream hover:bg-cream-light rounded-sm font-mono text-[11px] uppercase font-bold cursor-pointer"
+            >
+              Copy Inquiry
+            </button>
+            <button
+              type="button"
+              onclick="sendBarberViaWhatsApp()"
+              class="flex-1 py-2.5 px-3 bg-charcoal hover:bg-ochre text-cream rounded-sm font-mono text-[11px] uppercase font-bold cursor-pointer"
+            >
+              Open in WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          id="barber-submit-btn"
+          class="w-full py-3.5 px-4 bg-charcoal hover:bg-ochre text-cream rounded-sm font-mono text-xs uppercase tracking-apothecary font-bold transition-colors cursor-pointer"
+        >
+          Generate Partner Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PHOTOGRAPHY LIGHTBOX / ZOOM MODAL                                     -->
+  <!-- ===================================================================== -->
+  <div id="lightbox-overlay" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6" aria-modal="true" role="dialog" aria-labelledby="lightbox-title">
+    <div onclick="closeLightbox()" class="fixed inset-0 bg-charcoal/90 backdrop-blur-sm"></div>
+
+    <div class="relative z-10 w-full max-w-4xl bg-cream border border-charcoal rounded-sm shadow-2xl overflow-hidden animate-fade-up flex flex-col">
+      <!-- Top Bar -->
+      <div class="px-4 sm:px-6 py-3 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span id="lightbox-counter" class="font-mono text-[11px] text-ochre font-bold uppercase tracking-apothecary">01 / 06</span>
+          <h3 id="lightbox-title" class="font-display font-bold text-sm sm:text-base tracking-wide">Bottle &amp; Retail Box</h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeLightbox()"
+          class="p-2 border border-cream/30 hover:bg-cream/10 rounded-sm text-cream cursor-pointer"
+          aria-label="Close fullscreen gallery"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Zoomed Photograph Canvas -->
+      <div class="relative bg-slatebg flex items-center justify-center min-h-[280px] sm:min-h-[440px] max-h-[72vh] overflow-hidden">
+        <img
+          id="lightbox-img"
+          src=""
+          alt="PŪLA zoomed product photography"
+          class="max-h-[72vh] w-full object-contain transition-opacity duration-200"
+        />
+
+        <!-- Prev / Next Navigation Buttons -->
+        <button
+          type="button"
+          onclick="stepLightbox(-1)"
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-sm bg-charcoal/80 hover:bg-ochre text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
+          aria-label="Previous photograph"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onclick="stepLightbox(1)"
+          class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-sm bg-charcoal/80 hover:bg-ochre text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
+          aria-label="Next photograph"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Bottom Caption & Metadata Footer -->
+      <div class="px-4 sm:px-6 py-3.5 bg-cream border-t border-charcoal flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <p id="lightbox-caption" class="text-xs sm:text-sm text-stone leading-snug"></p>
+        <span id="lightbox-tag" class="font-mono text-[10px] uppercase tracking-apothecary text-ochre font-bold shrink-0"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Local File Input for Discreet Photo Fallback Replacement -->
+  <input type="file" id="local-photo-input" accept="image/*" class="hidden" onchange="handleLocalPhotoPicked(event)" />
+
+  <!-- ===================================================================== -->
+  <!-- CUSTOM TOAST MESSAGE BOX (NEVER USES alert())                         -->
+  <!-- ===================================================================== -->
+  <div
+    id="toast-banner"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] hidden bg-charcoal text-cream border border-ochre px-5 py-3 rounded-sm shadow-xl font-mono text-xs tracking-wider uppercase flex items-center gap-2.5"
+  >
+    <span class="w-2 h-2 rounded-full bg-ochre shrink-0"></span>
+    <span id="toast-text">Copied to clipboard</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION JAVASCRIPT (STATE, CALCULATOR, ORDER DRAWER, MODALS)      -->
+  <!-- ===================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------- *
+     * 0. REALISTIC PRODUCT & LIFESTYLE PHOTOGRAPHY GALLERY REGISTRY
+     * --------------------------------------------------------------------- */
+    const GALLERY_IMAGES = [
+      {
+        id: 'hero-box',
+        title: 'Bottle & Retail Box',
+        shortLabel: 'Bottle & Box',
+        metaLeft: 'BATCH 001 • 30 ML / 1.0 FL. OZ.',
+        metaRight: '01 • FRESH CITRUS & WOODS',
+        caption: '30ml amber glass dropper bottle beside matching textured cream retail carton on dark slate.',
+        sources: ['watermarked_img_6778882664256068068.jpg'],
+        placeholder: 'https://placehold.co/960x720/1C1B1B/F5F1E8?text=PULA+Bottle+%26+Retail+Box',
+        customUrl: null,
+        resolvedUrl: 'watermarked_img_6778882664256068068.jpg',
+      },
+      {
+        id: 'bottle-solo',
+        title: '30ml Amber Bottle',
+        shortLabel: '30ml Bottle',
+        metaLeft: 'OPTION A • ARTISAN APOTHECARY',
+        metaRight: 'COLD-PRESSED BASE',
+        caption: 'UV-protective amber glass with matte cream label, charcoal framing, and burnt amber variant typography.',
+        sources: ['p1.jpg'],
+        placeholder: 'https://placehold.co/960x720/1C1B1B/F5F1E8?text=PULA+30ml+Amber+Bottle',
+        customUrl: null,
+        resolvedUrl: 'p1.jpg',
+      },
+      {
+        id: 'box-back',
+        title: 'Box Back & INCI',
+        shortLabel: 'Box Back',
+        metaLeft: 'FULL INCI TRANSPARENCY • 12M PAO',
+        metaRight: 'MASERU, LESOTHO',
+        caption: 'Complete directions, full botanical INCI declaration, nut-oil caution, and copperplate raincloud side engraving.',
+        sources: ['watermarked_img_12690490086130051409.jpg'],
+        placeholder: 'https://placehold.co/960x720/1C1B1B/F5F1E8?text=PULA+Box+Back+%26+INCI',
+        customUrl: null,
+        resolvedUrl: 'watermarked_img_12690490086130051409.jpg',
+      },
+      {
+        id: 'botanicals',
+        title: 'Raw Botanicals',
+        shortLabel: 'Botanicals',
+        metaLeft: '100% PLANT-DERIVED • ZERO FILLERS',
+        metaRight: 'JOJOBA • ARGAN • MARULA',
+        caption: 'Raw Marula nuts, cedarwood chips, fresh eucalyptus leaves, citrus rind, and golden cold-pressed oil pipette.',
+        sources: ['watermarked_img_945027329055691337.jpg'],
+        placeholder: 'https://placehold.co/960x720/1C1B1B/F5F1E8?text=PULA+Raw+Botanicals',
+        customUrl: null,
+        resolvedUrl: 'watermarked_img_945027329055691337.jpg',
+      },
+      {
+        id: 'ritual',
+        title: 'The Daily Ritual',
+        shortLabel: 'Daily Ritual',
+        metaLeft: 'MORNING ROUTINE • 3–5 DROPS DAILY',
+        metaRight: 'HIGHLAND HYDRATION',
+        caption: 'Formulated for damp post-shower application alongside a hardwood beard comb for non-greasy daily conditioning.',
+        sources: ['0e5012cb.jpeg', 'watermarked_img_7491661958190963359.jpg'],
+        placeholder: 'https://placehold.co/960x720/1C1B1B/F5F1E8?text=PULA+The+Daily+Ritual',
+        customUrl: null,
+        resolvedUrl: '0e5012cb.jpeg',
+      },
+      {
+        id: 'barbershop',
+        title: 'Maseru Barbershop',
+        shortLabel: 'Barbershop',
+        metaLeft: 'BARBER APPROVED • MASERU & ROMA',
+        metaRight: 'STOCKIST EDITION',
+        caption: 'Crafted for barbershop stations across Maseru—high-contrast matte packaging with crisp citrus & cedar finish.',
+        sources: ['5d5225b7.jpeg', 'watermarked_img_1888701315113621907.jpg'],
+        placeholder: 'https://placehold.co/960x720/1C1B1B/F5F1E8?text=PULA+Maseru+Barbershop',
+        customUrl: null,
+        resolvedUrl: '5d5225b7.jpeg',
+      },
+    ];
+
+    let activeHeroIndex = 0;
+    let lightboxIndex = 0;
+    let pendingReplacePhotoId = null;
+
+    function getPhotoById(photoId) {
+      return GALLERY_IMAGES.find((item) => item.id === photoId) || GALLERY_IMAGES[0];
+    }
+
+    function getActiveHeroPhotoId() {
+      return GALLERY_IMAGES[activeHeroIndex].id;
+    }
+
+    function getBestPhotoUrl(photo) {
+      return photo.customUrl || photo.resolvedUrl || photo.sources[0];
+    }
+
+    /* Silent source fallback chain; reveals discreet local photo replacer ONLY if all real sources fail */
+    function handleImageLoad(imgEl, fallbackId) {
+      const photo = getPhotoById(imgEl.dataset.photoId);
+      if (photo && imgEl.src && !imgEl.src.includes('placehold.co')) {
+        photo.resolvedUrl = imgEl.getAttribute('src');
+      }
+      if (fallbackId) {
+        const fb = document.getElementById(fallbackId);
+        if (fb && !imgEl.src.includes('placehold.co')) {
+          fb.classList.add('hidden');
+        }
+      }
+    }
+
+    function handleImageError(imgEl, photoId, fallbackId) {
+      try {
+        const photo = getPhotoById(photoId);
+        if (!photo) return;
+        const currentIdx = parseInt(imgEl.dataset.srcIdx || '0', 10);
+        const nextIdx = currentIdx + 1;
+
+        if (nextIdx < photo.sources.length) {
+          imgEl.dataset.srcIdx = String(nextIdx);
+          imgEl.src = photo.sources[nextIdx];
+          return;
+        }
+
+        // All real sources exhausted: show neutral branded placeholder + discreet replace button
+        if (!imgEl.src.includes('placehold.co')) {
+          imgEl.src = photo.placeholder;
+          photo.resolvedUrl = photo.placeholder;
+        }
+        if (fallbackId) {
+          const fb = document.getElementById(fallbackId);
+          if (fb) fb.classList.remove('hidden');
+        }
+      } catch (err) {
+        console.error('Image fallback error:', err);
+      }
+    }
+
+    function triggerLocalPhotoReplace(photoId) {
+      pendingReplacePhotoId = photoId;
+      const input = document.getElementById('local-photo-input');
+      input.value = '';
+      input.click();
+    }
+
+    function applyLocalPhotoFile(file, photoId) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Please select a valid image file');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const photo = getPhotoById(photoId);
+        if (!photo) return;
+        photo.customUrl = e.target.result;
+        photo.resolvedUrl = e.target.result;
+
+        // Refresh every matching <img> across Hero, Thumbnails, and Page Sections
+        document.querySelectorAll(`img[data-photo-id="${photoId}"]`).forEach((img) => {
+          img.src = photo.customUrl;
+        });
+
+        // Hide any open fallback overlays for this photo
+        const fallbackMap = {
+          botanicals: 'fallback-botanicals',
+          ritual: 'fallback-ritual',
+          barbershop: 'fallback-barbershop',
+        };
+        if (fallbackMap[photoId]) {
+          const fb = document.getElementById(fallbackMap[photoId]);
+          if (fb) fb.classList.add('hidden');
+        }
+        if (getActiveHeroPhotoId() === photoId) {
+          document.getElementById('hero-fallback-bar').classList.add('hidden');
+        }
+
+        renderHeroThumbnails();
+        showToast(`Updated "${photo.title}" photo`);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleLocalPhotoPicked(event) {
+      const file = event.target.files && event.target.files[0];
+      if (file && pendingReplacePhotoId) {
+        applyLocalPhotoFile(file, pendingReplacePhotoId);
+      }
+    }
+
+    function handlePhotoDragOver(event) {
+      event.preventDefault();
+      event.currentTarget.classList.add('ring-2', 'ring-ochre');
+    }
+
+    function handlePhotoDragLeave(event) {
+      event.currentTarget.classList.remove('ring-2', 'ring-ochre');
+    }
+
+    function handlePhotoDrop(event, photoId) {
+      event.preventDefault();
+      event.currentTarget.classList.remove('ring-2', 'ring-ochre');
+      const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+      if (file) {
+        applyLocalPhotoFile(file, photoId);
+      }
+    }
+
+    /* Hero Thumbnail Switcher with Smooth Fade Transition */
+    function renderHeroThumbnails() {
+      const container = document.getElementById('hero-thumbnails');
+      if (!container) return;
+      container.innerHTML = '';
+
+      GALLERY_IMAGES.forEach((photo, idx) => {
+        const isActive = idx === activeHeroIndex;
+        const thumbUrl = getBestPhotoUrl(photo);
+        const btnHtml = `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            onclick="selectHeroImage(${idx})"
+            class="group flex flex-col text-left border ${isActive ? 'border-ochre ring-1 ring-ochre bg-cream' : 'border-charcoal/40 hover:border-charcoal bg-cream-light'} rounded-sm overflow-hidden transition-all cursor-pointer focus:outline-none"
+          >
+            <div class="w-full aspect-[4/3] bg-slatebg overflow-hidden">
+              <img
+                src="${thumbUrl}"
+                alt="${photo.title}"
+                data-photo-id="${photo.id}"
+                data-src-idx="0"
+                onerror="handleImageError(this, '${photo.id}', null)"
+                class="w-full h-full object-cover ${isActive ? 'opacity-100 scale-[1.03]' : 'opacity-80 group-hover:opacity-100'} transition-all duration-200"
+              />
+            </div>
+            <span class="px-1.5 py-1.5 font-mono text-[9px] leading-tight uppercase tracking-tight truncate w-full ${isActive ? 'bg-charcoal text-cream font-bold' : 'text-charcoal'}">
+              ${photo.shortLabel}
+            </span>
+          </button>
+        `;
+        container.insertAdjacentHTML('beforeend', btnHtml);
+      });
+    }
+
+    function selectHeroImage(index) {
+      try {
+        if (index < 0 || index >= GALLERY_IMAGES.length) return;
+        activeHeroIndex = index;
+        const photo = GALLERY_IMAGES[index];
+        const heroImg = document.getElementById('hero-main-img');
+        const fallbackBar = document.getElementById('hero-fallback-bar');
+
+        // Smooth fade out -> swap -> fade in
+        heroImg.classList.add('opacity-0');
+        setTimeout(() => {
+          heroImg.dataset.photoId = photo.id;
+          heroImg.dataset.srcIdx = '0';
+          heroImg.alt = `${photo.title} — ${photo.caption}`;
+          const targetUrl = getBestPhotoUrl(photo);
+          heroImg.src = targetUrl;
+
+          if (targetUrl.includes('placehold.co')) {
+            fallbackBar.classList.remove('hidden');
+          } else {
+            fallbackBar.classList.add('hidden');
+          }
+
+          document.getElementById('hero-meta-left').textContent = photo.metaLeft;
+          document.getElementById('hero-meta-right').textContent = photo.metaRight;
+          document.getElementById('hero-corner-index').textContent = `0${index + 1} / 0${GALLERY_IMAGES.length} • ${photo.title.toUpperCase()}`;
+          document.getElementById('hero-caption').textContent = photo.caption;
+
+          heroImg.classList.remove('opacity-0');
+        }, 150);
+
+        renderHeroThumbnails();
+      } catch (err) {
+        console.error('Hero image switch error:', err);
+      }
+    }
+
+    /* Fullscreen Lightbox / Zoom Modal Controls */
+    function renderLightbox() {
+      const photo = GALLERY_IMAGES[lightboxIndex];
+      if (!photo) return;
+      const img = document.getElementById('lightbox-img');
+      img.classList.add('opacity-0');
+      setTimeout(() => {
+        img.src = getBestPhotoUrl(photo);
+        img.alt = photo.title;
+        document.getElementById('lightbox-counter').textContent = `0${lightboxIndex + 1} / 0${GALLERY_IMAGES.length}`;
+        document.getElementById('lightbox-title').textContent = photo.title;
+        document.getElementById('lightbox-caption').textContent = photo.caption;
+        document.getElementById('lightbox-tag').textContent = `${photo.metaLeft}`;
+        img.classList.remove('opacity-0');
+      }, 90);
+    }
+
+    function openLightbox(index) {
+      lightboxIndex = typeof index === 'number' ? index : activeHeroIndex;
+      renderLightbox();
+      document.getElementById('lightbox-overlay').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function openLightboxById(photoId) {
+      const idx = GALLERY_IMAGES.findIndex((item) => item.id === photoId);
+      openLightbox(idx >= 0 ? idx : 0);
+    }
+
+    function stepLightbox(delta) {
+      lightboxIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      renderLightbox();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-overlay').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 1. PRODUCT CATALOG & ORDER STATE
+     * --------------------------------------------------------------------- */
+    const PRODUCTS = [
+      {
+        id: 'single',
+        code: '01',
+        name: 'Single Bottle (30ml)',
+        subtitle: '01 • Fresh Citrus & Woods',
+        price: 220,
+        badge: '30 ML',
+      },
+      {
+        id: 'twin',
+        code: '02',
+        name: 'Twin Pack (2 × 30ml)',
+        subtitle: 'Save M30 on 2 boxed bottles',
+        price: 410,
+        badge: 'SAVE M30',
+      },
+      {
+        id: 'kit',
+        code: '03',
+        name: 'The Ritual Gift Kit',
+        subtitle: '30ml Oil + Wooden Beard Comb',
+        price: 320,
+        badge: 'BUNDLE',
+      },
+    ];
+
+    const cartState = {
+      items: {
+        single: 1, // Pre-seeded with 1 single bottle when user opens bag directly, or adjustable to 0
+        twin: 0,
+        kit: 0,
+      },
+      fulfillment: 'pickup', // 'pickup' (FREE) or 'delivery' (+M30)
+      initializedByUser: false,
+    };
+
+    // Start cart badge at 0 until user adds something
+    cartState.items.single = 0;
+
+    let barberRequestType = 'tester';
+    let lastBarberMessage = '';
+    let toastTimer = null;
+
+    /* --------------------------------------------------------------------- *
+     * 2. TOAST & SAFE CLIPBOARD HELPER (execCommand for iFrame reliability)
+     * --------------------------------------------------------------------- */
+    function showToast(message) {
+      try {
+        const toast = document.getElementById('toast-banner');
+        const toastText = document.getElementById('toast-text');
+        toastText.textContent = message;
+        toast.classList.remove('hidden');
+
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 3200);
+      } catch (err) {
+        console.error('Toast display error:', err);
+      }
+    }
+
+    function copyTextSafely(text, successLabel) {
+      try {
+        const tempArea = document.createElement('textarea');
+        tempArea.value = text;
+        tempArea.setAttribute('readonly', '');
+        tempArea.style.position = 'fixed';
+        tempArea.style.top = '-9999px';
+        tempArea.style.left = '-9999px';
+        document.body.appendChild(tempArea);
+        tempArea.select();
+        tempArea.setSelectionRange(0, tempArea.value.length);
+        const copied = document.execCommand('copy');
+        document.body.removeChild(tempArea);
+
+        if (copied) {
+          showToast(successLabel || 'Order message copied!');
+        } else {
+          showToast('Select and copy the message box above');
+        }
+      } catch (err) {
+        console.error('Clipboard copy failed:', err);
+        showToast('Please select and copy the message above');
+      }
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 3. MOBILE NAVIGATION TOGGLE
+     * --------------------------------------------------------------------- */
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('mobile-menu-btn');
+      const openIcon = document.getElementById('icon-menu-open');
+      const closeIcon = document.getElementById('icon-menu-close');
+      const isHidden = menu.classList.toggle('hidden');
+
+      btn.setAttribute('aria-expanded', String(!isHidden));
+      openIcon.classList.toggle('hidden', !isHidden);
+      closeIcon.classList.toggle('hidden', isHidden);
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('mobile-menu-btn');
+      const openIcon = document.getElementById('icon-menu-open');
+      const closeIcon = document.getElementById('icon-menu-close');
+
+      menu.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      openIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 4. FORMULA & SCENT EXPLORER TABS + INCI ACCORDION
+     * --------------------------------------------------------------------- */
+    function switchFormulaTab(tabName) {
+      try {
+        const isCarrier = tabName === 'carrier';
+        const btnCarrier = document.getElementById('tab-btn-carrier');
+        const btnScent = document.getElementById('tab-btn-scent');
+        const panelCarrier = document.getElementById('panel-carrier');
+        const panelScent = document.getElementById('panel-scent');
+
+        btnCarrier.setAttribute('aria-selected', String(isCarrier));
+        btnScent.setAttribute('aria-selected', String(!isCarrier));
+
+        if (isCarrier) {
+          btnCarrier.className = 'px-4 sm:px-5 py-2.5 rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold transition-colors bg-charcoal text-cream cursor-pointer';
+          btnScent.className = 'px-4 sm:px-5 py-2.5 rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold transition-colors text-charcoal hover:bg-cream-dark cursor-pointer';
+          panelCarrier.classList.remove('hidden');
+          panelScent.classList.add('hidden');
+        } else {
+          btnScent.className = 'px-4 sm:px-5 py-2.5 rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold transition-colors bg-charcoal text-cream cursor-pointer';
+          btnCarrier.className = 'px-4 sm:px-5 py-2.5 rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold transition-colors text-charcoal hover:bg-cream-dark cursor-pointer';
+          panelScent.classList.remove('hidden');
+          panelCarrier.classList.add('hidden');
+        }
+      } catch (err) {
+        console.error('Tab switch error:', err);
+      }
+    }
+
+    function toggleInciAccordion() {
+      const content = document.getElementById('inci-content');
+      const btn = document.getElementById('inci-toggle-btn');
+      const icon = document.getElementById('inci-icon');
+      const isHidden = content.classList.toggle('hidden');
+
+      btn.setAttribute('aria-expanded', String(!isHidden));
+      icon.textContent = isHidden ? '+' : '−';
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 5. INTERACTIVE BEARD LENGTH DROP CALCULATOR
+     * --------------------------------------------------------------------- */
+    const BEARD_STAGES = {
+      stubble: {
+        dropsLabel: '2–3 Drops',
+        dropCount: 3,
+        daysLabel: '~200–240 Days',
+        tip: 'Focus on massaging straight into your skin to soothe new-growth beard itch, soften prickly tips, and prevent dry highland flaking.',
+      },
+      short: {
+        dropsLabel: '3–4 Drops',
+        dropCount: 4,
+        daysLabel: '~150–180 Days',
+        tip: 'Press oil evenly across your cheeks and chin after patting dry. A light pass with a boar-bristle brush trains short hairs to lie neatly.',
+      },
+      medium: {
+        dropsLabel: '4–5 Drops',
+        dropCount: 5,
+        daysLabel: '~120–150 Days',
+        tip: 'Massage 3 drops directly into the skin along your jawline and chin, then run the remaining 1–2 drops over the outer beard with a wooden comb for a satin, non-greasy sheen.',
+      },
+      full: {
+        dropsLabel: '6–8 Drops',
+        dropCount: 7,
+        daysLabel: '~75–100 Days',
+        tip: 'Split your dose in two: work 4 drops deep to the root and skin underneath, then smooth 2–4 drops downward through the lower length to tame coarse ends and lock in moisture.',
+      },
+    };
+
+    function selectBeardStage(stageKey) {
+      try {
+        const data = BEARD_STAGES[stageKey];
+        if (!data) return;
+
+        // Update button styles
+        const buttons = document.querySelectorAll('.stage-btn');
+        buttons.forEach((btn) => {
+          const isActive = btn.getAttribute('data-stage') === stageKey;
+          const spans = btn.querySelectorAll('span');
+          if (isActive) {
+            btn.className = 'stage-btn text-left p-3.5 border border-charcoal rounded-sm transition-all cursor-pointer bg-charcoal text-cream';
+            if (spans[1]) spans[1].className = 'block font-display font-bold text-sm sm:text-base text-cream';
+            if (spans[2]) spans[2].className = 'block font-mono text-[10px] text-cream/75';
+          } else {
+            btn.className = 'stage-btn text-left p-3.5 border border-charcoal rounded-sm transition-all cursor-pointer bg-cream hover:bg-cream-dark';
+            if (spans[1]) spans[1].className = 'block font-display font-bold text-sm sm:text-base text-charcoal';
+            if (spans[2]) spans[2].className = 'block font-mono text-[10px] text-stone';
+          }
+        });
+
+        // Update metrics
+        document.getElementById('calc-drops-label').textContent = data.dropsLabel;
+        document.getElementById('calc-days-label').textContent = data.daysLabel;
+        document.getElementById('calc-tip-text').textContent = data.tip;
+
+        // Render golden droplet SVGs
+        const dropContainer = document.getElementById('calc-droplet-icons');
+        dropContainer.innerHTML = '';
+        for (let i = 0; i < 8; i++) {
+          const active = i < data.dropCount;
+          const svgMarkup = `
+            <svg viewBox="0 0 18 22" class="w-4 h-5 transition-all ${active ? 'scale-105 opacity-100' : 'opacity-25'}" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 1.5C9 1.5 2 9.8 2 14.3C2 18.2 5.1 21 9 21C12.9 21 16 18.2 16 14.3C16 9.8 9 1.5 9 1.5Z"
+                    fill="${active ? '#C86D1F' : 'none'}"
+                    stroke="#1C1B1B"
+                    stroke-width="1.4" />
+            </svg>
+          `;
+          dropContainer.insertAdjacentHTML('beforeend', svgMarkup);
+        }
+      } catch (err) {
+        console.error('Drop calculator error:', err);
+      }
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 6. INTERACTIVE ORDER DRAWER / CART LOGIC
+     * --------------------------------------------------------------------- */
+    function getTotalItemCount() {
+      return Object.values(cartState.items).reduce((sum, qty) => sum + qty, 0);
+    }
+
+    function addItemAndOpen(productId) {
+      cartState.items[productId] = (cartState.items[productId] || 0) + 1;
+      cartState.initializedByUser = true;
+      renderDrawerProducts();
+      updateOrderSummary();
+      openOrderDrawer();
+      const prod = PRODUCTS.find((p) => p.id === productId);
+      if (prod) showToast(`Added ${prod.name}`);
+    }
+
+    function updateQty(productId, delta) {
+      const current = cartState.items[productId] || 0;
+      cartState.items[productId] = Math.max(0, current + delta);
+      renderDrawerProducts();
+      updateOrderSummary();
+    }
+
+    function setFulfillment(method) {
+      cartState.fulfillment = method;
+      const pickupBtn = document.getElementById('fulfill-pickup');
+      const deliveryBtn = document.getElementById('fulfill-delivery');
+
+      if (method === 'pickup') {
+        pickupBtn.className = 'p-3 border border-charcoal rounded-sm text-left bg-charcoal text-cream transition-colors cursor-pointer';
+        pickupBtn.querySelectorAll('span')[1].className = 'block font-mono text-[10px] opacity-80 mt-0.5';
+        deliveryBtn.className = 'p-3 border border-charcoal rounded-sm text-left bg-cream hover:bg-cream-dark text-charcoal transition-colors cursor-pointer';
+        deliveryBtn.querySelectorAll('span')[1].className = 'block font-mono text-[10px] text-stone mt-0.5';
+      } else {
+        deliveryBtn.className = 'p-3 border border-charcoal rounded-sm text-left bg-charcoal text-cream transition-colors cursor-pointer';
+        deliveryBtn.querySelectorAll('span')[1].className = 'block font-mono text-[10px] opacity-80 mt-0.5';
+        pickupBtn.className = 'p-3 border border-charcoal rounded-sm text-left bg-cream hover:bg-cream-dark text-charcoal transition-colors cursor-pointer';
+        pickupBtn.querySelectorAll('span')[1].className = 'block font-mono text-[10px] text-stone mt-0.5';
+      }
+      updateOrderSummary();
+    }
+
+    function renderDrawerProducts() {
+      const container = document.getElementById('drawer-product-list');
+      container.innerHTML = '';
+
+      PRODUCTS.forEach((product) => {
+        const qty = cartState.items[product.id] || 0;
+        const isSelected = qty > 0;
+        const itemHtml = `
+          <div class="p-3.5 border ${isSelected ? 'border-charcoal bg-cream-light' : 'border-charcoal/35 bg-cream'} rounded-sm flex items-center justify-between gap-3 transition-colors">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 mb-0.5">
+                <span class="font-display font-bold text-sm text-charcoal truncate">${product.name}</span>
+                <span class="font-mono text-[9px] px-1.5 py-0.5 rounded-sm ${product.id === 'twin' ? 'bg-ochre text-cream' : 'border border-charcoal/40 text-stone'} font-bold shrink-0">${product.badge}</span>
+              </div>
+              <p class="font-mono text-[11px] text-stone truncate">${product.subtitle}</p>
+              <p class="font-mono text-xs font-bold text-ochre mt-1">M${product.price}</p>
+            </div>
+            <div class="flex items-center border border-charcoal rounded-sm bg-cream shrink-0">
+              <button
+                type="button"
+                onclick="updateQty('${product.id}', -1)"
+                class="w-8 h-8 flex items-center justify-center font-mono text-sm font-bold text-charcoal hover:bg-cream-dark cursor-pointer"
+                aria-label="Decrease quantity of ${product.name}"
+              >−</button>
+              <span class="w-8 text-center font-mono text-xs font-bold text-charcoal">${qty}</span>
+              <button
+                type="button"
+                onclick="updateQty('${product.id}', 1)"
+                class="w-8 h-8 flex items-center justify-center font-mono text-sm font-bold text-charcoal hover:bg-cream-dark cursor-pointer"
+                aria-label="Increase quantity of ${product.name}"
+              >+</button>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', itemHtml);
+      });
+    }
+
+    function buildOrderMessage() {
+      const nameInput = document.getElementById('customer-name').value.trim();
+      const areaInput = document.getElementById('customer-area').value.trim();
+
+      let subtotal = 0;
+      const lines = [];
+
+      PRODUCTS.forEach((p) => {
+        const qty = cartState.items[p.id] || 0;
+        if (qty > 0) {
+          const lineTotal = qty * p.price;
+          subtotal += lineTotal;
+          lines.push(`• ${qty} × ${p.name} — M${lineTotal}`);
+        }
+      });
+
+      const hasItems = lines.length > 0;
+      const deliveryFee = hasItems && cartState.fulfillment === 'delivery' ? 30 : 0;
+      const grandTotal = subtotal + deliveryFee;
+      const fulfillLabel =
+        cartState.fulfillment === 'pickup'
+          ? 'Maseru Pickup (Pioneer / CBD — FREE)'
+          : 'Local Maseru Delivery (+M30)';
+
+      if (!hasItems) {
+        return 'Select at least 1 edition above to generate your formatted PŪLA Batch 001 order summary.';
+      }
+
+      return [
+        'Dumela PŪLA Grooming (@pulagrooming),',
+        'I would like to place a Batch 001 order:',
+        '',
+        ...lines,
+        '',
+        `Fulfillment: ${fulfillLabel}`,
+        `Total: M${grandTotal} (LSL)`,
+        `Name: ${nameInput || '[Your Name]'}`,
+        `Area: ${areaInput || '[Maseru Suburb / Area]'}`,
+      ].join('\n');
+    }
+
+    function updateOrderSummary() {
+      try {
+        const totalCount = getTotalItemCount();
+        document.getElementById('nav-cart-count').textContent = totalCount;
+
+        let subtotal = 0;
+        PRODUCTS.forEach((p) => {
+          subtotal += (cartState.items[p.id] || 0) * p.price;
+        });
+
+        const deliveryFee = totalCount > 0 && cartState.fulfillment === 'delivery' ? 30 : 0;
+        const total = subtotal + deliveryFee;
+
+        document.getElementById('drawer-subtotal').textContent = `M${subtotal}`;
+        document.getElementById('drawer-shipping-label').textContent =
+          cartState.fulfillment === 'pickup'
+            ? 'Maseru Pickup (Pioneer / CBD)'
+            : 'Local Maseru Delivery';
+        document.getElementById('drawer-shipping-cost').textContent =
+          deliveryFee > 0 ? `M${deliveryFee}` : 'FREE';
+        document.getElementById('drawer-total').textContent = `M${total}`;
+
+        document.getElementById('order-message-preview').textContent = buildOrderMessage();
+
+        if (totalCount > 0) {
+          document.getElementById('drawer-warning').classList.add('hidden');
+        }
+      } catch (err) {
+        console.error('Order summary update error:', err);
+      }
+    }
+
+    function openOrderDrawer() {
+      // If user opens drawer from navbar while empty, pre-select 1 bottle for effortless flow
+      if (getTotalItemCount() === 0 && !cartState.initializedByUser) {
+        cartState.items.single = 1;
+        cartState.initializedByUser = true;
+      }
+      renderDrawerProducts();
+      updateOrderSummary();
+      document.getElementById('order-drawer-overlay').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeOrderDrawer() {
+      document.getElementById('order-drawer-overlay').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    function copyOrderMessage() {
+      if (getTotalItemCount() === 0) {
+        document.getElementById('drawer-warning').classList.remove('hidden');
+        return;
+      }
+      copyTextSafely(buildOrderMessage(), 'Order summary copied for WhatsApp / IG DM!');
+    }
+
+    function sendOrderViaWhatsApp() {
+      if (getTotalItemCount() === 0) {
+        document.getElementById('drawer-warning').classList.remove('hidden');
+        return;
+      }
+      const message = buildOrderMessage();
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      showToast('Opening WhatsApp with your PŪLA order');
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 7. BARBERSHOP PARTNER MODAL LOGIC
+     * --------------------------------------------------------------------- */
+    function openBarberModal(type) {
+      setBarberRequestType(type || 'tester');
+      document.getElementById('barber-confirm-box').classList.add('hidden');
+      document.getElementById('barber-modal-overlay').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeBarberModal() {
+      document.getElementById('barber-modal-overlay').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    function setBarberRequestType(type) {
+      barberRequestType = type;
+      const testerBtn = document.getElementById('req-type-tester');
+      const wholesaleBtn = document.getElementById('req-type-wholesale');
+
+      if (type === 'tester') {
+        testerBtn.className = 'py-2.5 px-3 border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold bg-charcoal text-cream cursor-pointer';
+        wholesaleBtn.className = 'py-2.5 px-3 border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold bg-cream text-charcoal hover:bg-cream-dark cursor-pointer';
+      } else {
+        wholesaleBtn.className = 'py-2.5 px-3 border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold bg-charcoal text-cream cursor-pointer';
+        testerBtn.className = 'py-2.5 px-3 border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold bg-cream text-charcoal hover:bg-cream-dark cursor-pointer';
+      }
+    }
+
+    function handleBarberSubmit(event) {
+      event.preventDefault();
+      try {
+        const shopName = document.getElementById('barber-shop-name').value.trim();
+        const contactName = document.getElementById('barber-contact-name').value.trim();
+        const location = document.getElementById('barber-location').value;
+        const chairs = document.getElementById('barber-chairs').value;
+
+        const reqTitle =
+          barberRequestType === 'tester'
+            ? 'Free 5ml Barber Chair Tester'
+            : 'Wholesale & Consignment Rate Card';
+
+        lastBarberMessage = [
+          'Dumela PŪLA Trade Desk (@pulagrooming),',
+          `Request: ${reqTitle}`,
+          `Barbershop: ${shopName}`,
+          `Contact: ${contactName}`,
+          `Location: ${location}`,
+          `Scale: ${chairs}`,
+          'Looking forward to trying Batch 001 at our shop.',
+        ].join('\n');
+
+        document.getElementById('barber-message-output').textContent = lastBarberMessage;
+        document.getElementById('barber-confirm-box').classList.remove('hidden');
+        showToast('Partner inquiry generated!');
+      } catch (err) {
+        console.error('Barber form error:', err);
+      }
+    }
+
+    function copyBarberInquiry() {
+      if (!lastBarberMessage) return;
+      copyTextSafely(lastBarberMessage, 'Barbershop inquiry copied!');
+    }
+
+    function sendBarberViaWhatsApp() {
+      if (!lastBarberMessage) return;
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(lastBarberMessage)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      showToast('Opening WhatsApp for trade inquiry');
+    }
+
+    /* --------------------------------------------------------------------- *
+     * 8. KEYBOARD ACCESSIBILITY & INITIALIZATION
+     * --------------------------------------------------------------------- */
+    document.addEventListener('keydown', (e) => {
+      const lightboxOpen = !document.getElementById('lightbox-overlay').classList.contains('hidden');
+      if (e.key === 'Escape') {
+        closeOrderDrawer();
+        closeBarberModal();
+        closeLightbox();
+      } else if (lightboxOpen && e.key === 'ArrowRight') {
+        stepLightbox(1);
+      } else if (lightboxOpen && e.key === 'ArrowLeft') {
+        stepLightbox(-1);
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize hero gallery switcher, default calculator state (Medium Beard) & Order Drawer
+      renderHeroThumbnails();
+      selectBeardStage('medium');
+      renderDrawerProducts();
+      updateOrderSummary();
+    });
+  </script>
+</body>
+</html>

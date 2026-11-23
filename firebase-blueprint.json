@@ -1,0 +1,514 @@
+{
+  "entities": {
+    "Edition": {
+      "title": "Batch 001 Edition",
+      "description": "Small-batch PŪLA grooming product edition with live stock and pricing.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 40,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Unique identifier for the edition (e.g. single, twin, kit)."
+        },
+        "code": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "Short edition display code."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Edition display title."
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Scent or bundle subtitle."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 400,
+          "description": "Editorial description of the edition."
+        },
+        "price": {
+          "type": "number",
+          "description": "Price in Lesotho Loti (M)."
+        },
+        "compareAtPrice": {
+          "type": "number",
+          "description": "Optional pre-discount comparison price in LSL."
+        },
+        "volume": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Net volume or contents label."
+        },
+        "badge": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Concise edition callout text."
+        },
+        "stockCount": {
+          "type": "number",
+          "description": "Current remaining Batch 001 units."
+        },
+        "sortOrder": {
+          "type": "number",
+          "description": "Display ordering index."
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether the edition is active on the storefront."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the last inventory update."
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "name",
+        "subtitle",
+        "description",
+        "price",
+        "volume",
+        "badge",
+        "stockCount",
+        "sortOrder",
+        "active",
+        "updatedAt"
+      ]
+    },
+    "UserProfile": {
+      "title": "User Grooming Profile",
+      "description": "Private customer grooming preferences, ritual progress, and synced bag state.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID of the profile owner."
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Customer display name."
+        },
+        "beardStage": {
+          "type": "string",
+          "enum": ["stubble", "short", "medium", "full"],
+          "description": "Current beard length stage for drop dosage calculation."
+        },
+        "dailyDrops": {
+          "type": "number",
+          "description": "Configured daily oil drop target."
+        },
+        "bottleDropsRemaining": {
+          "type": "number",
+          "description": "Estimated remaining drops in current 30ml bottle (out of 600)."
+        },
+        "streakDays": {
+          "type": "number",
+          "description": "Consecutive days of logged grooming rituals."
+        },
+        "lastRitualDate": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^([0-9]{4}-[0-9]{2}-[0-9]{2})?$",
+          "description": "ISO date (YYYY-MM-DD) of the most recent logged ritual."
+        },
+        "savedArea": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Preferred Maseru/Lesotho delivery area or suburb."
+        },
+        "fulfillmentPref": {
+          "type": "string",
+          "enum": ["pickup", "delivery"],
+          "description": "Preferred fulfillment method."
+        },
+        "cartSingle": {
+          "type": "number",
+          "description": "Synced bag quantity for Single Bottle."
+        },
+        "cartTwin": {
+          "type": "number",
+          "description": "Synced bag quantity for Twin Pack."
+        },
+        "cartKit": {
+          "type": "number",
+          "description": "Synced bag quantity for The Ritual Gift Kit."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of profile creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of latest update."
+        }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "beardStage",
+        "dailyDrops",
+        "bottleDropsRemaining",
+        "streakDays",
+        "lastRitualDate",
+        "savedArea",
+        "fulfillmentPref",
+        "cartSingle",
+        "cartTwin",
+        "cartKit",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "RitualLog": {
+      "title": "Daily Ritual Log Entry",
+      "description": "Individual daily beard conditioning ritual check-in.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Owner Firebase Auth UID."
+        },
+        "dateKey": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Calendar date of check-in (YYYY-MM-DD)."
+        },
+        "beardStage": {
+          "type": "string",
+          "enum": ["stubble", "short", "medium", "full"],
+          "description": "Beard stage at time of check-in."
+        },
+        "dropsUsed": {
+          "type": "number",
+          "description": "Drops applied during this ritual."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 240,
+          "description": "Optional conditioning note."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of check-in."
+        }
+      },
+      "required": [
+        "userId",
+        "dateKey",
+        "beardStage",
+        "dropsUsed",
+        "note",
+        "createdAt"
+      ]
+    },
+    "Order": {
+      "title": "Batch 001 Customer Order",
+      "description": "Real-time tracked PŪLA grooming order with Lesotho fulfillment details.",
+      "type": "object",
+      "properties": {
+        "orderNumber": {
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "^PULA-[A-Z0-9\\-]+$",
+          "description": "Human-readable order code."
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Customer Firebase Auth UID."
+        },
+        "customerName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Recipient full name."
+        },
+        "customerArea": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Suburb or town in Lesotho."
+        },
+        "customerPhone": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Contact phone or WhatsApp number."
+        },
+        "qtySingle": {
+          "type": "number",
+          "description": "Quantity of Single Bottle (30ml)."
+        },
+        "qtyTwin": {
+          "type": "number",
+          "description": "Quantity of Twin Pack (2 x 30ml)."
+        },
+        "qtyKit": {
+          "type": "number",
+          "description": "Quantity of The Ritual Gift Kit."
+        },
+        "fulfillment": {
+          "type": "string",
+          "enum": ["pickup", "delivery"],
+          "description": "Maseru CBD pickup or local Maseru delivery."
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["mpesa", "ecocash", "eft", "cash"],
+          "description": "Selected Lesotho payment method."
+        },
+        "subtotal": {
+          "type": "number",
+          "description": "Items subtotal in LSL."
+        },
+        "deliveryFee": {
+          "type": "number",
+          "description": "Delivery fee in LSL (0 or 30)."
+        },
+        "total": {
+          "type": "number",
+          "description": "Grand total in LSL."
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Optional order or apothecary fulfillment notes."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "pouring", "ready", "delivered", "cancelled"],
+          "description": "Live fulfillment stage."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of order creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last status change."
+        }
+      },
+      "required": [
+        "orderNumber",
+        "userId",
+        "customerName",
+        "customerArea",
+        "customerPhone",
+        "qtySingle",
+        "qtyTwin",
+        "qtyKit",
+        "fulfillment",
+        "paymentMethod",
+        "subtotal",
+        "deliveryFee",
+        "total",
+        "notes",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "BarberInquiry": {
+      "title": "Barbershop Stockist & Tester Inquiry",
+      "description": "Wholesale rate card or free 5ml barber chair tester request.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Submitting user Firebase Auth UID."
+        },
+        "requestType": {
+          "type": "string",
+          "enum": ["tester", "wholesale"],
+          "description": "Type of barbershop trade request."
+        },
+        "shopName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Barbershop name."
+        },
+        "contactName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Owner or master barber name."
+        },
+        "location": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Maseru / Lesotho district location."
+        },
+        "chairs": {
+          "type": "string",
+          "enum": ["1-2 Chairs", "3-5 Chairs", "6+ Chairs"],
+          "description": "Active barber chairs in shop."
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Shop contact number."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["submitted", "contacted", "tester_dispatched", "partnered", "closed"],
+          "description": "Trade desk lead status."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of inquiry submission."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update."
+        }
+      },
+      "required": [
+        "userId",
+        "requestType",
+        "shopName",
+        "contactName",
+        "location",
+        "chairs",
+        "phone",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Review": {
+      "title": "Batch 001 Customer Review",
+      "description": "Verified customer feedback on 01 Fresh Citrus & Woods conditioning oil.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Author Firebase Auth UID."
+        },
+        "authorName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60,
+          "description": "Public display name."
+        },
+        "location": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "City or neighborhood (e.g. Maseru West)."
+        },
+        "beardStage": {
+          "type": "string",
+          "enum": ["stubble", "short", "medium", "full"],
+          "description": "Reviewer beard length stage."
+        },
+        "rating": {
+          "type": "number",
+          "description": "Integer rating from 1 to 5."
+        },
+        "comment": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 500,
+          "description": "Written product review."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "Visibility state."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of review creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of review update."
+        }
+      },
+      "required": [
+        "userId",
+        "authorName",
+        "location",
+        "beardStage",
+        "rating",
+        "comment",
+        "published",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AdminRecord": {
+      "title": "Apothecary Admin Record",
+      "description": "RBAC lookup document granting apothecary desk permissions.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Admin verified email."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin"],
+          "description": "Admin role marker."
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/editions/{editionId}": {
+      "schema": { "$ref": "#/entities/Edition" },
+      "description": "Live Batch 001 product editions and real-time inventory stock."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private customer grooming profile, drop targets, and synced bag."
+    },
+    "/users/{userId}/ritualLogs/{logId}": {
+      "schema": { "$ref": "#/entities/RitualLog" },
+      "description": "Daily beard conditioning check-in logs owned by the user."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer Batch 001 orders with real-time Maseru fulfillment tracking."
+    },
+    "/barberInquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/BarberInquiry" },
+      "description": "Maseru & Roma barbershop stockist and free tester inquiries."
+    },
+    "/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Public verified customer reviews for Batch 001."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Trusted admin role lookup collection."
+    }
+  }
+}

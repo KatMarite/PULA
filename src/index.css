@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F5F1E8;
+  --color-cream-dark: #EDE7DB;
+  --color-cream-light: #FAF8F3;
+  --color-charcoal: #1C1B1B;
+  --color-stone: #4A4845;
+  --color-ochre: #C86D1F;
+  --color-ochre-dark: #A85814;
+  --color-slatebg: #161514;
+
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --tracking-wordmark: 0.32em;
+  --tracking-apothecary: 0.14em;
+}
+
+@layer base {
+  html {
+    background-color: #F5F1E8;
+    color: #1C1B1B;
+    font-family: var(--font-sans);
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
+}

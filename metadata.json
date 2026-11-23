@@ -1,0 +1,6 @@
+{
+  "name": "PŪLA — Highland-Crafted Conditioning Beard Oil",
+  "description": "Small-batch botanical beard care from Maseru, Lesotho with real-time Firebase order tracking, daily grooming ritual sync, live Batch 001 inventory, and Maseru barbershop partner desk.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
