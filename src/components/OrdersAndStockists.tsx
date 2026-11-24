@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { BARBER_STATUS_LABELS } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 import { StudioMedia } from './ApothecaryArt';
@@ -16,7 +17,13 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
 
   return (
     <section id="section-stockists" className="scroll-mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="border border-charcoal bg-charcoal text-cream rounded-sm overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.12 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="border border-charcoal bg-charcoal text-cream rounded-sm overflow-hidden"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
           {/* Left Trade Pitch */}
           <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-cream/20 flex flex-col justify-between space-y-6">
@@ -159,7 +166,7 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

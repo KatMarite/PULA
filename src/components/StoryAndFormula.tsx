@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { CARRIER_OILS, SCENT_NOTES } from '../types/pula';
 import { EucalyptusSvg, MalotiMountainsSvg, RaincloudSvg, StudioMedia } from './ApothecaryArt';
@@ -20,7 +21,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
             <span className="font-mono text-xs uppercase tracking-[0.14em] font-bold text-charcoal">
               01. Brand Philosophy &amp; Highland Heritage
             </span>
-            <span className="font-mono text-xs text-ochre font-bold tabular-nums">
+            <span className="font-mono text-xs text-ochre-dark font-bold tabular-nums">
               29.3151° S, 27.4869° E · Maseru
             </span>
           </div>
@@ -41,7 +42,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                     [POO-LAH]
                   </span>
                 </h2>
-                <span className="font-mono italic text-sm sm:text-base text-ochre font-bold">
+                <span className="font-mono italic text-sm sm:text-base text-ochre-dark font-bold">
                   — Sesotho for &ldquo;Rain&rdquo;
                 </span>
               </div>
@@ -91,20 +92,24 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                 body: 'Measured, blended, and bottled fresh in Maseru for peak potency.',
               },
             ].map((pillar, idx) => (
-              <div
+              <motion.div
                 key={pillar.num}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.4, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 className={`p-4 sm:p-6 border-charcoal ${
                   idx < 2 ? 'border-b lg:border-b-0' : ''
                 } ${
                   idx % 2 === 0 ? 'border-r' : 'lg:border-r lg:last:border-r-0'
                 }`}
               >
-                <p className="font-mono text-[11px] text-ochre font-bold mb-1">{pillar.num}</p>
+                <p className="font-mono text-[11px] text-ochre-dark font-bold mb-1">{pillar.num}</p>
                 <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal mb-1">
                   {pillar.title}
                 </h3>
                 <p className="text-xs text-stone leading-relaxed">{pillar.body}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -115,7 +120,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
         <div className="border border-charcoal bg-cream rounded-sm overflow-hidden">
           <div className="p-6 sm:p-8 border-b border-charcoal bg-cream-dark/50 flex flex-col lg:flex-row lg:items-end justify-between gap-5">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre font-bold mb-2">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre-dark font-bold mb-2">
                 02. Apothecary Formulation
               </p>
               <h2 className="font-display font-bold text-2xl sm:text-4xl text-charcoal tracking-tight">
@@ -128,11 +133,19 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
               className="grid grid-cols-2 sm:inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1 w-full sm:w-auto"
               role="tablist"
               aria-label="Formula explorer tabs"
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                  e.preventDefault();
+                  setFormulaTab((prev) => (prev === 'carrier' ? 'scent' : 'carrier'));
+                }
+              }}
             >
               <button
+                id="tab-carrier"
                 type="button"
                 role="tab"
                 aria-selected={formulaTab === 'carrier'}
+                aria-controls="formula-tabpanel"
                 onClick={() => setFormulaTab('carrier')}
                 className={`px-4 py-2.5 min-h-[40px] rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   formulaTab === 'carrier'
@@ -143,9 +156,11 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                 Carrier Oils
               </button>
               <button
+                id="tab-scent"
                 type="button"
                 role="tab"
                 aria-selected={formulaTab === 'scent'}
+                aria-controls="formula-tabpanel"
                 onClick={() => setFormulaTab('scent')}
                 className={`px-4 py-2.5 min-h-[40px] rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   formulaTab === 'scent'
@@ -178,7 +193,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
 
                 <div className="mt-4 space-y-2">
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-stone">
-                    Cold-Pressed Proof · <span className="text-ochre font-bold">Zero Fillers</span>
+                    Cold-Pressed Proof · <span className="text-ochre-dark font-bold">Zero Fillers</span>
                   </p>
                   <p className="text-sm text-stone leading-relaxed">
                     Unrefined Southern African Marula, golden Jojoba, Moroccan Argan, fresh
@@ -195,9 +210,22 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
             </div>
 
             {/* Right Tab Panel */}
-            <div className="lg:col-span-8">
-              {formulaTab === 'carrier' ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 h-full animate-fade-up">
+            <div
+              id="formula-tabpanel"
+              role="tabpanel"
+              aria-labelledby={formulaTab === 'carrier' ? 'tab-carrier' : 'tab-scent'}
+              className="lg:col-span-8"
+            >
+              <AnimatePresence mode="wait">
+                {formulaTab === 'carrier' ? (
+                  <motion.div
+                    key="carrier"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    className="grid grid-cols-1 sm:grid-cols-2 h-full"
+                  >
                   {CARRIER_OILS.slice(0, 4).map((oil, idx) => (
                     <article
                       key={oil.code}
@@ -207,7 +235,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                     >
                       <div>
                         <p className="font-mono text-[11px] text-stone uppercase tracking-wider mb-2">
-                          <span className="text-ochre font-bold">{oil.code}</span> · {oil.origin}
+                          <span className="text-ochre-dark font-bold">{oil.code}</span> · {oil.origin}
                         </p>
                         <h3 className="font-display font-bold text-lg text-charcoal mb-0.5">
                           {oil.name}
@@ -225,7 +253,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                   <article className="p-6 sm:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-cream-dark/30 transition-colors">
                     <div>
                       <p className="font-mono text-[11px] text-stone uppercase tracking-wider mb-1">
-                        <span className="text-ochre font-bold">{CARRIER_OILS[4].code}</span> ·{' '}
+                        <span className="text-ochre-dark font-bold">{CARRIER_OILS[4].code}</span> ·{' '}
                         {CARRIER_OILS[4].latin}
                       </p>
                       <h3 className="font-display font-bold text-lg text-charcoal mb-1">
@@ -239,22 +267,29 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                       Role: {CARRIER_OILS[4].role}
                     </span>
                   </article>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-charcoal h-full animate-fade-up">
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="scent"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-charcoal h-full"
+                  >
                   <div className="md:col-span-4 p-6 flex flex-col items-center justify-center bg-cream-dark/25 text-center">
                     <EucalyptusSvg className="w-36 sm:w-40 h-auto mb-3" />
                     <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-stone mb-1">
                       Fig 03 · Eucalyptus Smithii
                     </span>
-                    <p className="font-mono text-[11px] text-ochre font-bold">
+                    <p className="font-mono text-[11px] text-ochre-dark font-bold">
                       Pure Essential Oils Only
                     </p>
                   </div>
                   <div className="md:col-span-8 divide-y divide-charcoal flex flex-col justify-between">
                     {SCENT_NOTES.map((note) => (
                       <div key={note.name} className="p-6">
-                        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-ochre font-bold mb-1.5">
+                        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-ochre-dark font-bold mb-1.5">
                           {note.tier}
                         </p>
                         <div className="flex flex-wrap items-baseline gap-x-2 mb-1.5">
@@ -269,8 +304,9 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                       </div>
                     ))}
                   </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -280,6 +316,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
               type="button"
               onClick={() => setInciOpen((prev) => !prev)}
               aria-expanded={inciOpen}
+              aria-controls="inci-panel"
               className="w-full px-6 sm:px-8 py-5 flex items-center justify-between text-left hover:bg-cream-dark/80 transition-colors cursor-pointer"
             >
               <div>
@@ -297,9 +334,18 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
               )}
             </button>
 
-            {inciOpen && (
-              <div className="border-t border-charcoal/30 px-6 sm:px-8 py-6 bg-cream animate-fade-up">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+            <AnimatePresence initial={false}>
+              {inciOpen && (
+                <motion.div
+                  id="inci-panel"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden border-t border-charcoal/30 bg-cream"
+                >
+                  <div className="px-6 sm:px-8 py-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
                   <div className="lg:col-span-7">
                     <h4 className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-charcoal mb-2">
                       Ingredients (INCI)
@@ -317,7 +363,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                     </p>
                   </div>
                   <div className="lg:col-span-5 lg:border-l lg:border-charcoal/30 lg:pl-8">
-                    <h4 className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-ochre mb-2">
+                    <h4 className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-ochre-dark mb-2">
                       Caution &amp; Storage
                     </h4>
                     <p className="text-xs sm:text-sm text-stone leading-relaxed">
@@ -332,8 +378,10 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                     </p>
                   </div>
                 </div>
-              </div>
-            )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>

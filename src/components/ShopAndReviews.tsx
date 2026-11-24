@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { EDITION_PHOTO_MAP, GalleryPhotoId } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 import { StudioMedia } from './ApothecaryArt';
@@ -15,7 +16,7 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
       <div className="border border-charcoal bg-cream rounded-sm overflow-hidden">
         <div className="px-6 sm:px-8 py-6 border-b border-charcoal bg-cream-dark/50 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre font-bold mb-2">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre-dark font-bold mb-2">
               04. Order Batch 001
             </p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-charcoal tracking-tight">
@@ -28,14 +29,18 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-charcoal">
-          {editions.map((edition) => {
+          {editions.map((edition, idx) => {
             const isHighlighted = edition.id === 'twin';
             const outOfStock = edition.stockCount <= 0;
             const photoId = EDITION_PHOTO_MAP[edition.id];
 
             return (
-              <div
+              <motion.div
                 key={edition.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className={`flex flex-col justify-between transition-colors ${
                   isHighlighted
                     ? 'bg-cream-dark/35 hover:bg-cream-dark/55'
@@ -59,7 +64,7 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
 
                   <div className="p-6 sm:p-7 pb-0">
                     <div className="flex items-center justify-between gap-2 mb-3 font-mono text-[11px] uppercase tracking-wider">
-                      <span className={isHighlighted ? 'text-ochre font-bold' : 'text-stone'}>
+                      <span className={isHighlighted ? 'text-ochre-dark font-bold' : 'text-stone'}>
                         {edition.code} · {edition.badge}
                       </span>
                       <span
@@ -74,7 +79,7 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
                     <h3 className="font-display font-bold text-xl text-charcoal mb-1">
                       {edition.name}
                     </h3>
-                    <p className="font-mono text-xs text-ochre font-bold mb-3">
+                    <p className="font-mono text-xs text-ochre-dark font-bold mb-3">
                       {edition.subtitle}
                     </p>
                     <p className="text-sm text-stone leading-relaxed mb-6">
@@ -98,9 +103,10 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
                     <span className="font-mono text-[11px] text-stone">{edition.volume}</span>
                   </div>
 
-                  <button
+                  <motion.button
                     type="button"
                     disabled={outOfStock}
+                    whileTap={outOfStock ? undefined : { scale: 0.98 }}
                     onClick={() => addToCartAndOpen(edition.id)}
                     className={`w-full py-3.5 px-4 min-h-[46px] rounded-sm font-mono text-xs uppercase tracking-[0.12em] font-bold transition-colors cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed tabular-nums ${
                       isHighlighted
@@ -109,9 +115,9 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
                     }`}
                   >
                     {outOfStock ? 'Batch 001 Exhausted' : `Add to Order — M${edition.price}`}
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

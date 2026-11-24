@@ -1,4 +1,5 @@
 import React from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { BEARD_STAGES, BeardStage } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 import { StudioMedia } from './ApothecaryArt';
@@ -18,13 +19,27 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
   const stageSpec = BEARD_STAGES[selectedStage];
   const singlePrice = editions.find((e) => e.id === 'single')?.price ?? 220;
 
+  const stageKeys = Object.keys(BEARD_STAGES) as BeardStage[];
+
+  const handleStageKeyDown = (e: React.KeyboardEvent, idx: number) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowDown' && e.key !== 'ArrowLeft' && e.key !== 'ArrowUp') {
+      return;
+    }
+    e.preventDefault();
+    const delta = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1;
+    const nextIdx = (idx + delta + stageKeys.length) % stageKeys.length;
+    selectBeardStage(stageKeys[nextIdx]);
+    const nextEl = document.getElementById(`beard-stage-${stageKeys[nextIdx]}`);
+    nextEl?.focus();
+  };
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
         {/* LEFT COLUMN: 3-Step Apothecary Routine */}
         <div className="lg:col-span-6 border border-charcoal bg-cream rounded-sm flex flex-col justify-between overflow-hidden">
           <div className="px-6 sm:px-8 py-5 border-b border-charcoal bg-cream-dark/50">
-            <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre font-bold mb-1">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre-dark font-bold mb-1">
               03. The Daily Ritual
             </p>
             <h2 className="font-display font-bold text-2xl sm:text-3xl text-charcoal tracking-tight">
@@ -65,8 +80,15 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                 title: 'Massage & Comb',
                 desc: 'Work fingers upward into the skin beneath your beard first, then smooth downward through the length with a wooden comb or boar-bristle brush.',
               },
-            ].map((item) => (
-              <div key={item.step} className="p-5 sm:p-6 flex gap-4">
+            ].map((item, idx) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.35, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="p-5 sm:p-6 flex gap-4"
+              >
                 <div className="w-10 h-10 rounded-sm border border-charcoal bg-cream-dark flex items-center justify-center font-mono text-xs font-bold text-charcoal shrink-0">
                   {item.step}
                 </div>
@@ -76,7 +98,7 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                   </h3>
                   <p className="text-sm text-stone leading-relaxed">{item.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -104,15 +126,18 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                 Select Your Current Beard Stage
               </p>
               <div className="grid grid-cols-2 gap-2.5" role="radiogroup" aria-label="Beard length stage">
-                {(Object.keys(BEARD_STAGES) as BeardStage[]).map((stageKey) => {
+                {stageKeys.map((stageKey, idx) => {
                   const spec = BEARD_STAGES[stageKey];
                   const active = selectedStage === stageKey;
                   return (
                     <button
+                      id={`beard-stage-${stageKey}`}
                       key={stageKey}
                       type="button"
                       role="radio"
                       aria-checked={active}
+                      tabIndex={active ? 0 : -1}
+                      onKeyDown={(e) => handleStageKeyDown(e, idx)}
                       onClick={() => selectBeardStage(stageKey)}
                       className={`text-left p-3.5 min-h-[72px] border border-charcoal rounded-sm transition-colors cursor-pointer ${
                         active
@@ -120,7 +145,11 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                           : 'bg-cream text-charcoal hover:bg-cream-dark'
                       }`}
                     >
-                      <span className="block font-mono text-[10px] text-ochre font-bold uppercase">
+                      <span
+                        className={`block font-mono text-[10px] font-bold uppercase ${
+                          active ? 'text-ochre' : 'text-ochre-dark'
+                        }`}
+                      >
                         {spec.step}
                       </span>
                       <span className="block font-display font-bold text-sm sm:text-base">
@@ -154,7 +183,7 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                   <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-stone mb-1">
                     30ml Bottle Lasts
                   </p>
-                  <p className="font-mono font-bold text-lg text-ochre tabular-nums">
+                  <p className="font-mono font-bold text-lg text-ochre-dark tabular-nums">
                     {stageSpec.daysLabel}
                   </p>
                 </div>
@@ -167,12 +196,15 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                   {Array.from({ length: 8 }).map((_, i) => {
                     const active = i < stageSpec.defaultDrops;
                     return (
-                      <svg
+                      <motion.svg
                         key={i}
                         viewBox="0 0 18 22"
-                        className={`w-4 h-5 transition-opacity ${
-                          active ? 'opacity-100' : 'opacity-25'
-                        }`}
+                        animate={{
+                          scale: active ? 1 : 0.85,
+                          opacity: active ? 1 : 0.25,
+                        }}
+                        transition={{ duration: 0.22, delay: active ? i * 0.03 : 0 }}
+                        className="w-4 h-5"
                       >
                         <path
                           d="M9 1.5C9 1.5 2 9.8 2 14.3C2 18.2 5.1 21 9 21C12.9 21 16 18.2 16 14.3C16 9.8 9 1.5 9 1.5Z"
@@ -180,7 +212,7 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
                           stroke="#1C1B1B"
                           strokeWidth="1.4"
                         />
-                      </svg>
+                      </motion.svg>
                     );
                   })}
                 </div>
@@ -189,7 +221,18 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
               <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-charcoal font-bold mb-1">
                 Apothecary Tip
               </p>
-              <p className="text-sm text-stone leading-relaxed">{stageSpec.tip}</p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={stageSpec.key}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.18 }}
+                  className="text-sm text-stone leading-relaxed"
+                >
+                  {stageSpec.tip}
+                </motion.p>
+              </AnimatePresence>
             </div>
 
             <div className="flex items-center justify-between gap-3 pt-1">

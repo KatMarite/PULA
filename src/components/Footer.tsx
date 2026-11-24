@@ -21,7 +21,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 PŪLA
               </p>
               <p className="font-mono text-xs text-stone mb-2">Highland-Crafted Grooming</p>
-              <p className="font-mono text-[11px] text-ochre font-bold uppercase tracking-wider">
+              <p className="font-mono text-[11px] text-ochre-dark font-bold uppercase tracking-wider">
                 Maseru, Lesotho
               </p>
             </div>
@@ -30,9 +30,9 @@ export function Footer({ onNavigate }: FooterProps) {
           {/* Middle: Navigation & Account */}
           <div className="md:col-span-5 grid grid-cols-2 gap-6 text-sm">
             <div>
-              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-charcoal mb-3">
+              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-charcoal mb-3">
                 Apothecary
-              </h3>
+              </h2>
               <ul className="space-y-2 font-mono text-xs text-stone">
                 <li>
                   <button
@@ -74,9 +74,9 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
 
             <div>
-              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-charcoal mb-3">
+              <h2 className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-charcoal mb-3">
                 Connect &amp; Orders
-              </h3>
+              </h2>
               <ul className="space-y-2 font-mono text-xs text-stone">
                 <li>
                   <a

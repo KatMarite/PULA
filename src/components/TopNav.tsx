@@ -47,11 +47,12 @@ export function TopNav({ activeSection, onNavigate }: TopNavProps) {
                 <button
                   key={item.id}
                   type="button"
+                  aria-current={isActive ? 'location' : undefined}
                   onClick={() => onNavigate(item.id)}
-                  className={`font-mono text-xs uppercase tracking-[0.14em] py-2 border-b-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`font-mono text-xs uppercase tracking-[0.14em] py-2 min-h-[40px] border-b-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                     isActive
-                      ? 'border-ochre text-ochre font-bold'
-                      : 'border-transparent text-charcoal hover:text-ochre'
+                      ? 'border-ochre text-ochre-dark font-bold'
+                      : 'border-transparent text-charcoal hover:text-ochre-dark'
                   }`}
                 >
                   {item.label}
@@ -61,11 +62,12 @@ export function TopNav({ activeSection, onNavigate }: TopNavProps) {
             {isAdmin && (
               <button
                 type="button"
+                aria-current={activeSection === 'desk' ? 'location' : undefined}
                 onClick={() => onNavigate('desk')}
-                className={`font-mono text-xs uppercase tracking-[0.14em] py-2 border-b-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                className={`font-mono text-xs uppercase tracking-[0.14em] py-2 min-h-[40px] border-b-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                   activeSection === 'desk'
-                    ? 'border-ochre text-ochre font-bold'
-                    : 'border-transparent text-ochre hover:text-charcoal'
+                    ? 'border-ochre text-ochre-dark font-bold'
+                    : 'border-transparent text-ochre-dark hover:text-charcoal'
                 }`}
               >
                 Desk
@@ -126,9 +128,10 @@ export function MobileBottomBar({ activeSection, onNavigate }: TopNavProps) {
             <button
               key={tab.id}
               type="button"
+              aria-current={isActive ? 'location' : undefined}
               onClick={() => onNavigate(tab.id)}
               className={`relative flex flex-col items-center justify-center min-h-[44px] gap-1 transition-colors cursor-pointer ${
-                isActive ? 'text-ochre font-bold' : 'text-stone hover:text-charcoal'
+                isActive ? 'text-ochre-dark font-bold' : 'text-stone hover:text-charcoal'
               }`}
             >
               <Icon className="w-[19px] h-[19px]" />

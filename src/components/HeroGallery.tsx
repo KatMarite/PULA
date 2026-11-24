@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, Pause, Play } from 'lucide-react';
 import { GALLERY_ITEMS, GalleryItem, GalleryPhotoId } from '../types/pula';
 import { usePula } from '../context/PulaContext';
@@ -54,23 +55,44 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
 
           {/* Hero Main Content */}
           <div className="px-6 sm:px-8 lg:px-10 py-8 sm:py-12 flex-1 flex flex-col justify-center">
-            <p className="font-mono text-xs uppercase tracking-[0.14em] text-stone mb-3">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="font-mono text-xs uppercase tracking-[0.14em] text-stone mb-3"
+            >
               Conditioning Beard Oil · 01 Fresh Citrus &amp; Woods
-            </p>
-            <h1 className="font-display font-extrabold text-3xl sm:text-5xl xl:text-[52px] leading-[1.06] tracking-tight text-charcoal mb-5">
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display font-extrabold text-3xl sm:text-5xl xl:text-[52px] leading-[1.06] tracking-tight text-charcoal mb-5"
+            >
               Highland-Crafted Botanical Beard Care.
-            </h1>
-            <p className="text-stone text-base sm:text-[17px] leading-relaxed max-w-xl mb-7">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="text-stone text-base sm:text-[17px] leading-relaxed max-w-xl mb-7"
+            >
               Formulated in small batches in Maseru with cold-pressed Southern African{' '}
               <strong className="text-charcoal font-semibold">Marula, Jojoba, and Argan</strong> oils.
               Built to soften coarse hair, calm dry highland skin, and sync your orders live across
               every device.
-            </p>
+            </motion.p>
 
             {/* Primary & Secondary CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <button
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+            >
+              <motion.button
                 type="button"
+                whileTap={{ scale: 0.98 }}
                 onClick={() => addToCartAndOpen('single')}
                 className="inline-flex items-center justify-center gap-2.5 bg-ochre text-cream hover:bg-charcoal transition-colors px-5 sm:px-6 py-4 min-h-[48px] rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold text-center sm:whitespace-nowrap cursor-pointer"
               >
@@ -78,16 +100,17 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                   Order 01 Fresh Citrus — M{singleEdition?.price ?? 220}
                 </span>
                 <ArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
                 type="button"
+                whileTap={{ scale: 0.98 }}
                 onClick={onExploreFormula}
                 className="inline-flex items-center justify-center border border-charcoal bg-transparent hover:bg-cream-dark text-charcoal transition-colors px-5 sm:px-6 py-4 min-h-[48px] rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold text-center sm:whitespace-nowrap cursor-pointer"
               >
                 Explore Formula
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* Quiet Unboxed Trust Strip */}
             <div className="mt-6 pt-5 border-t border-charcoal/20 flex flex-wrap items-center justify-between gap-3 text-xs text-stone font-mono">
@@ -139,13 +162,38 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
         >
           {/* Top Apothecary Metadata Strip */}
           <div className="px-5 sm:px-6 py-3.5 border-b border-charcoal bg-cream flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em]">
-            <span className="text-charcoal font-bold">{activePhoto.metaLeft}</span>
-            <span className="text-ochre font-bold">{activePhoto.metaRight}</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={`left-${activePhoto.id}`}
+                initial={{ opacity: 0, y: 3 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -3 }}
+                transition={{ duration: 0.2 }}
+                className="text-charcoal font-bold"
+              >
+                {activePhoto.metaLeft}
+              </motion.span>
+            </AnimatePresence>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={`right-${activePhoto.id}`}
+                initial={{ opacity: 0, y: 3 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -3 }}
+                transition={{ duration: 0.2 }}
+                className="text-ochre-dark font-bold"
+              >
+                {activePhoto.metaRight}
+              </motion.span>
+            </AnimatePresence>
           </div>
 
           {/* Primary Framed Studio Stage */}
           <div className="p-0 sm:p-5 flex-1 flex flex-col justify-center">
-            <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] border-b sm:border border-charcoal bg-slatebg rounded-none sm:rounded-sm overflow-hidden group">
+            <div
+              className="relative w-full aspect-[4/5] sm:aspect-[4/3] border-b sm:border border-charcoal bg-slatebg rounded-none sm:rounded-sm overflow-hidden group"
+              aria-live="off"
+            >
               <div
                 className="flex h-full w-full transition-transform duration-500 ease-out motion-reduce:transition-none"
                 style={{ transform: `translateX(-${activeIdx * 100}%)` }}
@@ -229,7 +277,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
               <button
                 type="button"
                 onClick={() => addToCartAndOpen('single')}
-                className="font-mono text-[10px] uppercase tracking-[0.12em] text-ochre hover:text-charcoal transition-colors font-bold cursor-pointer tabular-nums"
+                className="font-mono text-[10px] uppercase tracking-[0.12em] text-ochre-dark hover:text-charcoal transition-colors font-bold cursor-pointer tabular-nums"
               >
                 + Quick Add (M{singleEdition?.price ?? 220})
               </button>

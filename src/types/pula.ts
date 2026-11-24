@@ -194,7 +194,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Stockist Edition',
     caption:
       'Crafted for barbershop stations across Maseru—high-contrast matte packaging with crisp citrus and cedar finish.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image_97dcdac2.jpeg',
+    imageSrc: '/assets/barbershop-station.jpg',
   },
 ];
 

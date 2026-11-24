@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { CheckCircle2, Copy, ExternalLink, Minus, Plus, X } from 'lucide-react';
 import {
   buildWhatsAppOrderText,
@@ -7,6 +8,7 @@ import {
   PaymentMethod,
 } from '../types/pula';
 import { usePula } from '../context/PulaContext';
+import { useDialogAccessibility } from '../hooks/useDialogAccessibility';
 
 export function OrderDrawer() {
   const {
@@ -32,6 +34,9 @@ export function OrderDrawer() {
   const [submitting, setSubmitting] = useState(false);
   const [placedOrder, setPlacedOrder] = useState<Order | null>(null);
   const [validationMsg, setValidationMsg] = useState<string | null>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useDialogAccessibility(orderDrawerOpen, closeOrderDrawer, drawerRef);
 
   useEffect(() => {
     if (orderDrawerOpen) {
@@ -46,8 +51,6 @@ export function OrderDrawer() {
       setPlacedOrder(null);
     }
   }, [orderDrawerOpen, profile, user, customerName, customerArea]);
-
-  if (!orderDrawerOpen) return null;
 
   const subtotal = editions.reduce((sum, ed) => sum + (cart[ed.id] || 0) * ed.price, 0);
   const deliveryFee = totalCartItems > 0 && fulfillment === 'delivery' ? 30 : 0;
@@ -124,20 +127,34 @@ export function OrderDrawer() {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end sm:items-stretch sm:justify-end"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pula-order-drawer-title"
-    >
-      {/* Backdrop */}
-      <div
-        onClick={closeOrderDrawer}
-        className="fixed inset-0 bg-charcoal/70 backdrop-blur-xs"
-      />
+    <AnimatePresence>
+      {orderDrawerOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-stretch sm:justify-end"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pula-order-drawer-title"
+        >
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={closeOrderDrawer}
+            className="fixed inset-0 bg-charcoal/70 backdrop-blur-xs"
+          />
 
-      {/* Drawer / Mobile Bottom Sheet */}
-      <div className="relative z-10 w-full sm:w-[470px] max-h-[92dvh] sm:max-h-full bg-cream border-t sm:border-t-0 sm:border-l border-charcoal rounded-t-2xl sm:rounded-none shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+          {/* Drawer / Mobile Bottom Sheet */}
+          <motion.div
+            ref={drawerRef}
+            tabIndex={-1}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 24 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 w-full sm:w-[470px] max-h-[92dvh] sm:max-h-full bg-cream border-t sm:border-t-0 sm:border-l border-charcoal rounded-t-2xl sm:rounded-none shadow-2xl flex flex-col overflow-hidden focus:outline-none"
+          >
         {/* Mobile grab handle */}
         <div className="sm:hidden flex justify-center pt-2.5 pb-1 bg-charcoal rounded-t-2xl">
           <div className="w-10 h-1 bg-cream/30 rounded-full" />
@@ -167,7 +184,7 @@ export function OrderDrawer() {
           /* CONFIRMED REAL-TIME ORDER RECEIPT */
           <div className="flex-1 min-h-0 overflow-y-auto p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] sm:pb-6 space-y-5">
             <div className="p-5 border border-charcoal bg-cream-light rounded-sm space-y-3">
-              <div className="flex items-center gap-2.5 text-ochre">
+              <div className="flex items-center gap-2.5 text-ochre-dark">
                 <CheckCircle2 className="w-5 h-5 shrink-0" />
                 <span className="font-mono text-xs uppercase font-bold tracking-wider">
                   Order Synced Live · Status: Received
@@ -234,7 +251,7 @@ export function OrderDrawer() {
                             {ed.name}
                           </p>
                           <p className="font-mono text-[11px] text-stone truncate">{ed.subtitle}</p>
-                          <p className="font-mono text-xs font-bold text-ochre mt-1 tabular-nums">
+                          <p className="font-mono text-xs font-bold text-ochre-dark mt-1 tabular-nums">
                             M{ed.price} · {ed.stockCount > 0 ? `${ed.stockCount} in stock` : 'Sold out'}
                           </p>
                         </div>
@@ -272,9 +289,10 @@ export function OrderDrawer() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-stone font-bold mb-2.5">
                   Fulfillment in Lesotho
                 </p>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-2 gap-2.5" role="group" aria-label="Fulfillment method">
                   <button
                     type="button"
+                    aria-pressed={fulfillment === 'pickup'}
                     onClick={() => setFulfillment('pickup')}
                     className={`p-3 min-h-[56px] border border-charcoal rounded-sm text-left transition-colors cursor-pointer ${
                       fulfillment === 'pickup'
@@ -293,6 +311,7 @@ export function OrderDrawer() {
                   </button>
                   <button
                     type="button"
+                    aria-pressed={fulfillment === 'delivery'}
                     onClick={() => setFulfillment('delivery')}
                     className={`p-3 min-h-[56px] border border-charcoal rounded-sm text-left transition-colors cursor-pointer ${
                       fulfillment === 'delivery'
@@ -319,11 +338,12 @@ export function OrderDrawer() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-stone font-bold mb-2">
                   Payment Method
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" role="group" aria-label="Payment method">
                   {(['mpesa', 'ecocash', 'eft', 'cash'] as PaymentMethod[]).map((method) => (
                     <button
                       key={method}
                       type="button"
+                      aria-pressed={paymentMethod === method}
                       onClick={() => setPaymentMethod(method)}
                       className={`py-2.5 px-2 min-h-[40px] border border-charcoal rounded-sm font-mono text-[10px] uppercase font-bold transition-colors cursor-pointer ${
                         paymentMethod === method
@@ -412,7 +432,10 @@ export function OrderDrawer() {
               </div>
 
               {validationMsg && (
-                <div className="p-3 border border-ochre bg-ochre/10 rounded-sm font-mono text-xs text-ochre font-bold">
+                <div
+                  role="alert"
+                  className="p-3 border border-ochre bg-ochre/10 rounded-sm font-mono text-xs text-ochre-dark font-bold"
+                >
                   {validationMsg}
                 </div>
               )}
@@ -459,7 +482,7 @@ export function OrderDrawer() {
                   href={waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] uppercase tracking-wider text-ochre hover:text-charcoal font-bold underline underline-offset-2"
+                  className="font-mono text-[10px] uppercase tracking-wider text-ochre-dark hover:text-charcoal font-bold underline underline-offset-2"
                 >
                   Direct WhatsApp →
                 </a>
@@ -467,7 +490,9 @@ export function OrderDrawer() {
             </div>
           </form>
         )}
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }

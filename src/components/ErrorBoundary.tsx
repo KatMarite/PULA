@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="min-h-screen bg-cream text-charcoal flex items-center justify-center p-6">
           <div className="max-w-lg w-full border border-charcoal bg-cream-light p-8 rounded-sm space-y-4">
-            <p className="font-mono text-xs uppercase tracking-apothecary text-ochre font-bold">
+            <p className="font-mono text-xs uppercase tracking-apothecary text-ochre-dark font-bold">
               PŪLA Apothecary · Sync Notice
             </p>
             <h1 className="font-display font-bold text-2xl text-charcoal">

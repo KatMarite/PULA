@@ -64,7 +64,11 @@ export function AdminDesk() {
 
         {/* Desk Sub-Navigation */}
         <div className="px-4 sm:px-8 py-3.5 border-b border-charcoal bg-cream-dark/50 flex flex-wrap items-center justify-between gap-3">
-          <div className="grid grid-cols-3 sm:inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1 w-full sm:w-auto">
+          <div
+            className="grid grid-cols-3 sm:inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1 w-full sm:w-auto"
+            role="tablist"
+            aria-label="Apothecary desk sections"
+          >
             {(
               [
                 { id: 'orders', label: `Orders (${orders.length})` },
@@ -75,6 +79,8 @@ export function AdminDesk() {
               <button
                 key={tab.id}
                 type="button"
+                role="tab"
+                aria-selected={deskTab === tab.id}
                 onClick={() => setDeskTab(tab.id)}
                 className={`px-2 sm:px-3.5 py-2 min-h-[38px] rounded-sm font-mono text-[10px] sm:text-[11px] uppercase font-bold text-center whitespace-nowrap transition-colors cursor-pointer ${
                   deskTab === tab.id
@@ -113,7 +119,7 @@ export function AdminDesk() {
                   className="p-5 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
                 >
                   <div className="space-y-1">
-                    <p className="font-mono text-xs font-bold text-ochre tabular-nums">
+                    <p className="font-mono text-xs font-bold text-ochre-dark tabular-nums">
                       {order.orderNumber} · M{order.total} ({PAYMENT_LABELS[order.paymentMethod]})
                     </p>
                     <p className="font-display font-bold text-base text-charcoal">
@@ -168,7 +174,7 @@ export function AdminDesk() {
                 className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
               >
                 <div>
-                  <p className="font-mono text-[11px] text-ochre font-bold uppercase">
+                  <p className="font-mono text-[11px] text-ochre-dark font-bold uppercase">
                     {ed.code} · {ed.volume}
                   </p>
                   <h3 className="font-display font-bold text-lg text-charcoal">{ed.name}</h3>
@@ -236,7 +242,7 @@ export function AdminDesk() {
                   className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div>
-                    <p className="font-mono text-xs font-bold text-ochre uppercase">
+                    <p className="font-mono text-xs font-bold text-ochre-dark uppercase">
                       {inq.requestType === 'tester' ? 'Free 5ml Tester' : 'Wholesale Rate Card'} ·{' '}
                       {inq.location}
                     </p>
@@ -250,6 +256,7 @@ export function AdminDesk() {
                   </div>
 
                   <select
+                    aria-label={`Status for ${inq.shopName}`}
                     value={inq.status}
                     onChange={(e) =>
                       void updateBarberStatusAdmin(inq.id, e.target.value as BarberInquiryStatus)

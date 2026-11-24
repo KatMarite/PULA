@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { CheckCircle2, Copy, ExternalLink, X } from 'lucide-react';
 import { BarberChairRange, BarberInquiry, BarberRequestType } from '../types/pula';
 import { usePula } from '../context/PulaContext';
+import { useDialogAccessibility } from '../hooks/useDialogAccessibility';
 
 export function BarberModal() {
   const {
@@ -21,6 +23,9 @@ export function BarberModal() {
   const [phone, setPhone] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState<BarberInquiry | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useDialogAccessibility(barberModalOpen, closeBarberModal, modalRef);
 
   useEffect(() => {
     setRequestType(barberModalType);
@@ -30,8 +35,6 @@ export function BarberModal() {
       setContactName(user.displayName);
     }
   }, [barberModalOpen, barberModalType, user, contactName]);
-
-  if (!barberModalOpen) return null;
 
   const formattedMessage = submitted
     ? [
@@ -78,15 +81,32 @@ export function BarberModal() {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pula-barber-modal-title"
-    >
-      <div onClick={closeBarberModal} className="fixed inset-0 bg-charcoal/75 backdrop-blur-xs" />
+    <AnimatePresence>
+      {barberModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pula-barber-modal-title"
+        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={closeBarberModal}
+            className="fixed inset-0 bg-charcoal/75 backdrop-blur-xs"
+          />
 
-      <div className="relative z-10 w-full max-w-lg max-h-[90dvh] bg-cream border border-charcoal rounded-sm shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+          <motion.div
+            ref={modalRef}
+            tabIndex={-1}
+            initial={{ opacity: 0, scale: 0.97, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.97, y: 12 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 w-full max-w-lg max-h-[90dvh] bg-cream border border-charcoal rounded-sm shadow-2xl flex flex-col overflow-hidden focus:outline-none"
+          >
         <div className="px-5 sm:px-6 py-4 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between shrink-0">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ochre font-bold">
@@ -108,7 +128,7 @@ export function BarberModal() {
 
         {submitted ? (
           <div className="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1 min-h-0">
-            <div className="flex items-center gap-2 text-ochre font-mono text-xs uppercase font-bold">
+            <div className="flex items-center gap-2 text-ochre-dark font-mono text-xs uppercase font-bold">
               <CheckCircle2 className="w-4 h-4" />
               <span>Saved Live to PŪLA Trade Desk</span>
             </div>
@@ -141,9 +161,10 @@ export function BarberModal() {
               <p className="font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-2">
                 What would you like to request?
               </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2" role="group" aria-label="Request type">
                 <button
                   type="button"
+                  aria-pressed={requestType === 'tester'}
                   onClick={() => setRequestType('tester')}
                   className={`py-2.5 px-3 min-h-[44px] border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold cursor-pointer ${
                     requestType === 'tester'
@@ -155,6 +176,7 @@ export function BarberModal() {
                 </button>
                 <button
                   type="button"
+                  aria-pressed={requestType === 'wholesale'}
                   onClick={() => setRequestType('wholesale')}
                   className={`py-2.5 px-3 min-h-[44px] border border-charcoal rounded-sm font-mono text-[11px] uppercase font-bold cursor-pointer ${
                     requestType === 'wholesale'
@@ -277,7 +299,9 @@ export function BarberModal() {
             </button>
           </form>
         )}
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
