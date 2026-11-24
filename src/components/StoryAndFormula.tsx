@@ -129,7 +129,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                 onClick={() => setFormulaTab('carrier')}
                 className={`px-4 py-2.5 min-h-[40px] rounded-sm font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   formulaTab === 'carrier'
-                    ? 'bg-charcoal text-cream'
+                    ? 'bg-[#c86d1f] text-cream'
                     : 'text-charcoal hover:bg-cream-dark'
                 }`}
               >

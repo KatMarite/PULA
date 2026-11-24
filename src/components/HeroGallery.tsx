@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { ArrowRight, Maximize2 } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight, Maximize2, Pause, Play } from 'lucide-react';
 import { GALLERY_ITEMS, GalleryItem, GalleryPhotoId } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 import { StudioMedia } from './ApothecaryArt';
 
 const HERO_GALLERY_ORDER: GalleryPhotoId[] = ['botanicals', 'hero-box', 'gift-kit', 'box-back'];
+const SLIDE_INTERVAL_MS = 4500;
 
 const HERO_GALLERY_ITEMS: GalleryItem[] = HERO_GALLERY_ORDER
   .map((id) => GALLERY_ITEMS.find((item) => item.id === id))
@@ -18,6 +19,8 @@ interface HeroGalleryProps {
 export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryProps) {
   const { editions, addToCartAndOpen } = usePula();
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const singleEdition = editions.find((e) => e.id === 'single') || editions[0];
   const totalBottlesLeft = editions.reduce((acc, ed) => acc + (ed.stockCount || 0), 0);
@@ -26,6 +29,21 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
     0,
     GALLERY_ITEMS.findIndex((item) => item.id === activePhoto.id)
   );
+
+  const stepSlide = useCallback((delta: number) => {
+    setActiveIdx((prev) => (prev + delta + HERO_GALLERY_ITEMS.length) % HERO_GALLERY_ITEMS.length);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || isHovered) return;
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      stepSlide(1);
+    }, SLIDE_INTERVAL_MS);
+    return () => window.clearInterval(timer);
+  }, [isPaused, isHovered, stepSlide]);
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8 sm:py-10">
@@ -115,8 +133,18 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Studio Showcase & Interactive 4-View Gallery Switcher */}
-        <div className="lg:col-span-6 bg-cream-dark/35 flex flex-col justify-between">
+        {/* RIGHT COLUMN: Studio Showcase & Interactive 4-View Slideshow */}
+        <div
+          className="lg:col-span-6 bg-cream-dark/35 flex flex-col justify-between"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') stepSlide(-1);
+            if (e.key === 'ArrowRight') stepSlide(1);
+          }}
+          aria-roledescription="carousel"
+          aria-label="Studio Gallery slideshow"
+        >
           {/* Top Apothecary Metadata Strip */}
           <div className="px-5 sm:px-6 py-3.5 border-b border-charcoal bg-cream flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em]">
             <span className="text-charcoal font-bold">{activePhoto.metaLeft}</span>
@@ -126,14 +154,30 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
           {/* Primary Framed Studio Stage */}
           <div className="p-4 sm:p-5 flex-1 flex flex-col justify-center">
             <div className="relative w-full aspect-[4/3] border border-charcoal bg-slatebg rounded-sm overflow-hidden group">
-              <button
-                type="button"
-                onClick={() => onOpenLightbox(activeLightboxIdx)}
-                className="w-full h-full block cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre"
-                aria-label={`Zoom ${activePhoto.title}`}
+              <div
+                className="flex h-full w-full transition-transform duration-500 ease-out motion-reduce:transition-none"
+                style={{ transform: `translateX(-${activeIdx * 100}%)` }}
               >
-                <StudioMedia photoId={activePhoto.id} alt={activePhoto.caption} />
-              </button>
+                {HERO_GALLERY_ITEMS.map((item, idx) => {
+                  const lightboxIdx = Math.max(
+                    0,
+                    GALLERY_ITEMS.findIndex((entry) => entry.id === item.id)
+                  );
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => onOpenLightbox(lightboxIdx)}
+                      tabIndex={idx === activeIdx ? 0 : -1}
+                      aria-hidden={idx !== activeIdx}
+                      className="w-full h-full shrink-0 block cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre"
+                      aria-label={`Zoom ${item.title}`}
+                    >
+                      <StudioMedia photoId={item.id} alt={item.caption} />
+                    </button>
+                  );
+                })}
+              </div>
 
               {/* Measured bottom contrast scrim */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
@@ -145,8 +189,22 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                 </span>
               </div>
 
-              {/* Top-right functional action: Fullscreen Zoom */}
+              {/* Top-right functional actions: Play/Pause + Fullscreen Zoom */}
               <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setIsPaused((prev) => !prev)}
+                  className="bg-charcoal/85 text-cream hover:bg-ochre border border-cream/25 px-2.5 py-1.5 rounded-sm flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
+                  aria-label={isPaused ? 'Play slideshow' : 'Pause slideshow'}
+                  aria-pressed={isPaused}
+                >
+                  {isPaused ? (
+                    <Play className="w-3 h-3" aria-hidden="true" />
+                  ) : (
+                    <Pause className="w-3 h-3" aria-hidden="true" />
+                  )}
+                  <span className="hidden sm:inline">{isPaused ? 'Play' : 'Pause'}</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => onOpenLightbox(activeLightboxIdx)}
@@ -158,8 +216,26 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                 </button>
               </div>
 
+              {/* Previous / Next Slide Controls */}
+              <button
+                type="button"
+                onClick={() => stepSlide(-1)}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-sm bg-charcoal/80 hover:bg-ochre text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="w-4 h-4" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => stepSlide(1)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-sm bg-charcoal/80 hover:bg-ochre text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              </button>
+
               {/* Caption */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 px-4 py-3">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 px-4 py-3 flex items-end justify-between gap-3">
                 <p className="font-mono text-[11px] text-cream/95 leading-snug max-w-md">
                   {activePhoto.caption}
                 </p>
@@ -167,12 +243,24 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
             </div>
           </div>
 
-          {/* Interactive 4-View Thumbnail Switcher */}
+          {/* Interactive 4-View Slideshow Switcher */}
           <div className="px-4 sm:px-5 pb-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-stone font-bold">
-                Studio Gallery · {HERO_GALLERY_ITEMS.length} Photos
-              </span>
+              <div className="flex items-center gap-2.5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-stone font-bold">
+                  Studio Slideshow · {HERO_GALLERY_ITEMS.length} Photos
+                </span>
+                <div className="flex items-center gap-1" aria-hidden="true">
+                  {HERO_GALLERY_ITEMS.map((item, idx) => (
+                    <span
+                      key={item.id}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        idx === activeIdx ? 'w-4 bg-ochre' : 'w-1.5 bg-charcoal/30'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
               <button
                 type="button"
                 onClick={() => addToCartAndOpen('single')}
