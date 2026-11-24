@@ -293,7 +293,7 @@ service cloud.firestore {
         : data.subtotal == (
             data.qtySingle * 220 +
             data.qtyTwin * 410 +
-            data.qtyKit * 320
+            data.qtyKit * 550
           );
     }
 

@@ -659,7 +659,7 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
 
       const singlePrice = editions.find((e) => e.id === 'single')?.price ?? 220;
       const twinPrice = editions.find((e) => e.id === 'twin')?.price ?? 410;
-      const kitPrice = editions.find((e) => e.id === 'kit')?.price ?? 320;
+      const kitPrice = editions.find((e) => e.id === 'kit')?.price ?? 550;
 
       const subtotal = qtySingle * singlePrice + qtyTwin * twinPrice + qtyKit * kitPrice;
       const deliveryFee = input.fulfillment === 'delivery' ? 30 : 0;

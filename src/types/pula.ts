@@ -241,7 +241,7 @@ export const DEFAULT_EDITIONS: Edition[] = [
     subtitle: '30ml Oil + Hardwood Comb & Brush',
     description:
       'Our flagship 30ml boxed oil presented in a kraft highland gift box alongside an engraved hardwood beard comb and boar-bristle brush.',
-    price: 320,
+    price: 550,
     volume: 'Oil + Comb + Brush',
     badge: 'Gift Ready',
     stockCount: 15,
