@@ -137,7 +137,7 @@ export function OrderDrawer() {
       />
 
       {/* Drawer / Mobile Bottom Sheet */}
-      <div className="relative z-10 w-full sm:w-[470px] max-h-[92vh] sm:max-h-full bg-cream border-t sm:border-t-0 sm:border-l border-charcoal rounded-t-2xl sm:rounded-none shadow-2xl flex flex-col animate-fade-up">
+      <div className="relative z-10 w-full sm:w-[470px] max-h-[92dvh] sm:max-h-full bg-cream border-t sm:border-t-0 sm:border-l border-charcoal rounded-t-2xl sm:rounded-none shadow-2xl flex flex-col overflow-hidden animate-fade-up">
         {/* Mobile grab handle */}
         <div className="sm:hidden flex justify-center pt-2.5 pb-1 bg-charcoal rounded-t-2xl">
           <div className="w-10 h-1 bg-cream/30 rounded-full" />
@@ -165,7 +165,7 @@ export function OrderDrawer() {
 
         {placedOrder ? (
           /* CONFIRMED REAL-TIME ORDER RECEIPT */
-          <div className="flex-1 overflow-y-auto p-6 space-y-5">
+          <div className="flex-1 min-h-0 overflow-y-auto p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] sm:pb-6 space-y-5">
             <div className="p-5 border border-charcoal bg-cream-light rounded-sm space-y-3">
               <div className="flex items-center gap-2.5 text-ochre">
                 <CheckCircle2 className="w-5 h-5 shrink-0" />
@@ -208,8 +208,8 @@ export function OrderDrawer() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handlePlaceOrder} className="flex-1 flex flex-col overflow-hidden">
-            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+          <form onSubmit={handlePlaceOrder} className="flex-1 min-h-0 flex flex-col overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-y-auto px-5 sm:px-6 py-5 space-y-5">
               {/* Edition Quantity Selectors */}
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-stone font-bold mb-3">
@@ -218,6 +218,7 @@ export function OrderDrawer() {
                 <div className="space-y-2.5">
                   {editions.map((ed) => {
                     const qty = cart[ed.id] || 0;
+                    const maxQty = ed.active ? Math.min(20, Math.max(0, ed.stockCount)) : 0;
                     const selected = qty > 0;
                     return (
                       <div
@@ -234,14 +235,15 @@ export function OrderDrawer() {
                           </p>
                           <p className="font-mono text-[11px] text-stone truncate">{ed.subtitle}</p>
                           <p className="font-mono text-xs font-bold text-ochre mt-1 tabular-nums">
-                            M{ed.price} · {ed.stockCount} in stock
+                            M{ed.price} · {ed.stockCount > 0 ? `${ed.stockCount} in stock` : 'Sold out'}
                           </p>
                         </div>
                         <div className="flex items-center border border-charcoal rounded-sm bg-cream shrink-0">
                           <button
                             type="button"
+                            disabled={qty <= 0}
                             onClick={() => updateCartQty(ed.id, -1)}
-                            className="w-10 h-10 flex items-center justify-center text-charcoal hover:bg-cream-dark cursor-pointer"
+                            className="w-10 h-10 flex items-center justify-center text-charcoal hover:bg-cream-dark cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             aria-label={`Decrease ${ed.name}`}
                           >
                             <Minus className="w-3.5 h-3.5" />
@@ -251,8 +253,9 @@ export function OrderDrawer() {
                           </span>
                           <button
                             type="button"
+                            disabled={qty >= maxQty}
                             onClick={() => updateCartQty(ed.id, 1)}
-                            className="w-10 h-10 flex items-center justify-center text-charcoal hover:bg-cream-dark cursor-pointer"
+                            className="w-10 h-10 flex items-center justify-center text-charcoal hover:bg-cream-dark cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                             aria-label={`Increase ${ed.name}`}
                           >
                             <Plus className="w-3.5 h-3.5" />
@@ -416,7 +419,7 @@ export function OrderDrawer() {
             </div>
 
             {/* Sticky Checkout Footer */}
-            <div className="px-6 py-4 border-t border-charcoal bg-cream-dark space-y-3">
+            <div className="px-5 sm:px-6 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:pb-4 border-t border-charcoal bg-cream-dark space-y-3 shrink-0">
               <div className="space-y-1 font-mono text-xs">
                 <div className="flex justify-between text-stone">
                   <span>Items Subtotal</span>

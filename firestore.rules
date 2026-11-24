@@ -36,7 +36,7 @@ service cloud.firestore {
 
     // Zero-lookup admin check safe for allow list rules (Cost-Optimization Clause)
     function isVerifiedAdminEmail() {
-      return isVerifiedUser() && request.auth.token.email == 'KatlehoMarite@gmail.com';
+      return isVerifiedUser() && request.auth.token.email.lower() == 'katlehomarite@gmail.com';
     }
 
     // Full RBAC admin check for single-document operations
@@ -64,12 +64,12 @@ service cloud.firestore {
         data.name is string && data.name.size() >= 1 && data.name.size() <= 80 &&
         data.subtitle is string && data.subtitle.size() >= 1 && data.subtitle.size() <= 100 &&
         data.description is string && data.description.size() >= 1 && data.description.size() <= 400 &&
-        data.price is number && data.price >= 1 && data.price <= 100000 &&
-        (!('compareAtPrice' in data) || (data.compareAtPrice is number && data.compareAtPrice >= 0 && data.compareAtPrice <= 100000)) &&
+        data.price is int && data.price >= 1 && data.price <= 100000 &&
+        (!('compareAtPrice' in data) || (data.compareAtPrice is int && data.compareAtPrice >= 0 && data.compareAtPrice <= 100000)) &&
         data.volume is string && data.volume.size() >= 1 && data.volume.size() <= 40 &&
         data.badge is string && data.badge.size() >= 1 && data.badge.size() <= 30 &&
-        data.stockCount is number && data.stockCount >= 0 && data.stockCount <= 10000 &&
-        data.sortOrder is number && data.sortOrder >= 0 && data.sortOrder <= 100 &&
+        data.stockCount is int && data.stockCount >= 0 && data.stockCount <= 10000 &&
+        data.sortOrder is int && data.sortOrder >= 0 && data.sortOrder <= 100 &&
         data.active is bool &&
         data.updatedAt is timestamp;
     }
@@ -134,17 +134,17 @@ service cloud.firestore {
         data.customerName is string && data.customerName.size() >= 2 && data.customerName.size() <= 80 &&
         data.customerArea is string && data.customerArea.size() >= 2 && data.customerArea.size() <= 100 &&
         data.customerPhone is string && data.customerPhone.size() <= 30 &&
-        data.qtySingle is number && data.qtySingle >= 0 && data.qtySingle <= 20 &&
-        data.qtyTwin is number && data.qtyTwin >= 0 && data.qtyTwin <= 20 &&
-        data.qtyKit is number && data.qtyKit >= 0 && data.qtyKit <= 20 &&
+        data.qtySingle is int && data.qtySingle >= 0 && data.qtySingle <= 20 &&
+        data.qtyTwin is int && data.qtyTwin >= 0 && data.qtyTwin <= 20 &&
+        data.qtyKit is int && data.qtyKit >= 0 && data.qtyKit <= 20 &&
         (data.qtySingle + data.qtyTwin + data.qtyKit) >= 1 &&
         data.fulfillment is string && data.fulfillment.size() <= 16 &&
         data.fulfillment in ['pickup', 'delivery'] &&
         data.paymentMethod is string && data.paymentMethod.size() <= 16 &&
         data.paymentMethod in ['mpesa', 'ecocash', 'eft', 'cash'] &&
-        data.subtotal is number && data.subtotal >= 1 && data.subtotal <= 100000 &&
-        data.deliveryFee is number && data.deliveryFee >= 0 && data.deliveryFee <= 500 &&
-        data.total is number && data.total == (data.subtotal + data.deliveryFee) &&
+        data.subtotal is int && data.subtotal >= 1 && data.subtotal <= 100000 &&
+        data.deliveryFee is int && data.deliveryFee == (data.fulfillment == 'delivery' ? 30 : 0) &&
+        data.total is int && data.total == (data.subtotal + data.deliveryFee) &&
         data.notes is string && data.notes.size() <= 300 &&
         data.status is string && data.status.size() <= 20 &&
         data.status in ['pending', 'confirmed', 'pouring', 'ready', 'delivered', 'cancelled'] &&
@@ -190,7 +190,7 @@ service cloud.firestore {
         data.location is string && data.location.size() <= 60 &&
         data.beardStage is string && data.beardStage.size() <= 16 &&
         data.beardStage in ['stubble', 'short', 'medium', 'full'] &&
-        data.rating is number && data.rating >= 1 && data.rating <= 5 &&
+        data.rating is int && data.rating >= 1 && data.rating <= 5 &&
         data.comment is string && data.comment.size() >= 5 && data.comment.size() <= 500 &&
         data.published is bool &&
         data.createdAt is timestamp &&
@@ -279,6 +279,24 @@ service cloud.firestore {
     // -------------------------------------------------------------------------
     // Collection 3: Real-Time Customer Orders (Owner + Admin Isolation)
     // -------------------------------------------------------------------------
+    function isValidOrderPricing(data) {
+      return (
+        exists(/databases/$(database)/documents/editions/single) &&
+        exists(/databases/$(database)/documents/editions/twin) &&
+        exists(/databases/$(database)/documents/editions/kit)
+      )
+        ? data.subtotal == (
+            data.qtySingle * get(/databases/$(database)/documents/editions/single).data.price +
+            data.qtyTwin * get(/databases/$(database)/documents/editions/twin).data.price +
+            data.qtyKit * get(/databases/$(database)/documents/editions/kit).data.price
+          )
+        : data.subtotal == (
+            data.qtySingle * 220 +
+            data.qtyTwin * 410 +
+            data.qtyKit * 320
+          );
+    }
+
     match /orders/{orderId} {
       allow get: if isSignedIn() &&
         isValidId(orderId) &&
@@ -288,6 +306,7 @@ service cloud.firestore {
       allow create: if isVerifiedUser() &&
         isValidId(orderId) &&
         isValidOrder(incoming()) &&
+        isValidOrderPricing(incoming()) &&
         incoming().userId == request.auth.uid &&
         incoming().status == 'pending' &&
         incoming().createdAt == request.time &&

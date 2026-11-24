@@ -63,20 +63,20 @@ export function AdminDesk() {
         </div>
 
         {/* Desk Sub-Navigation */}
-        <div className="px-6 sm:px-8 py-3.5 border-b border-charcoal bg-cream-dark/50 flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1">
+        <div className="px-4 sm:px-8 py-3.5 border-b border-charcoal bg-cream-dark/50 flex flex-wrap items-center justify-between gap-3">
+          <div className="grid grid-cols-3 sm:inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1 w-full sm:w-auto">
             {(
               [
                 { id: 'orders', label: `Orders (${orders.length})` },
                 { id: 'inventory', label: 'Inventory' },
-                { id: 'stockists', label: `Barbershops (${barberInquiries.length})` },
+                { id: 'stockists', label: `Barbers (${barberInquiries.length})` },
               ] as const
             ).map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setDeskTab(tab.id)}
-                className={`px-3.5 py-2 min-h-[38px] rounded-sm font-mono text-[11px] uppercase font-bold whitespace-nowrap transition-colors cursor-pointer ${
+                className={`px-2 sm:px-3.5 py-2 min-h-[38px] rounded-sm font-mono text-[10px] sm:text-[11px] uppercase font-bold text-center whitespace-nowrap transition-colors cursor-pointer ${
                   deskTab === tab.id
                     ? 'bg-charcoal text-cream'
                     : 'text-charcoal hover:bg-cream-dark'
@@ -143,7 +143,7 @@ export function AdminDesk() {
                       onChange={(e) =>
                         void updateOrderStatusAdmin(order.id, e.target.value as OrderStatus)
                       }
-                      className="px-3 py-2.5 min-h-[42px] bg-cream-light border border-charcoal rounded-sm font-mono text-xs font-bold text-charcoal uppercase cursor-pointer"
+                      className="w-full sm:w-auto px-3 py-2.5 min-h-[42px] bg-cream-light border border-charcoal rounded-sm font-mono text-xs font-bold text-charcoal uppercase cursor-pointer"
                     >
                       <option value="pending">Pending</option>
                       <option value="confirmed">Confirmed</option>
@@ -254,7 +254,7 @@ export function AdminDesk() {
                     onChange={(e) =>
                       void updateBarberStatusAdmin(inq.id, e.target.value as BarberInquiryStatus)
                     }
-                    className="px-3 py-2.5 min-h-[42px] bg-cream-light border border-charcoal rounded-sm font-mono text-xs font-bold text-charcoal uppercase cursor-pointer"
+                    className="w-full sm:w-auto px-3 py-2.5 min-h-[42px] bg-cream-light border border-charcoal rounded-sm font-mono text-xs font-bold text-charcoal uppercase cursor-pointer"
                   >
                     {(Object.keys(BARBER_STATUS_LABELS) as BarberInquiryStatus[]).map((key) => (
                       <option key={key} value={key}>

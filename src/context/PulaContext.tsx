@@ -418,7 +418,8 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
         }
       },
       (error) => {
-        handleFirestoreError(error, OperationType.GET, `users/${uid}`);
+        console.error('Profile listener error:', error);
+        setSyncError('Unable to sync your profile right now.');
       }
     );
 
@@ -457,7 +458,8 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
         setDbOrders(items);
       },
       (error) => {
-        handleFirestoreError(error, OperationType.LIST, 'orders');
+        console.error('Orders listener error:', error);
+        setSyncError('Unable to sync live orders right now.');
       }
     );
 
@@ -489,7 +491,8 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
         setDbBarberInquiries(items);
       },
       (error) => {
-        handleFirestoreError(error, OperationType.LIST, 'barberInquiries');
+        console.error('Barber inquiries listener error:', error);
+        setSyncError('Unable to sync trade inquiries right now.');
       }
     );
 
@@ -504,6 +507,7 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   const syncProfileFields = useCallback(
     async (partial: Partial<UserProfile>) => {
       if (user && dbProfile) {
+        if (!user.emailVerified) return;
         const profileRef = doc(db, 'users', user.uid);
         try {
           await updateDoc(profileRef, {
@@ -542,11 +546,26 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
     [syncProfileFields]
   );
 
+  const getEditionMaxQty = useCallback(
+    (id: Edition['id']): number => {
+      const ed = editions.find((item) => item.id === id);
+      if (!ed || !ed.active) return 0;
+      return clampNumber(ed.stockCount, 0, 20);
+    },
+    [editions]
+  );
+
   const updateCartQty = useCallback(
     (id: Edition['id'], delta: number) => {
       setInitializedBag(true);
+      const maxQty = getEditionMaxQty(id);
       setLocalCart((prev) => {
-        const nextQty = clampNumber((prev[id] || 0) + delta, 0, 20);
+        const current = prev[id] || 0;
+        const nextQty = clampNumber(current + delta, 0, Math.max(maxQty, delta < 0 ? current : 0));
+        if (delta > 0 && nextQty === current) {
+          showToast(maxQty === 0 ? 'This edition is currently sold out' : `Maximum ${maxQty} available in stock`);
+          return prev;
+        }
         const next = { ...prev, [id]: nextQty };
         void syncProfileFields({
           cartSingle: next.single,
@@ -556,15 +575,19 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
         return next;
       });
     },
-    [syncProfileFields]
+    [getEditionMaxQty, syncProfileFields, showToast]
   );
 
   const addToCartAndOpen = useCallback(
     (id: Edition['id']) => {
+      const ed = editions.find((item) => item.id === id);
+      if (!ed || !ed.active || ed.stockCount <= 0) {
+        showToast('This edition is currently sold out');
+        return;
+      }
       updateCartQty(id, 1);
       setOrderDrawerOpen(true);
-      const ed = editions.find((item) => item.id === id);
-      if (ed) showToast(`Added ${ed.name} to bag`);
+      showToast(`Added ${ed.name} to bag`);
     },
     [updateCartQty, editions, showToast]
   );
@@ -577,11 +600,11 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   const totalCartItems = localCart.single + localCart.twin + localCart.kit;
 
   const openOrderDrawer = useCallback(() => {
-    if (totalCartItems === 0 && !initializedBag) {
+    if (totalCartItems === 0 && !initializedBag && getEditionMaxQty('single') > 0) {
       updateCartQty('single', 1);
     }
     setOrderDrawerOpen(true);
-  }, [totalCartItems, initializedBag, updateCartQty]);
+  }, [totalCartItems, initializedBag, getEditionMaxQty, updateCartQty]);
 
   const closeOrderDrawer = useCallback(() => setOrderDrawerOpen(false), []);
 
@@ -594,6 +617,12 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
 
   const setCustomPhoto = useCallback(
     (photoId: string, dataUrl: string) => {
+      const isSafeRasterDataUrl = /^data:image\/(png|jpeg|jpg|webp|gif|avif);base64,[a-zA-Z0-9+/=]+$/.test(dataUrl);
+      const isSafeLocalAsset = /^\/assets\/[a-zA-Z0-9_./-]+$/.test(dataUrl);
+      if (!isSafeRasterDataUrl && !isSafeLocalAsset) {
+        showToast('Invalid image format');
+        return;
+      }
       setCustomPhotos((prev) => ({ ...prev, [photoId]: dataUrl }));
       showToast('Updated studio photo preview');
     },
@@ -610,6 +639,22 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       if (qtySingle + qtyTwin + qtyKit < 1) {
         showToast('Add at least 1 edition to your bag');
         return null;
+      }
+
+      const requestedByEdition: Record<Edition['id'], number> = {
+        single: qtySingle,
+        twin: qtyTwin,
+        kit: qtyKit,
+      };
+      for (const id of ['single', 'twin', 'kit'] as Edition['id'][]) {
+        const requested = requestedByEdition[id];
+        if (requested > 0) {
+          const ed = editions.find((item) => item.id === id);
+          if (!ed || !ed.active || requested > ed.stockCount) {
+            showToast(`${ed?.name || id} does not have enough stock available`);
+            return null;
+          }
+        }
       }
 
       const singlePrice = editions.find((e) => e.id === 'single')?.price ?? 220;
@@ -632,6 +677,10 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (user) {
+        if (!user.emailVerified) {
+          showToast('Please verify your email address before placing an order');
+          return null;
+        }
         const payload = {
           orderNumber,
           userId: user.uid,
@@ -721,6 +770,10 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   const cancelOrder = useCallback(
     async (orderId: string) => {
       if (user) {
+        if (!user.emailVerified) {
+          showToast('Please verify your email address first');
+          return;
+        }
         try {
           await updateDoc(doc(db, 'orders', orderId), {
             status: 'cancelled',
@@ -754,6 +807,10 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (user) {
+        if (!user.emailVerified) {
+          showToast('Please verify your email address before submitting an inquiry');
+          return null;
+        }
         const payload = {
           userId: user.uid,
           requestType: input.requestType,
@@ -815,6 +872,10 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (user) {
+        if (!user.emailVerified) {
+          showToast('Please verify your email address before posting a review');
+          return false;
+        }
         try {
           await addDoc(collection(db, 'reviews'), {
             userId: user.uid,
@@ -860,7 +921,7 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
         showToast('Review removed');
         return;
       }
-      if (!user) return;
+      if (!user || !user.emailVerified) return;
       try {
         await deleteDoc(doc(db, 'reviews', reviewId));
         showToast('Review removed');

@@ -86,8 +86,8 @@ export function BarberModal() {
     >
       <div onClick={closeBarberModal} className="fixed inset-0 bg-charcoal/75 backdrop-blur-xs" />
 
-      <div className="relative z-10 w-full max-w-lg bg-cream border border-charcoal rounded-sm shadow-2xl overflow-hidden animate-fade-up">
-        <div className="px-6 py-4 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between">
+      <div className="relative z-10 w-full max-w-lg max-h-[90dvh] bg-cream border border-charcoal rounded-sm shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+        <div className="px-5 sm:px-6 py-4 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between shrink-0">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ochre font-bold">
               Maseru &amp; Roma Trade Desk
@@ -107,7 +107,7 @@ export function BarberModal() {
         </div>
 
         {submitted ? (
-          <div className="p-6 space-y-4">
+          <div className="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1 min-h-0">
             <div className="flex items-center gap-2 text-ochre font-mono text-xs uppercase font-bold">
               <CheckCircle2 className="w-4 h-4" />
               <span>Saved Live to PŪLA Trade Desk</span>
@@ -136,7 +136,7 @@ export function BarberModal() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1 min-h-0">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-wider text-stone font-bold mb-2">
                 What would you like to request?

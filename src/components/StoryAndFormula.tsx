@@ -68,7 +68,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
           </div>
 
           {/* 4 Brand Pillars */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-charcoal divide-y sm:divide-y-0 divide-x divide-charcoal bg-cream-dark/50">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-charcoal bg-cream-dark/50">
             {[
               {
                 num: '01',
@@ -90,8 +90,15 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                 title: 'Small-Batch Craft',
                 body: 'Measured, blended, and bottled fresh in Maseru for peak potency.',
               },
-            ].map((pillar) => (
-              <div key={pillar.num} className="p-5 sm:p-6">
+            ].map((pillar, idx) => (
+              <div
+                key={pillar.num}
+                className={`p-4 sm:p-6 border-charcoal ${
+                  idx < 2 ? 'border-b lg:border-b-0' : ''
+                } ${
+                  idx % 2 === 0 ? 'border-r' : 'lg:border-r lg:last:border-r-0'
+                }`}
+              >
                 <p className="font-mono text-[11px] text-ochre font-bold mb-1">{pillar.num}</p>
                 <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal mb-1">
                   {pillar.title}
@@ -118,7 +125,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
 
             {/* Interactive Segmented Tab Control */}
             <div
-              className="inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1 self-start lg:self-auto"
+              className="grid grid-cols-2 sm:inline-flex border border-charcoal rounded-sm bg-cream p-1 gap-1 w-full sm:w-auto"
               role="tablist"
               aria-label="Formula explorer tabs"
             >
@@ -190,7 +197,7 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
             {/* Right Tab Panel */}
             <div className="lg:col-span-8">
               {formulaTab === 'carrier' ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-charcoal h-full animate-fade-up">
+                <div className="grid grid-cols-1 sm:grid-cols-2 h-full animate-fade-up">
                   {CARRIER_OILS.slice(0, 4).map((oil, idx) => (
                     <article
                       key={oil.code}

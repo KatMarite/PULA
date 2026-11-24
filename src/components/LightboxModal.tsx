@@ -33,8 +33,8 @@ export function LightboxModal({ activeIndex, onClose, onStep }: LightboxModalPro
     >
       <div onClick={onClose} className="fixed inset-0 bg-charcoal/90 backdrop-blur-sm" />
 
-      <div className="relative z-10 w-full max-w-4xl bg-cream border border-charcoal rounded-sm shadow-2xl overflow-hidden animate-fade-up flex flex-col">
-        <div className="px-4 sm:px-6 py-3 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between gap-4">
+      <div className="relative z-10 w-full max-w-4xl max-h-[92dvh] bg-cream border border-charcoal rounded-sm shadow-2xl overflow-hidden animate-fade-up flex flex-col">
+        <div className="px-4 sm:px-6 py-3 bg-charcoal text-cream border-b border-charcoal flex items-center justify-between gap-4 shrink-0">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <span className="font-mono text-[11px] text-ochre font-bold uppercase tracking-[0.14em] tabular-nums">
               0{activeIndex + 1} / 0{GALLERY_ITEMS.length}
@@ -53,13 +53,13 @@ export function LightboxModal({ activeIndex, onClose, onStep }: LightboxModalPro
           </button>
         </div>
 
-        <div className="relative bg-slatebg flex items-center justify-center aspect-[4/3] max-h-[70vh] overflow-hidden">
+        <div className="relative bg-slatebg flex items-center justify-center aspect-[4/3] max-h-[65dvh] w-full overflow-hidden">
           <StudioMedia photoId={photo.id} alt={photo.caption} className="w-full h-full object-contain" />
 
           <button
             type="button"
             onClick={() => onStep(-1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-sm bg-ochre/90 hover:bg-charcoal text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-sm bg-ochre/90 hover:bg-charcoal text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Previous view"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -67,7 +67,7 @@ export function LightboxModal({ activeIndex, onClose, onStep }: LightboxModalPro
           <button
             type="button"
             onClick={() => onStep(1)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-sm bg-ochre/90 hover:bg-charcoal text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-sm bg-ochre/90 hover:bg-charcoal text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Next view"
           >
             <ChevronRight className="w-5 h-5" />

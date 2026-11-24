@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, Maximize2, Pause, Play } from 'lucide-react';
+import { ArrowRight, Pause, Play } from 'lucide-react';
 import { GALLERY_ITEMS, GalleryItem, GalleryPhotoId } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 import { StudioMedia } from './ApothecaryArt';
@@ -23,12 +23,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
   const [isHovered, setIsHovered] = useState(false);
 
   const singleEdition = editions.find((e) => e.id === 'single') || editions[0];
-  const totalBottlesLeft = editions.reduce((acc, ed) => acc + (ed.stockCount || 0), 0);
   const activePhoto = HERO_GALLERY_ITEMS[activeIdx] || HERO_GALLERY_ITEMS[0];
-  const activeLightboxIdx = Math.max(
-    0,
-    GALLERY_ITEMS.findIndex((item) => item.id === activePhoto.id)
-  );
 
   const stepSlide = useCallback((delta: number) => {
     setActiveIdx((prev) => (prev + delta + HERO_GALLERY_ITEMS.length) % HERO_GALLERY_ITEMS.length);
@@ -46,17 +41,14 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
   }, [isPaused, isHovered, stepSlide]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8 sm:py-10">
+    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 pb-6 sm:py-10">
       <div className="border border-charcoal bg-cream rounded-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
         {/* LEFT COLUMN: Apothecary Editorial Copy & CTAs */}
-        <div className="lg:col-span-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-charcoal">
+        <div className="order-2 lg:order-1 lg:col-span-6 flex flex-col justify-between lg:border-r border-charcoal">
           {/* Top Metadata Strip (clean unboxed text with typographic separators) */}
           <div className="px-6 sm:px-8 py-3.5 border-b border-charcoal bg-cream-dark/60 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
             <span className="text-charcoal font-bold">
-              Batch 001 · Maseru, Lesotho
-            </span>
-            <span className="text-ochre font-bold tabular-nums">
-              {totalBottlesLeft} Sets Available
+              Batch 001
             </span>
           </div>
 
@@ -80,7 +72,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
               <button
                 type="button"
                 onClick={() => addToCartAndOpen('single')}
-                className="inline-flex items-center justify-center gap-2.5 bg-ochre text-cream hover:bg-charcoal transition-colors px-6 py-4 min-h-[48px] rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold whitespace-nowrap cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 bg-ochre text-cream hover:bg-charcoal transition-colors px-5 sm:px-6 py-4 min-h-[48px] rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold text-center sm:whitespace-nowrap cursor-pointer"
               >
                 <span className="tabular-nums">
                   Order 01 Fresh Citrus — M{singleEdition?.price ?? 220}
@@ -91,7 +83,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
               <button
                 type="button"
                 onClick={onExploreFormula}
-                className="inline-flex items-center justify-center border border-charcoal bg-transparent hover:bg-cream-dark text-charcoal transition-colors px-6 py-4 min-h-[48px] rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold whitespace-nowrap cursor-pointer"
+                className="inline-flex items-center justify-center border border-charcoal bg-transparent hover:bg-cream-dark text-charcoal transition-colors px-5 sm:px-6 py-4 min-h-[48px] rounded-sm font-mono text-xs sm:text-[13px] tracking-wider uppercase font-bold text-center sm:whitespace-nowrap cursor-pointer"
               >
                 Explore Formula
               </button>
@@ -106,27 +98,27 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
 
           {/* 3-Cell Apothecary Spec Strip */}
           <div className="grid grid-cols-3 border-t border-charcoal divide-x divide-charcoal bg-cream-dark/40">
-            <div className="px-3 sm:px-5 py-4 text-center">
-              <p className="font-mono text-[10px] text-stone uppercase tracking-wider mb-1">
+            <div className="px-2 sm:px-5 py-3.5 sm:py-4 text-center">
+              <p className="font-mono text-[9px] sm:text-[10px] text-stone uppercase tracking-wider mb-1">
                 Net Volume
               </p>
-              <p className="font-mono text-[11px] sm:text-xs font-bold text-charcoal tabular-nums">
+              <p className="font-mono text-[10px] sm:text-xs font-bold text-charcoal tabular-nums">
                 30 ML / 1.0 FL. OZ.
               </p>
             </div>
-            <div className="px-3 sm:px-5 py-4 text-center">
-              <p className="font-mono text-[10px] text-stone uppercase tracking-wider mb-1">
+            <div className="px-2 sm:px-5 py-3.5 sm:py-4 text-center">
+              <p className="font-mono text-[9px] sm:text-[10px] text-stone uppercase tracking-wider mb-1">
                 Purity
               </p>
-              <p className="font-mono text-[11px] sm:text-xs font-bold text-charcoal">
+              <p className="font-mono text-[10px] sm:text-xs font-bold text-charcoal">
                 100% NATURAL
               </p>
             </div>
-            <div className="px-3 sm:px-5 py-4 text-center">
-              <p className="font-mono text-[10px] text-stone uppercase tracking-wider mb-1">
+            <div className="px-2 sm:px-5 py-3.5 sm:py-4 text-center">
+              <p className="font-mono text-[9px] sm:text-[10px] text-stone uppercase tracking-wider mb-1">
                 Extraction
               </p>
-              <p className="font-mono text-[11px] sm:text-xs font-bold text-charcoal">
+              <p className="font-mono text-[10px] sm:text-xs font-bold text-charcoal">
                 COLD-PRESSED
               </p>
             </div>
@@ -135,7 +127,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
 
         {/* RIGHT COLUMN: Studio Showcase & Interactive 4-View Slideshow */}
         <div
-          className="lg:col-span-6 bg-cream-dark/35 flex flex-col justify-between"
+          className="order-1 lg:order-2 lg:col-span-6 bg-cream-dark/35 flex flex-col justify-between border-b lg:border-b-0 border-charcoal"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onKeyDown={(e) => {
@@ -152,8 +144,8 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
           </div>
 
           {/* Primary Framed Studio Stage */}
-          <div className="p-4 sm:p-5 flex-1 flex flex-col justify-center">
-            <div className="relative w-full aspect-[4/3] border border-charcoal bg-slatebg rounded-sm overflow-hidden group">
+          <div className="p-0 sm:p-5 flex-1 flex flex-col justify-center">
+            <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] border-b sm:border border-charcoal bg-slatebg rounded-none sm:rounded-sm overflow-hidden group">
               <div
                 className="flex h-full w-full transition-transform duration-500 ease-out motion-reduce:transition-none"
                 style={{ transform: `translateX(-${activeIdx * 100}%)` }}
@@ -179,8 +171,8 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                 })}
               </div>
 
-              {/* Measured bottom contrast scrim */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+              {/* Measured bottom contrast scrim (desktop/tablet only) */}
+              <div className="hidden sm:block pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
 
               {/* Top-left view index */}
               <div className="pointer-events-none absolute top-3 left-3 bg-cream/95 border border-charcoal px-2.5 py-1 rounded-sm">
@@ -189,7 +181,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                 </span>
               </div>
 
-              {/* Top-right functional actions: Play/Pause + Fullscreen Zoom */}
+              {/* Top-right functional action: Play/Pause */}
               <div className="absolute top-3 right-3 flex items-center gap-1.5">
                 <button
                   type="button"
@@ -205,37 +197,10 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                   )}
                   <span className="hidden sm:inline">{isPaused ? 'Play' : 'Pause'}</span>
                 </button>
-                <button
-                  type="button"
-                  onClick={() => onOpenLightbox(activeLightboxIdx)}
-                  className="bg-ochre text-cream hover:bg-charcoal border border-cream/25 px-2.5 py-1.5 rounded-sm flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
-                  aria-label="Open fullscreen gallery"
-                >
-                  <Maximize2 className="w-3 h-3" aria-hidden="true" />
-                  <span>Zoom</span>
-                </button>
               </div>
 
-              {/* Previous / Next Slide Controls */}
-              <button
-                type="button"
-                onClick={() => stepSlide(-1)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-sm bg-charcoal/80 hover:bg-ochre text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-4 h-4" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                onClick={() => stepSlide(1)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-sm bg-charcoal/80 hover:bg-ochre text-cream border border-cream/25 flex items-center justify-center transition-colors cursor-pointer"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-4 h-4" aria-hidden="true" />
-              </button>
-
-              {/* Caption */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 px-4 py-3 flex items-end justify-between gap-3">
+              {/* Caption (hidden on mobile) */}
+              <div className="hidden sm:flex pointer-events-none absolute inset-x-0 bottom-0 px-4 py-3 items-end justify-between gap-3">
                 <p className="font-mono text-[11px] text-cream/95 leading-snug max-w-md">
                   {activePhoto.caption}
                 </p>
@@ -244,8 +209,8 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
           </div>
 
           {/* Interactive 4-View Slideshow Switcher */}
-          <div className="px-4 sm:px-5 pb-4">
-            <div className="flex items-center justify-between mb-2">
+          <div className="px-3.5 sm:px-5 pt-3 sm:pt-0 pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
               <div className="flex items-center gap-2.5">
                 <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-stone font-bold">
                   Studio Slideshow · {HERO_GALLERY_ITEMS.length} Photos

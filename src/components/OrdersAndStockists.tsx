@@ -124,25 +124,25 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
                   Stockist Spec Sheet · Batch 001
                 </p>
                 <dl className="space-y-3 font-mono text-xs">
-                  <div className="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
-                    <dt className="text-cream/65">RETAIL RRP</dt>
-                    <dd className="text-cream font-bold tabular-nums">M220 / 30ml Boxed</dd>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt className="text-cream/65 shrink-0">RETAIL RRP</dt>
+                    <dd className="text-cream font-bold tabular-nums text-right">M220 / 30ml Boxed</dd>
                   </div>
-                  <div className="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
-                    <dt className="text-cream/65">SHELF FOOTPRINT</dt>
-                    <dd className="text-cream font-bold tabular-nums">38 × 38 × 110 mm</dd>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt className="text-cream/65 shrink-0">SHELF FOOTPRINT</dt>
+                    <dd className="text-cream font-bold tabular-nums text-right">38 × 38 × 110 mm</dd>
                   </div>
-                  <div className="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
-                    <dt className="text-cream/65">STARTER CASE</dt>
-                    <dd className="text-cream font-bold">5 Units + 1 Tester</dd>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt className="text-cream/65 shrink-0">STARTER CASE</dt>
+                    <dd className="text-cream font-bold text-right">5 Units + 1 Tester</dd>
                   </div>
-                  <div className="flex justify-between gap-4 border-b border-cream/15 pb-2.5">
-                    <dt className="text-cream/65">DELIVERY ZONES</dt>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-cream/15 pb-2.5">
+                    <dt className="text-cream/65 shrink-0">DELIVERY ZONES</dt>
                     <dd className="text-cream font-bold text-right">Maseru, Roma, Mazenod</dd>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt className="text-cream/65">DIRECT TRADE DESK</dt>
-                    <dd className="text-ochre font-bold">@pulagrooming</dd>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="text-cream/65 shrink-0">DIRECT TRADE DESK</dt>
+                    <dd className="text-ochre font-bold text-right">@pulagrooming</dd>
                   </div>
                 </dl>
               </div>

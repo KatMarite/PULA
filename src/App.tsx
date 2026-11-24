@@ -95,7 +95,7 @@ function PulaAppShell() {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-charcoal text-cream border border-ochre px-5 py-3 rounded-sm shadow-xl font-mono text-xs tracking-wider uppercase whitespace-nowrap animate-fade-up"
+          className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] md:bottom-6 left-1/2 -translate-x-1/2 z-[60] w-max max-w-[calc(100vw-2rem)] bg-charcoal text-cream border border-ochre px-4 sm:px-5 py-3 rounded-sm shadow-xl font-mono text-xs tracking-wider uppercase text-center break-words animate-fade-up"
         >
           {toastMessage}
         </div>
