@@ -78,7 +78,7 @@ export function TopNav({ activeSection, onNavigate }: TopNavProps) {
             <button
               type="button"
               onClick={openOrderDrawer}
-              className="inline-flex items-center gap-2.5 bg-ochre text-cream hover:bg-charcoal transition-colors px-4 py-2.5 min-h-[40px] rounded-sm font-mono text-xs tracking-[0.14em] uppercase font-bold whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+              className="inline-flex items-center gap-2.5 bg-charcoal text-cream hover:bg-ochre transition-colors px-4 py-2.5 min-h-[40px] rounded-sm font-mono text-xs tracking-[0.14em] uppercase font-bold whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               aria-label={`Open order bag, ${totalCartItems} items`}
             >
               <ShoppingBag className="w-3.5 h-3.5" aria-hidden="true" />

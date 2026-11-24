@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { ArrowRight, Maximize2 } from 'lucide-react';
-import { GALLERY_ITEMS } from '../types/pula';
+import { GALLERY_ITEMS, GalleryItem, GalleryPhotoId } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 import { StudioMedia } from './ApothecaryArt';
+
+const HERO_GALLERY_ORDER: GalleryPhotoId[] = ['botanicals', 'hero-box', 'gift-kit', 'box-back'];
+
+const HERO_GALLERY_ITEMS: GalleryItem[] = HERO_GALLERY_ORDER
+  .map((id) => GALLERY_ITEMS.find((item) => item.id === id))
+  .filter((item): item is GalleryItem => Boolean(item));
 
 interface HeroGalleryProps {
   onExploreFormula: () => void;
@@ -15,7 +21,11 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
 
   const singleEdition = editions.find((e) => e.id === 'single') || editions[0];
   const totalBottlesLeft = editions.reduce((acc, ed) => acc + (ed.stockCount || 0), 0);
-  const activePhoto = GALLERY_ITEMS[activeIdx] || GALLERY_ITEMS[0];
+  const activePhoto = HERO_GALLERY_ITEMS[activeIdx] || HERO_GALLERY_ITEMS[0];
+  const activeLightboxIdx = Math.max(
+    0,
+    GALLERY_ITEMS.findIndex((item) => item.id === activePhoto.id)
+  );
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8 sm:py-10">
@@ -105,7 +115,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Studio Showcase & Interactive 6-View Gallery Switcher */}
+        {/* RIGHT COLUMN: Studio Showcase & Interactive 4-View Gallery Switcher */}
         <div className="lg:col-span-6 bg-cream-dark/35 flex flex-col justify-between">
           {/* Top Apothecary Metadata Strip */}
           <div className="px-5 sm:px-6 py-3.5 border-b border-charcoal bg-cream flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em]">
@@ -118,7 +128,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
             <div className="relative w-full aspect-[4/3] border border-charcoal bg-slatebg rounded-sm overflow-hidden group">
               <button
                 type="button"
-                onClick={() => onOpenLightbox(activeIdx)}
+                onClick={() => onOpenLightbox(activeLightboxIdx)}
                 className="w-full h-full block cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre"
                 aria-label={`Zoom ${activePhoto.title}`}
               >
@@ -131,7 +141,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
               {/* Top-left view index */}
               <div className="pointer-events-none absolute top-3 left-3 bg-cream/95 border border-charcoal px-2.5 py-1 rounded-sm">
                 <span className="font-mono text-[10px] font-bold tracking-[0.12em] text-charcoal uppercase tabular-nums">
-                  0{activeIdx + 1} / 0{GALLERY_ITEMS.length} · {activePhoto.title}
+                  0{activeIdx + 1} / 0{HERO_GALLERY_ITEMS.length} · {activePhoto.title}
                 </span>
               </div>
 
@@ -139,7 +149,7 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
               <div className="absolute top-3 right-3 flex items-center gap-1.5">
                 <button
                   type="button"
-                  onClick={() => onOpenLightbox(activeIdx)}
+                  onClick={() => onOpenLightbox(activeLightboxIdx)}
                   className="bg-ochre text-cream hover:bg-charcoal border border-cream/25 px-2.5 py-1.5 rounded-sm flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
                   aria-label="Open fullscreen gallery"
                 >
@@ -157,11 +167,11 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
             </div>
           </div>
 
-          {/* Interactive 8-View Thumbnail Switcher */}
+          {/* Interactive 4-View Thumbnail Switcher */}
           <div className="px-4 sm:px-5 pb-4">
             <div className="flex items-center justify-between mb-2">
               <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-stone font-bold">
-                Studio Gallery · {GALLERY_ITEMS.length} Photos
+                Studio Gallery · {HERO_GALLERY_ITEMS.length} Photos
               </span>
               <button
                 type="button"
@@ -173,11 +183,11 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
             </div>
 
             <div
-              className="grid grid-cols-4 sm:grid-cols-8 gap-1.5"
+              className="grid grid-cols-4 gap-1.5"
               role="tablist"
               aria-label="Product gallery views"
             >
-              {GALLERY_ITEMS.map((item, idx) => {
+              {HERO_GALLERY_ITEMS.map((item, idx) => {
                 const isActive = idx === activeIdx;
                 return (
                   <button
