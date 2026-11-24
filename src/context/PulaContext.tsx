@@ -35,13 +35,10 @@ import {
   Edition,
   FulfillmentMethod,
   generateOrderNumber,
-  getTodayDateKey,
-  getYesterdayDateKey,
   Order,
   OrderStatus,
   PaymentMethod,
   Review,
-  RitualLog,
   sanitizeString,
   UserProfile,
 } from '../types/pula';
@@ -83,7 +80,6 @@ interface PulaContextValue {
   editions: Edition[];
   editionsFromDb: boolean;
   profile: UserProfile | null;
-  ritualLogs: RitualLog[];
   orders: Order[];
   barberInquiries: BarberInquiry[];
   reviews: Review[];
@@ -110,9 +106,6 @@ interface PulaContextValue {
   customPhotos: Record<string, string>;
   setCustomPhoto: (photoId: string, dataUrl: string) => void;
 
-  logDailyRitual: (note?: string) => Promise<boolean>;
-  resetBottleCounter: () => Promise<void>;
-  deleteRitualLog: (logId: string) => Promise<void>;
   placeOrder: (input: PlaceOrderInput) => Promise<Order | null>;
   cancelOrder: (orderId: string) => Promise<void>;
   submitBarberInquiry: (input: SubmitBarberInput) => Promise<BarberInquiry | null>;
@@ -131,7 +124,6 @@ interface PulaContextValue {
 const STORAGE_KEYS = {
   guestId: 'pula_guest_id_v1',
   profile: 'pula_guest_profile_v1',
-  ritualLogs: 'pula_guest_ritual_logs_v1',
   orders: 'pula_guest_orders_v1',
   inquiries: 'pula_guest_inquiries_v1',
   reviews: 'pula_guest_reviews_v1',
@@ -199,9 +191,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   const [guestProfile, setGuestProfile] = useState<UserProfile>(() =>
     readStorage<UserProfile>(STORAGE_KEYS.profile, createDefaultGuestProfile(guestId))
   );
-  const [guestRitualLogs, setGuestRitualLogs] = useState<RitualLog[]>(() =>
-    readStorage<RitualLog[]>(STORAGE_KEYS.ritualLogs, [])
-  );
   const [guestOrders, setGuestOrders] = useState<Order[]>(() =>
     readStorage<Order[]>(STORAGE_KEYS.orders, [])
   );
@@ -213,7 +202,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   );
 
   const [dbProfile, setDbProfile] = useState<UserProfile | null>(null);
-  const [dbRitualLogs, setDbRitualLogs] = useState<RitualLog[]>([]);
   const [dbOrders, setDbOrders] = useState<Order[]>([]);
   const [dbBarberInquiries, setDbBarberInquiries] = useState<BarberInquiry[]>([]);
   const [dbReviews, setDbReviews] = useState<Review[]>([]);
@@ -242,7 +230,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   const activeUserId = user?.uid || guestId;
 
   const profile = user ? dbProfile ?? guestProfile : guestProfile;
-  const ritualLogs = user ? dbRitualLogs : guestRitualLogs;
   const orders = user ? dbOrders : guestOrders;
   const barberInquiries = user ? dbBarberInquiries : guestInquiries;
   const reviews = useMemo(() => {
@@ -254,10 +241,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     writeStorage(STORAGE_KEYS.profile, guestProfile);
   }, [guestProfile]);
-
-  useEffect(() => {
-    writeStorage(STORAGE_KEYS.ritualLogs, guestRitualLogs);
-  }, [guestRitualLogs]);
 
   useEffect(() => {
     writeStorage(STORAGE_KEYS.orders, guestOrders);
@@ -288,7 +271,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       setAuthReady(true);
       if (!nextUser) {
         setDbProfile(null);
-        setDbRitualLogs([]);
         setDbOrders([]);
         setDbBarberInquiries([]);
       }
@@ -374,7 +356,7 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  // 4. Authenticated-only Real-Time Sync: Profile, Ritual Logs, Orders, Barber Inquiries
+  // 4. Authenticated-only Real-Time Sync: Profile, Orders, Barber Inquiries
   useEffect(() => {
     if (!authReady || !user) return;
 
@@ -437,34 +419,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       },
       (error) => {
         handleFirestoreError(error, OperationType.GET, `users/${uid}`);
-      }
-    );
-
-    const logsQuery = query(
-      collection(db, 'users', uid, 'ritualLogs'),
-      where('userId', '==', uid)
-    );
-    const unsubLogs = onSnapshot(
-      logsQuery,
-      (snap) => {
-        const items: RitualLog[] = snap.docs
-          .map((d) => {
-            const data = d.data();
-            return {
-              id: d.id,
-              userId: String(data.userId || uid),
-              dateKey: String(data.dateKey || ''),
-              beardStage: (data.beardStage as BeardStage) || 'medium',
-              dropsUsed: Number(data.dropsUsed || 5),
-              note: String(data.note || ''),
-              createdAt: data.createdAt ?? null,
-            };
-          })
-          .sort((a, b) => (b.createdAt?.toMillis?.() ?? 0) - (a.createdAt?.toMillis?.() ?? 0));
-        setDbRitualLogs(items);
-      },
-      (error) => {
-        handleFirestoreError(error, OperationType.LIST, `users/${uid}/ritualLogs`);
       }
     );
 
@@ -541,7 +495,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
 
     return () => {
       unsubProfile();
-      unsubLogs();
       unsubOrders();
       unsubInquiries();
     };
@@ -645,95 +598,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
       showToast('Updated studio photo preview');
     },
     [showToast]
-  );
-
-  // Daily Ritual Logging
-  const logDailyRitual = useCallback(
-    async (note = ''): Promise<boolean> => {
-      const activeProfile = profile ?? guestProfile;
-      const today = getTodayDateKey();
-      const yesterday = getYesterdayDateKey();
-      const dropsUsed = clampNumber(BEARD_STAGES[localStage].defaultDrops, 1, 20);
-      const nextRemaining = clampNumber(activeProfile.bottleDropsRemaining - dropsUsed, 0, 600);
-      const nextStreak =
-        activeProfile.lastRitualDate === today
-          ? activeProfile.streakDays
-          : activeProfile.lastRitualDate === yesterday
-            ? clampNumber(activeProfile.streakDays + 1, 1, 3650)
-            : 1;
-      const cleanNote = sanitizeString(note, 240);
-
-      if (user && dbProfile) {
-        try {
-          await addDoc(collection(db, 'users', user.uid, 'ritualLogs'), {
-            userId: user.uid,
-            dateKey: today,
-            beardStage: localStage,
-            dropsUsed,
-            note: cleanNote,
-            createdAt: serverTimestamp(),
-          });
-
-          await updateDoc(doc(db, 'users', user.uid), {
-            beardStage: localStage,
-            dailyDrops: dropsUsed,
-            bottleDropsRemaining: nextRemaining,
-            streakDays: nextStreak,
-            lastRitualDate: today,
-            updatedAt: serverTimestamp(),
-          });
-
-          showToast(`Logged ${dropsUsed} drops · ${nextStreak}-day streak`);
-          return true;
-        } catch (error) {
-          handleFirestoreError(error, OperationType.CREATE, `users/${user.uid}/ritualLogs`);
-        }
-      }
-
-      const newLog: RitualLog = {
-        id: `log_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`,
-        userId: guestId,
-        dateKey: today,
-        beardStage: localStage,
-        dropsUsed,
-        note: cleanNote,
-        createdAt: null,
-      };
-      setGuestRitualLogs((prev) => [newLog, ...prev]);
-      setGuestProfile((prev) => ({
-        ...prev,
-        beardStage: localStage,
-        dailyDrops: dropsUsed,
-        bottleDropsRemaining: nextRemaining,
-        streakDays: nextStreak,
-        lastRitualDate: today,
-      }));
-      showToast(`Logged ${dropsUsed} drops · ${nextStreak}-day streak`);
-      return true;
-    },
-    [user, dbProfile, profile, guestProfile, guestId, localStage, showToast]
-  );
-
-  const resetBottleCounter = useCallback(async () => {
-    await syncProfileFields({ bottleDropsRemaining: 600 });
-    showToast('Fresh 30ml bottle started (600 drops)');
-  }, [syncProfileFields, showToast]);
-
-  const deleteRitualLog = useCallback(
-    async (logId: string) => {
-      if (user) {
-        try {
-          await deleteDoc(doc(db, 'users', user.uid, 'ritualLogs', logId));
-          showToast('Removed ritual entry');
-        } catch (error) {
-          handleFirestoreError(error, OperationType.DELETE, `users/${user.uid}/ritualLogs/${logId}`);
-        }
-        return;
-      }
-      setGuestRitualLogs((prev) => prev.filter((item) => item.id !== logId));
-      showToast('Removed ritual entry');
-    },
-    [user, showToast]
   );
 
   // Place Order
@@ -1119,7 +983,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
     editions,
     editionsFromDb,
     profile,
-    ritualLogs,
     orders,
     barberInquiries,
     reviews,
@@ -1142,9 +1005,6 @@ export function PulaProvider({ children }: { children: React.ReactNode }) {
     closeBarberModal,
     customPhotos,
     setCustomPhoto,
-    logDailyRitual,
-    resetBottleCounter,
-    deleteRitualLog,
     placeOrder,
     cancelOrder,
     submitBarberInquiry,
