@@ -173,18 +173,9 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                 {activePhoto.metaLeft}
               </motion.span>
             </AnimatePresence>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={`right-${activePhoto.id}`}
-                initial={{ opacity: 0, y: 3 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -3 }}
-                transition={{ duration: 0.2 }}
-                className="text-ochre-dark font-bold"
-              >
-                {activePhoto.metaRight}
-              </motion.span>
-            </AnimatePresence>
+            <span className="text-ochre-dark font-bold">
+              01 · Fresh Citrus &amp; Woods
+            </span>
           </div>
 
           {/* Primary Framed Studio Stage */}
