@@ -116,7 +116,7 @@ export function Footer({ onNavigate }: FooterProps) {
               <PaoSymbolSvg className="w-9 h-9 shrink-0" />
               <div>
                 <p className="font-mono text-[10px] font-bold uppercase text-charcoal">
-                  Period After Opening
+                  
                 </p>
                 <p className="font-mono text-[10px] text-stone">30 ml e · Cruelty-Free</p>
               </div>
@@ -130,7 +130,7 @@ export function Footer({ onNavigate }: FooterProps) {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] text-stone">
           <p>© 2026 PŪLA Grooming. Crafted in Maseru, Lesotho.</p>
           <p className="uppercase tracking-[0.14em] font-bold text-charcoal">
-            Batch 001 · Small-Batch Grooming
+            Batch 001 · 
           </p>
         </div>
       </div>

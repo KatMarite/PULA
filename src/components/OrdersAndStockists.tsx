@@ -29,7 +29,7 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
           <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-cream/20 flex flex-col justify-between space-y-6">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-ochre font-bold mb-2">
-                05. Maseru &amp; Roma Barbershop Partners
+                05. Barbershop Partners
               </p>
               <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-wide text-cream mb-4">
                 Stock PŪLA on Your Barber Station.
@@ -158,7 +158,7 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
                   PŪ
                 </div>
                 <p className="text-xs text-cream/75 leading-relaxed">
-                  &ldquo;Clean matte packaging that stands out on a wooden barber station—and
+                  &ldquo;Clean matte packaging that stands out on a barber station—and
                   smells like fresh citrus and cedar, not synthetic perfume.&rdquo;
                 </p>
               </div>
