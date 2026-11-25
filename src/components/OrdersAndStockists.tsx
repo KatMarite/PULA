@@ -37,8 +37,7 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
               <p className="text-cream/80 text-base leading-relaxed max-w-xl mb-6">
                 Give your clients a crisp, 100% natural finish after every fade and beard lineup.
                 We offer flexible wholesale pricing, low minimum starter cases (from 5 boxed
-                bottles), and complimentary 5ml chair testers for barbershops in Maseru, Roma, and
-                Mazenod.
+                bottles), and complimentary 5ml chair testers for barbershops in Lesotho.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-cream/20 font-mono text-xs">

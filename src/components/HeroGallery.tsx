@@ -77,10 +77,9 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
               transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
               className="text-stone text-base sm:text-[17px] leading-relaxed max-w-xl mb-7"
             >
-              Formulated in small batches in Maseru with cold-pressed Southern African{' '}
-              <strong className="text-charcoal font-semibold">Marula, Jojoba, and Argan</strong> oils.
-              Built to soften coarse hair, calm dry highland skin, and sync your orders live across
-              every device.
+              Formulated with cold-pressed Southern African{' '}
+              <strong className="text-charcoal font-semibold">Marula, Jojoba, and Argan</strong>{' '}
+              oils. Built to soften coarse hair, calm dry highland skin.
             </motion.p>
 
             {/* Primary & Secondary CTAs */}
