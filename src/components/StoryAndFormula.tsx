@@ -2,7 +2,28 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { CARRIER_OILS, SCENT_NOTES } from '../types/pula';
-import { EucalyptusSvg, MalotiMountainsSvg, RaincloudSvg, StudioMedia } from './ApothecaryArt';
+import {
+  ArganSvg,
+  EucalyptusSvg,
+  JojobaSvg,
+  MalotiMountainsSvg,
+  MarulaSvg,
+  RaincloudSvg,
+  StudioMedia,
+  SweetAlmondSvg,
+  VitaminESvg,
+} from './ApothecaryArt';
+
+const CARRIER_OIL_FIGURES: Record<
+  string,
+  { fig: string; Illustration: React.ComponentType<{ className?: string }> }
+> = {
+  'Base 01': { fig: 'Fig 04 · Simmondsia Chinensis', Illustration: JojobaSvg },
+  'Base 02': { fig: 'Fig 05 · Sclerocarya Birrea', Illustration: MarulaSvg },
+  'Base 03': { fig: 'Fig 06 · Argania Spinosa', Illustration: ArganSvg },
+  'Base 04': { fig: 'Fig 07 · Prunus Amygdalus', Illustration: SweetAlmondSvg },
+  'Base 05': { fig: 'Fig 08 · Tocopherol', Illustration: VitaminESvg },
+};
 
 interface StoryAndFormulaProps {
   onOpenLightboxById: (photoId: 'botanicals') => void;
@@ -226,47 +247,78 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                     transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                     className="grid grid-cols-1 sm:grid-cols-2 h-full"
                   >
-                  {CARRIER_OILS.slice(0, 4).map((oil, idx) => (
-                    <article
-                      key={oil.code}
-                      className={`p-6 flex flex-col justify-between border-b border-charcoal hover:bg-cream-dark/30 transition-colors ${
-                        idx % 2 === 0 ? 'sm:border-r' : ''
-                      }`}
-                    >
-                      <div>
-                        <p className="font-mono text-[11px] text-stone uppercase tracking-wider mb-2">
-                          <span className="text-ochre-dark font-bold">{oil.code}</span> · {oil.origin}
+                  {CARRIER_OILS.slice(0, 4).map((oil, idx) => {
+                    const figure = CARRIER_OIL_FIGURES[oil.code];
+                    const Illustration = figure?.Illustration;
+                    return (
+                      <article
+                        key={oil.code}
+                        className={`p-6 flex flex-col justify-between border-b border-charcoal hover:bg-cream-dark/30 transition-colors ${
+                          idx % 2 === 0 ? 'sm:border-r' : ''
+                        }`}
+                      >
+                        <div>
+                          <div className="flex items-start justify-between gap-3 mb-2">
+                            <div className="min-w-0">
+                              <p className="font-mono text-[11px] text-stone uppercase tracking-wider mb-2">
+                                <span className="text-ochre-dark font-bold">{oil.code}</span> · {oil.origin}
+                              </p>
+                              <h3 className="font-display font-bold text-lg text-charcoal mb-0.5">
+                                {oil.name}
+                              </h3>
+                              <p className="font-mono italic text-[11px] text-stone">{oil.latin}</p>
+                            </div>
+                            {Illustration && (
+                              <div className="shrink-0 flex flex-col items-center text-center">
+                                <Illustration className="w-24 sm:w-28 h-auto" />
+                                <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-stone mt-1">
+                                  {figure.fig.split(' · ')[0]}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <p className="text-sm text-stone leading-relaxed mt-2">{oil.description}</p>
+                        </div>
+                        <p className="mt-4 pt-3 border-t border-charcoal/20 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                          Role: {oil.role}
                         </p>
-                        <h3 className="font-display font-bold text-lg text-charcoal mb-0.5">
-                          {oil.name}
-                        </h3>
-                        <p className="font-mono italic text-[11px] text-stone mb-2.5">{oil.latin}</p>
-                        <p className="text-sm text-stone leading-relaxed">{oil.description}</p>
-                      </div>
-                      <p className="mt-4 pt-3 border-t border-charcoal/20 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
-                        Role: {oil.role}
-                      </p>
-                    </article>
-                  ))}
+                      </article>
+                    );
+                  })}
 
                   {/* 5th Carrier: Full-width bottom row */}
-                  <article className="p-6 sm:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-cream-dark/30 transition-colors">
-                    <div>
-                      <p className="font-mono text-[11px] text-stone uppercase tracking-wider mb-1">
-                        <span className="text-ochre-dark font-bold">{CARRIER_OILS[4].code}</span> ·{' '}
-                        {CARRIER_OILS[4].latin}
-                      </p>
-                      <h3 className="font-display font-bold text-lg text-charcoal mb-1">
-                        {CARRIER_OILS[4].name}
-                      </h3>
-                      <p className="text-sm text-stone leading-relaxed max-w-2xl">
-                        {CARRIER_OILS[4].description}
-                      </p>
-                    </div>
-                    <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
-                      Role: {CARRIER_OILS[4].role}
-                    </span>
-                  </article>
+                  {(() => {
+                    const vitaminOil = CARRIER_OILS[4];
+                    const figure = CARRIER_OIL_FIGURES[vitaminOil.code];
+                    const Illustration = figure?.Illustration;
+                    return (
+                      <article className="p-6 sm:col-span-2 flex flex-col sm:flex-row sm:items-center justify-between gap-5 hover:bg-cream-dark/30 transition-colors">
+                        {Illustration && (
+                          <div className="shrink-0 flex flex-col items-center text-center self-center sm:self-auto">
+                            <Illustration className="w-28 sm:w-32 h-auto" />
+                            <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-stone mt-1">
+                              {figure.fig}
+                            </span>
+                          </div>
+                        )}
+                        <div className="flex-1">
+                          <p className="font-mono text-[11px] text-stone uppercase tracking-wider mb-1">
+                            <span className="text-ochre-dark font-bold">{vitaminOil.code}</span> ·{' '}
+                            {vitaminOil.latin}
+                          </p>
+                          <h3 className="font-display font-bold text-lg text-charcoal mb-1">
+                            {vitaminOil.name}
+                          </h3>
+                          <p className="text-sm text-stone leading-relaxed max-w-2xl">
+                            {vitaminOil.description}
+                          </p>
+                        </div>
+                        <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-charcoal font-bold">
+                          Role: {vitaminOil.role}
+                        </span>
+                      </article>
+                    );
+                  })()}
                   </motion.div>
                 ) : (
                   <motion.div

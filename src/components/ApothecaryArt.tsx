@@ -172,6 +172,402 @@ export function EucalyptusSvg({ className = 'w-36 h-auto' }: { className?: strin
   );
 }
 
+export function JojobaSvg({ className = 'w-28 h-auto' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 180 140"
+      className={className}
+      stroke="#1C1B1B"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="Copperplate botanical engraving of Golden Jojoba leaves and seed capsules"
+    >
+      {/* Main curving desert twig */}
+      <path d="M 22,118 C 52,102 82,78 134,34" strokeWidth="1.7" />
+      <path d="M 26,120 C 56,104 86,80 135,38" strokeWidth="0.75" />
+
+      {/* Left paired leathery jojoba leaves */}
+      <g>
+        <path d="M 56,97 C 32,88 18,66 26,48 C 44,44 62,64 60,92" strokeWidth="1.35" />
+        <path d="M 55,93 C 44,77 35,63 29,51" strokeWidth="0.85" />
+        <line x1="45" y1="78" x2="35" y2="79" strokeWidth="0.65" />
+        <line x1="39" y1="68" x2="29" y2="68" strokeWidth="0.65" />
+        <line x1="48" y1="74" x2="54" y2="66" strokeWidth="0.65" />
+      </g>
+      <g>
+        <path d="M 88,73 C 70,56 64,34 78,20 C 96,22 104,46 92,69" strokeWidth="1.3" />
+        <path d="M 88,69 C 84,52 81,38 79,24" strokeWidth="0.85" />
+        <line x1="84" y1="51" x2="75" y2="45" strokeWidth="0.65" />
+        <line x1="86" y1="43" x2="93" y2="37" strokeWidth="0.65" />
+      </g>
+
+      {/* Right lower leaf */}
+      <g>
+        <path d="M 110,55 C 128,48 150,55 158,72 C 142,84 120,76 112,59" strokeWidth="1.3" />
+        <path d="M 114,58 C 129,62 142,66 154,71" strokeWidth="0.85" />
+        <line x1="129" y1="62" x2="136" y2="55" strokeWidth="0.65" />
+        <line x1="136" y1="64" x2="128" y2="71" strokeWidth="0.65" />
+      </g>
+
+      {/* Primary acorn-like jojoba capsule with 3-valved calyx */}
+      <g>
+        <path d="M 76,83 C 82,92 84,104 82,116" strokeWidth="1.1" />
+        <path d="M 73,94 C 78,89 88,89 93,95" strokeWidth="1.1" />
+        <path d="M 70,96 C 68,112 75,126 83,128 C 92,126 98,112 95,96 Z" strokeWidth="1.45" />
+        {/* Copperplate hatching inside seed capsule */}
+        <line x1="74" y1="103" x2="79" y2="123" strokeWidth="0.7" />
+        <line x1="78" y1="100" x2="83" y2="125" strokeWidth="0.7" />
+        <line x1="83" y1="99" x2="87" y2="124" strokeWidth="0.7" />
+        <line x1="88" y1="101" x2="91" y2="119" strokeWidth="0.7" />
+      </g>
+
+      {/* Secondary split jojoba pod + golden oil droplet */}
+      <g>
+        <path d="M 118,86 C 110,94 109,110 118,120 C 127,122 135,114 134,102 C 132,92 125,86 118,86 Z" strokeWidth="1.35" />
+        <path d="M 114,91 C 119,102 121,111 119,120" strokeWidth="0.85" />
+        <path d="M 122,90 C 127,99 128,109 125,118" strokeWidth="0.7" />
+        <path
+          d="M 148,104 C 148,104 141,113 141,118 C 141,122 144.1,125 148,125 C 151.9,125 155,122 155,118 C 155,113 148,104 148,104 Z"
+          stroke="#C86D1F"
+          strokeWidth="1.25"
+        />
+        <line x1="146" y1="115" x2="146" y2="121" stroke="#C86D1F" strokeWidth="0.8" />
+      </g>
+
+      {/* Stippling */}
+      <g fill="#1C1B1B" stroke="none">
+        <circle cx="102" cy="98" r="0.9" />
+        <circle cx="105" cy="108" r="0.85" />
+        <circle cx="64" cy="112" r="0.85" />
+        <circle cx="148" cy="96" r="0.85" />
+      </g>
+    </svg>
+  );
+}
+
+export function MarulaSvg({ className = 'w-28 h-auto' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 180 140"
+      className={className}
+      stroke="#1C1B1B"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="Copperplate botanical engraving of Virgin Marula fruit, leaves, and nut"
+    >
+      {/* Branch stem */}
+      <path d="M 18,46 C 58,34 106,30 160,36" strokeWidth="1.7" />
+      <path d="M 24,48 C 62,37 108,33 154,38" strokeWidth="0.7" />
+
+      {/* Compound marula leaflets along upper right */}
+      <g>
+        <path d="M 96,32 C 110,18 128,14 148,16" strokeWidth="1.1" />
+        <path d="M 106,26 C 102,16 110,8 120,11 C 122,19 114,26 106,26 Z" strokeWidth="1.15" />
+        <path d="M 124,20 C 122,10 132,5 140,10 C 140,18 131,22 124,20 Z" strokeWidth="1.15" />
+        <path d="M 140,16 C 144,8 156,7 161,14 C 156,21 146,21 140,16 Z" strokeWidth="1.15" />
+        <path d="M 118,24 C 124,29 135,28 139,20" strokeWidth="1.0" />
+      </g>
+
+      {/* Primary plump marula fruit */}
+      <g>
+        <path d="M 64,37 C 66,46 66,52 65,57" strokeWidth="1.2" />
+        <ellipse cx="64" cy="84" rx="25" ry="28" strokeWidth="1.5" />
+        {/* Curved shading hatches */}
+        <path d="M 46,70 C 44,82 46,94 53,104" strokeWidth="0.7" />
+        <path d="M 52,65 C 50,80 52,96 59,107" strokeWidth="0.7" />
+        <path d="M 78,66 C 83,76 84,88 80,99" strokeWidth="0.65" />
+        <path d="M 60,57 C 64,60 68,60 71,57" strokeWidth="0.9" />
+      </g>
+
+      {/* Second smaller marula fruit */}
+      <g>
+        <path d="M 112,33 C 114,44 115,52 114,60" strokeWidth="1.15" />
+        <ellipse cx="114" cy="80" rx="19" ry="22" strokeWidth="1.4" />
+        <path d="M 101,69 C 99,78 100,88 106,96" strokeWidth="0.7" />
+        <path d="M 107,65 C 105,76 107,89 112,98" strokeWidth="0.65" />
+      </g>
+
+      {/* Cracked Marula nut & ochre oil drop */}
+      <g>
+        <path d="M 134,114 C 128,104 134,94 146,96 C 156,98 160,109 154,118 C 148,125 138,123 134,114 Z" strokeWidth="1.35" />
+        <circle cx="142" cy="107" r="3.2" strokeWidth="0.9" />
+        <circle cx="149" cy="111" r="2.8" strokeWidth="0.9" />
+        <path
+          d="M 92,112 C 92,112 87,119 87,123 C 87,126 89.2,128.5 92,128.5 C 94.8,128.5 97,126 97,123 C 97,119 92,112 92,112 Z"
+          stroke="#C86D1F"
+          strokeWidth="1.25"
+        />
+      </g>
+
+      <g fill="#1C1B1B" stroke="none">
+        <circle cx="72" cy="95" r="0.9" />
+        <circle cx="75" cy="88" r="0.85" />
+        <circle cx="122" cy="86" r="0.85" />
+        <circle cx="38" cy="108" r="0.9" />
+      </g>
+    </svg>
+  );
+}
+
+export function ArganSvg({ className = 'w-28 h-auto' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 180 140"
+      className={className}
+      stroke="#1C1B1B"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="Copperplate botanical engraving of Moroccan Argan twig, thorns, leaves, and fruit"
+    >
+      {/* Gnarled argan branch + characteristic thorns */}
+      <path d="M 20,98 C 52,82 96,62 152,42" strokeWidth="1.8" />
+      <path d="M 48,84 L 40,66" strokeWidth="1.25" />
+      <path d="M 104,59 L 112,42" strokeWidth="1.25" />
+
+      {/* Narrow clustered lanceolate leaves */}
+      <g>
+        <path d="M 64,77 C 52,58 54,34 68,18 C 76,34 76,58 66,76" strokeWidth="1.25" />
+        <path d="M 65,73 C 64,54 66,36 68,21" strokeWidth="0.75" />
+        <path d="M 68,75 C 74,54 84,34 96,24 C 94,44 82,64 69,75" strokeWidth="1.2" />
+        <path d="M 69,72 C 78,54 86,39 94,27" strokeWidth="0.7" />
+        <path d="M 122,52 C 134,34 150,24 166,22 C 158,38 142,50 124,53" strokeWidth="1.2" />
+        <path d="M 125,51 C 139,40 151,31 163,24" strokeWidth="0.7" />
+      </g>
+
+      {/* Pointed spindle-shaped argan fruits */}
+      <g>
+        <path d="M 88,68 C 84,74 82,84 85,95 C 91,105 101,105 106,94 C 109,83 103,71 91,67 Z" strokeWidth="1.45" />
+        <path d="M 90,72 C 88,82 89,91 93,99" strokeWidth="0.7" />
+        <path d="M 95,71 C 94,81 95,91 98,99" strokeWidth="0.7" />
+      </g>
+      <g>
+        <path d="M 124,56 C 118,65 117,77 123,86 C 131,93 141,89 144,78 C 146,67 137,57 124,56 Z" strokeWidth="1.35" />
+        <path d="M 126,62 C 124,70 126,78 130,85" strokeWidth="0.7" />
+      </g>
+
+      {/* Cross-section kernel revealing inner argan nut + ochre drop */}
+      <g>
+        <path d="M 52,102 C 42,108 42,122 54,126 C 66,127 73,115 66,105 C 62,100 56,99 52,102 Z" strokeWidth="1.35" />
+        <ellipse cx="56" cy="113" rx="6" ry="4" transform="rotate(-18 56 113)" stroke="#C86D1F" strokeWidth="1.15" />
+        <path
+          d="M 148,100 C 148,100 142,108 142,113 C 142,117 144.7,120 148,120 C 151.3,120 154,117 154,113 C 154,108 148,100 148,100 Z"
+          stroke="#C86D1F"
+          strokeWidth="1.2"
+        />
+      </g>
+
+      <g fill="#1C1B1B" stroke="none">
+        <circle cx="101" cy="86" r="0.85" />
+        <circle cx="137" cy="75" r="0.85" />
+        <circle cx="76" cy="115" r="0.9" />
+      </g>
+    </svg>
+  );
+}
+
+export function SweetAlmondSvg({ className = 'w-28 h-auto' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 180 140"
+      className={className}
+      stroke="#1C1B1B"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="Copperplate botanical engraving of Sweet Almond blossom, serrated leaves, and almonds"
+    >
+      {/* Branch */}
+      <path d="M 16,108 C 56,88 102,60 152,24" strokeWidth="1.65" />
+
+      {/* Serrated lanceolate leaves */}
+      <g>
+        <path d="M 46,92 C 30,68 32,38 50,20 C 60,40 60,68 48,91" strokeWidth="1.3" />
+        <path d="M 47,87 C 46,64 47,42 50,24" strokeWidth="0.8" />
+        <line x1="47" y1="68" x2="39" y2="58" strokeWidth="0.65" />
+        <line x1="48" y1="54" x2="40" y2="45" strokeWidth="0.65" />
+        <line x1="48" y1="60" x2="55" y2="51" strokeWidth="0.65" />
+      </g>
+      <g>
+        <path d="M 110,52 C 128,44 150,48 164,62 C 148,74 126,70 112,55" strokeWidth="1.25" />
+        <path d="M 115,54 C 131,56 146,59 160,62" strokeWidth="0.75" />
+      </g>
+
+      {/* 5-petaled almond blossom with ochre stamens */}
+      <g transform="translate(82,38)">
+        <path d="M 0,-5 C -6,-18 6,-18 0,-5" strokeWidth="1.15" />
+        <path d="M 5,-2 C 18,-8 20,4 5,2" strokeWidth="1.15" />
+        <path d="M 3,4 C 12,16 0,20 -2,5" strokeWidth="1.15" />
+        <path d="M -3,4 C -14,16 -20,4 -5,2" strokeWidth="1.15" />
+        <path d="M -5,-2 C -18,-8 -10,-18 -2,-5" strokeWidth="1.15" />
+        <g stroke="#C86D1F" strokeWidth="0.9">
+          <line x1="0" y1="0" x2="0" y2="-8" />
+          <line x1="0" y1="0" x2="7" y2="-4" />
+          <line x1="0" y1="0" x2="5" y2="6" />
+          <line x1="0" y1="0" x2="-6" y2="5" />
+          <line x1="0" y1="0" x2="-7" y2="-4" />
+        </g>
+      </g>
+
+      {/* Classic teardrop sweet almonds with pitted shell hatching */}
+      <g>
+        <path d="M 88,80 C 74,90 74,114 88,124 C 102,114 102,90 88,80 Z" strokeWidth="1.45" />
+        <path d="M 84,88 C 81,98 81,109 85,118" strokeWidth="0.7" />
+        <path d="M 88,85 C 88,97 88,110 88,120" strokeWidth="0.7" />
+        <path d="M 92,89 C 94,99 94,109 91,118" strokeWidth="0.7" />
+      </g>
+      <g>
+        <path d="M 122,88 C 110,95 108,113 118,122 C 131,117 134,99 122,88 Z" strokeWidth="1.35" />
+        <path d="M 118,96 C 116,104 116,112 118,118" strokeWidth="0.7" />
+        <path d="M 123,95 C 124,103 123,111 121,117" strokeWidth="0.7" />
+      </g>
+
+      <g fill="#1C1B1B" stroke="none">
+        <circle cx="88" cy="100" r="0.85" />
+        <circle cx="121" cy="106" r="0.85" />
+        <circle cx="68" cy="112" r="0.85" />
+      </g>
+    </svg>
+  );
+}
+
+export function VitaminESvg({ className = 'w-28 h-auto' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 180 140"
+      className={className}
+      stroke="#1C1B1B"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label="Copperplate botanical and apothecary engraving of wheat-germ stalks, sunflower seed, and Vitamin E pipette"
+    >
+      {/* Arching botanical wheat-germ stalks & sheathing leaves */}
+      <g>
+        {/* Main arching culm & secondary culm */}
+        <path d="M 38,124 C 42,96 52,66 72,34" strokeWidth="1.5" />
+        <path d="M 41,124 C 45,98 54,70 72,38" strokeWidth="0.65" />
+        <path d="M 28,124 C 30,104 34,86 44,64" strokeWidth="1.2" />
+
+        {/* Arching blade leaves */}
+        <path d="M 42,110 C 26,102 16,90 14,76 C 24,82 34,92 43,104" strokeWidth="1.2" />
+        <path d="M 40,106 C 30,97 22,89 17,80" strokeWidth="0.65" />
+        <path d="M 47,96 C 60,88 73,88 84,94 C 72,100 58,100 46,98" strokeWidth="1.2" />
+        <path d="M 48,96 C 60,94 70,94 80,94" strokeWidth="0.65" />
+
+        {/* Overlapping engraved wheat spikelets along primary ear (bottom-left to top-right) */}
+        {[
+          { x: 52, y: 74, a: -42, s: 1.0 },
+          { x: 61, y: 70, a: 12, s: 1.0 },
+          { x: 57, y: 63, a: -40, s: 0.96 },
+          { x: 66, y: 59, a: 14, s: 0.96 },
+          { x: 62, y: 52, a: -38, s: 0.92 },
+          { x: 70, y: 48, a: 16, s: 0.92 },
+          { x: 66, y: 42, a: -34, s: 0.86 },
+          { x: 74, y: 38, a: 18, s: 0.84 },
+        ].map((g, i) => (
+          <g key={i} transform={`translate(${g.x},${g.y}) rotate(${g.a}) scale(${g.s})`}>
+            <path d="M 0,0 C -5,-5 -4,-13 0,-17 C 4,-13 5,-5 0,0 Z" strokeWidth="1.15" />
+            <path d="M 0,-2 L 0,-14" strokeWidth="0.6" />
+            <path d="M -2,-6 L -1,-11" strokeWidth="0.5" />
+            {/* Sweeping wheat awn */}
+            <path d="M 0,-17 C -1,-24 -3,-29 -6,-34" strokeWidth="0.65" />
+          </g>
+        ))}
+
+        {/* Secondary smaller wheat ear */}
+        {[
+          { x: 38, y: 76, a: -36, s: 0.82 },
+          { x: 44, y: 72, a: 10, s: 0.8 },
+          { x: 41, y: 66, a: -32, s: 0.78 },
+          { x: 47, y: 62, a: 14, s: 0.76 },
+        ].map((g, i) => (
+          <g key={i} transform={`translate(${g.x},${g.y}) rotate(${g.a}) scale(${g.s})`}>
+            <path d="M 0,0 C -4.5,-4.5 -3.5,-11.5 0,-15 C 3.5,-11.5 4.5,-4.5 0,0 Z" strokeWidth="1.05" />
+            <path d="M 0,-2 L 0,-12" strokeWidth="0.55" />
+            <path d="M 0,-15 C -1,-21 -3,-25 -5,-29" strokeWidth="0.6" />
+          </g>
+        ))}
+      </g>
+
+      {/* Apothecary glass dropper pipette with ribbed collar & oil meniscus */}
+      <g>
+        {/* Rubber squeeze bulb with shading hatches */}
+        <path d="M 118,16 C 122,10 132,10 136,16 L 138,31 L 116,31 Z" strokeWidth="1.45" />
+        <path d="M 121,16 C 121,21 121,26 120,30" strokeWidth="0.7" />
+        <path d="M 125,14 C 125,20 125,26 124,30" strokeWidth="0.65" />
+        <path d="M 132,16 C 133,21 133,26 134,30" strokeWidth="0.65" />
+
+        {/* Ribbed knurled collar */}
+        <rect x="113" y="31" width="28" height="7" rx="1.2" strokeWidth="1.35" />
+        <line x1="118" y1="31" x2="118" y2="38" strokeWidth="0.75" />
+        <line x1="122" y1="31" x2="122" y2="38" strokeWidth="0.75" />
+        <line x1="127" y1="31" x2="127" y2="38" strokeWidth="0.75" />
+        <line x1="132" y1="31" x2="132" y2="38" strokeWidth="0.75" />
+        <line x1="136" y1="31" x2="136" y2="38" strokeWidth="0.75" />
+
+        {/* Tapered glass pipette barrel */}
+        <path d="M 120,38 L 120,74 L 125,91 L 129,91 L 134,74 L 134,38" strokeWidth="1.35" />
+        {/* Glass refraction highlight & graduated tick marks */}
+        <line x1="122" y1="42" x2="122" y2="72" strokeWidth="0.6" />
+        <line x1="129" y1="46" x2="134" y2="46" strokeWidth="0.75" />
+        <line x1="127" y1="54" x2="134" y2="54" strokeWidth="0.75" />
+        <line x1="129" y1="62" x2="134" y2="62" strokeWidth="0.75" />
+        {/* Golden Tocopherol oil level inside tip */}
+        <path d="M 121,67 Q 127,70 133,67" stroke="#C86D1F" strokeWidth="1.1" />
+        <path d="M 123,74 L 131,74" stroke="#C86D1F" strokeWidth="0.7" />
+        <path d="M 124,80 L 130,80" stroke="#C86D1F" strokeWidth="0.7" />
+      </g>
+
+      {/* Suspended Vitamin E antioxidant droplet & concentric preservation ripples */}
+      <g>
+        <path
+          d="M 127,96 C 127,96 119,106.5 119,112 C 119,116.5 122.6,120 127,120 C 131.4,120 135,116.5 135,112 C 135,106.5 127,96 127,96 Z"
+          stroke="#C86D1F"
+          strokeWidth="1.5"
+        />
+        <path d="M 123.5,109 C 122.5,112 123.5,115.5 126.5,116.5" stroke="#C86D1F" strokeWidth="0.9" />
+        {/* Radiating antioxidant protection ticks */}
+        <g stroke="#C86D1F" strokeWidth="0.8" opacity="0.85">
+          <line x1="112" y1="111" x2="105" y2="111" />
+          <line x1="142" y1="111" x2="149" y2="111" />
+          <line x1="114" y1="102" x2="108" y2="97" />
+          <line x1="140" y1="102" x2="146" y2="97" />
+        </g>
+        {/* Subtle ripple beneath droplet */}
+        <ellipse cx="127" cy="124" rx="14" ry="2.2" stroke="#C86D1F" strokeWidth="0.75" opacity="0.75" />
+      </g>
+
+      {/* Hatched sunflower seed (natural tocopherol source) at base */}
+      <g>
+        <path d="M 88,122 C 80,118 76,109 82,102 C 88,101 97,106 101,115 C 98,121 93,124 88,122 Z" strokeWidth="1.3" />
+        <path d="M 83,104 C 89,109 94,114 97,120" strokeWidth="0.75" />
+        <path d="M 81,109 C 86,113 90,117 93,122" strokeWidth="0.7" />
+        <path d="M 87,103 C 92,107 96,111 99,117" strokeWidth="0.65" />
+      </g>
+
+      {/* Ground copperplate line hatching & stippling */}
+      <path d="M 16,125 Q 88,122 162,126" strokeWidth="0.85" />
+      <line x1="28" y1="129" x2="66" y2="128" strokeWidth="0.6" />
+      <line x1="78" y1="129" x2="110" y2="129" strokeWidth="0.55" />
+      <line x1="138" y1="129" x2="156" y2="129" strokeWidth="0.6" />
+      <g fill="#1C1B1B" stroke="none">
+        <circle cx="96" cy="96" r="0.85" />
+        <circle cx="104" cy="118" r="0.9" />
+        <circle cx="146" cy="121" r="0.85" />
+        <circle cx="62" cy="116" r="0.85" />
+      </g>
+    </svg>
+  );
+}
+
 export function MonogramSealSvg({ className = 'w-28 h-28' }: { className?: string }) {
   return (
     <svg
