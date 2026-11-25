@@ -204,7 +204,11 @@ export function StoryAndFormula({ onOpenLightboxById }: StoryAndFormulaProps) {
                   className="relative w-full aspect-[4/3] border border-charcoal rounded-sm overflow-hidden bg-slatebg group cursor-zoom-in block text-left"
                   aria-label="Zoom raw botanicals study"
                 >
-                  <StudioMedia photoId="botanicals" alt="Raw botanical ingredients flat lay" />
+                  <StudioMedia
+                    photoId="botanicals"
+                    alt="Raw botanical ingredients flat lay"
+                    sizes="(min-width: 1024px) 32vw, 95vw"
+                  />
                   <div className="pointer-events-none absolute top-2.5 left-2.5 bg-cream/95 border border-charcoal px-2 py-0.5 rounded-sm">
                     <span className="font-mono text-[9px] font-bold tracking-[0.12em] text-charcoal uppercase">
                       Raw Botanicals

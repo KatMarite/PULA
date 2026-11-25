@@ -115,6 +115,7 @@ export function OrdersAndStockists({ onOpenLightboxById }: OrdersAndStockistsPro
                 <StudioMedia
                   photoId="barbershop"
                   alt="PŪLA Conditioning Beard Oil displayed on a wooden Maseru barbershop station"
+                  sizes="(min-width: 1024px) 40vw, 95vw"
                 />
                 <div className="pointer-events-none absolute top-2.5 left-2.5 bg-charcoal/90 border border-cream/30 px-2.5 py-0.5 rounded-sm">
                   <span className="font-mono text-[9px] font-bold tracking-[0.12em] text-ochre uppercase">

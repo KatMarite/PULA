@@ -84,7 +84,13 @@ export function LightboxModal({ activeIndex, onClose, onStep }: LightboxModalPro
                   transition={{ duration: 0.18 }}
                   className="w-full h-full flex items-center justify-center"
                 >
-                  <StudioMedia photoId={photo.id} alt={photo.caption} className="w-full h-full object-contain" />
+                  <StudioMedia
+                    photoId={photo.id}
+                    alt={photo.caption}
+                    priority
+                    sizes="(min-width: 1024px) 896px, 95vw"
+                    className="w-full h-full object-contain"
+                  />
                 </motion.div>
               </AnimatePresence>
 

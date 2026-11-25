@@ -113,6 +113,10 @@ export interface GalleryItem {
   metaRight: string;
   caption: string;
   imageSrc: string;
+  imageSrcSm?: string;
+  imageFallbackSrc?: string;
+  width?: number;
+  height?: number;
 }
 
 export const GALLERY_ITEMS: GalleryItem[] = [
@@ -124,7 +128,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: '01 · Fresh Citrus & Woods',
     caption:
       '30ml UV-protective amber glass dropper bottle beside matching textured cream retail carton on dark slate.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image__2__61fb4bfe.jpeg',
+    imageSrc: '/assets/studio/hero-box-1200.webp',
+    imageSrcSm: '/assets/studio/hero-box-480.webp',
+    imageFallbackSrc: '/assets/studio/hero-box.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'bottle-solo',
@@ -134,7 +142,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Cold-Pressed Base',
     caption:
       'UV-protective amber glass with matte cream label, ink charcoal framing, eucalyptus sprig, and Marula nut.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image__5__5b1c378a.jpeg',
+    imageSrc: '/assets/studio/bottle-solo-1200.webp',
+    imageSrcSm: '/assets/studio/bottle-solo-480.webp',
+    imageFallbackSrc: '/assets/studio/bottle-solo.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'twin-pack',
@@ -144,7 +156,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: '2 × 30 ml Boxed',
     caption:
       'Two full-size 30ml amber glass dropper bottles with matching textured cream retail cartons on dark highland slate.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image__6__dbf02074.jpeg',
+    imageSrc: '/assets/studio/twin-pack-1200.webp',
+    imageSrcSm: '/assets/studio/twin-pack-480.webp',
+    imageFallbackSrc: '/assets/studio/twin-pack.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'box-back',
@@ -154,7 +170,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Maseru, Lesotho',
     caption:
       'Complete directions, full botanical INCI declaration, nut-oil caution, and copperplate raincloud side engraving.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image__1__8e0d1f0b.jpeg',
+    imageSrc: '/assets/studio/box-back-1200.webp',
+    imageSrcSm: '/assets/studio/box-back-480.webp',
+    imageFallbackSrc: '/assets/studio/box-back.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'botanicals',
@@ -164,7 +184,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Jojoba · Argan · Marula',
     caption:
       'Unrefined Southern African Marula nuts, cedarwood chips, eucalyptus leaves, citrus rind, and golden oil pipette.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image__3__ac2e38b9.jpeg',
+    imageSrc: '/assets/studio/botanicals-1200.webp',
+    imageSrcSm: '/assets/studio/botanicals-480.webp',
+    imageFallbackSrc: '/assets/studio/botanicals.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'ritual',
@@ -174,7 +198,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Highland Hydration',
     caption:
       'Precision glass pipette dosing golden cold-pressed oil into your palm beside a hardwood beard comb.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image_7p70wr7p70wr7p70_eca62f38.jpeg',
+    imageSrc: '/assets/studio/ritual-1200.webp',
+    imageSrcSm: '/assets/studio/ritual-480.webp',
+    imageFallbackSrc: '/assets/studio/ritual.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'gift-kit',
@@ -184,7 +212,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Oil · Comb · Brush',
     caption:
       'Highland-crafted kraft presentation box housing 30ml Conditioning Beard Oil, engraved hardwood comb, and boar-bristle brush.',
-    imageSrc: '/assets/aistudio/Gemini_Generated_Image__4__a6b30f92.jpeg',
+    imageSrc: '/assets/studio/gift-kit-1200.webp',
+    imageSrcSm: '/assets/studio/gift-kit-480.webp',
+    imageFallbackSrc: '/assets/studio/gift-kit.jpg',
+    width: 1200,
+    height: 896,
   },
   {
     id: 'barbershop',
@@ -194,7 +226,11 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     metaRight: 'Stockist Edition',
     caption:
       'Crafted for barbershop stations across Maseru—high-contrast matte packaging with crisp citrus and cedar finish.',
-    imageSrc: '/assets/barbershop-station.jpg',
+    imageSrc: '/assets/studio/barbershop-1200.webp',
+    imageSrcSm: '/assets/studio/barbershop-480.webp',
+    imageFallbackSrc: '/assets/studio/barbershop.jpg',
+    width: 1024,
+    height: 764,
   },
 ];
 

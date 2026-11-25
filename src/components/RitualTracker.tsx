@@ -54,7 +54,11 @@ export function RitualTracker({ onOpenLightboxById }: RitualTrackerProps) {
               className="relative w-full aspect-[16/10] border border-charcoal rounded-sm overflow-hidden bg-slatebg group cursor-zoom-in block text-left"
               aria-label="Zoom Daily Ritual studio scene"
             >
-              <StudioMedia photoId="ritual" alt="PŪLA bottle beside hardwood comb on stone vanity" />
+              <StudioMedia
+                photoId="ritual"
+                alt="PŪLA bottle beside hardwood comb on stone vanity"
+                sizes="(min-width: 1024px) 46vw, 95vw"
+              />
               <div className="pointer-events-none absolute top-2.5 left-2.5 bg-cream/95 border border-charcoal px-2.5 py-0.5 rounded-sm">
                 <span className="font-mono text-[9px] font-bold tracking-[0.12em] text-charcoal uppercase">
                   Morning Ritual · Damp Application

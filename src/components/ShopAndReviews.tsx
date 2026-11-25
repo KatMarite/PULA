@@ -58,6 +58,7 @@ export function ShopAndReviews({ onOpenLightboxById }: ShopAndReviewsProps) {
                     <StudioMedia
                       photoId={photoId}
                       alt={`${edition.name} — ${edition.subtitle}`}
+                      sizes="(min-width: 768px) 32vw, 95vw"
                       className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                     />
                   </button>

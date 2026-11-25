@@ -203,7 +203,12 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                       className="w-full h-full shrink-0 block cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre"
                       aria-label={`Zoom ${item.title}`}
                     >
-                      <StudioMedia photoId={item.id} alt={item.caption} />
+                      <StudioMedia
+                        photoId={item.id}
+                        alt={item.caption}
+                        priority={idx === 0}
+                        sizes="(min-width: 1024px) 46vw, 96vw"
+                      />
                     </button>
                   );
                 })}
@@ -294,7 +299,11 @@ export function HeroGallery({ onExploreFormula, onOpenLightbox }: HeroGalleryPro
                     }`}
                   >
                     <div className="w-full aspect-[4/3] bg-slatebg overflow-hidden">
-                      <StudioMedia photoId={item.id} alt={item.title} />
+                      <StudioMedia
+                        photoId={item.id}
+                        alt={item.title}
+                        sizes="(min-width: 640px) 140px, 24vw"
+                      />
                     </div>
                     <span
                       className={`px-1.5 py-1.5 font-mono text-[9px] leading-tight uppercase truncate w-full ${

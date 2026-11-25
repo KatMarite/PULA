@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { GALLERY_ITEMS, GalleryPhotoId } from '../types/pula';
 import { usePula } from '../context/PulaContext';
 
@@ -14,19 +15,40 @@ export function MalotiMountainsSvg({ className = 'w-44 h-auto' }: { className?: 
       role="img"
       aria-label="Copperplate engraving of Maloti mountain peaks and summit mist"
     >
-      <path d="M 18,32 C 30,20 48,20 60,29 C 70,22 86,23 94,32" strokeWidth="1.0" />
-      <path d="M 108,24 C 120,15 138,16 150,25 C 158,20 168,23 172,30" strokeWidth="0.95" />
-      <path d="M 10,64 C 24,57 40,59 50,66" strokeWidth="0.8" />
-      <path d="M 134,58 C 148,51 162,53 174,60" strokeWidth="0.8" />
-      <g stroke="#C86D1F" strokeWidth="0.85" opacity="0.85">
+      {/* Drifting summit mist clouds */}
+      <motion.g
+        animate={{ x: [-2.5, 2.5, -2.5] }}
+        transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <path d="M 18,32 C 30,20 48,20 60,29 C 70,22 86,23 94,32" strokeWidth="1.0" />
+        <path d="M 108,24 C 120,15 138,16 150,25 C 158,20 168,23 172,30" strokeWidth="0.95" />
+      </motion.g>
+      <motion.g
+        animate={{ x: [2, -2, 2] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <path d="M 10,64 C 24,57 40,59 50,66" strokeWidth="0.8" />
+        <path d="M 134,58 C 148,51 162,53 174,60" strokeWidth="0.8" />
+      </motion.g>
+      {/* Shimmering ochre sun rays */}
+      <motion.g
+        stroke="#C86D1F"
+        strokeWidth="0.85"
+        animate={{ opacity: [0.4, 0.95, 0.4] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <line x1="42" y1="32" x2="36" y2="46" />
         <line x1="56" y1="31" x2="50" y2="45" />
         <line x1="126" y1="27" x2="120" y2="41" />
         <line x1="140" y1="28" x2="134" y2="42" />
-      </g>
-      <path
+      </motion.g>
+      <motion.path
         d="M 8,124 L 36,80 L 48,90 L 66,54 L 78,66 L 98,24 L 118,62 L 130,50 L 152,86 L 162,76 L 174,124 Z"
         strokeWidth="1.5"
+        initial={{ pathLength: 0, opacity: 0.4 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
       />
       <path d="M 98,24 L 92,52 L 100,74 L 90,98 L 98,124" strokeWidth="1.25" />
       <path d="M 66,54 L 70,80 L 60,104 L 66,124" strokeWidth="1.0" />
@@ -83,22 +105,33 @@ export function RaincloudSvg({ className = 'w-44 h-auto' }: { className?: string
       role="img"
       aria-label="Copperplate engraving of cumulus raincloud showering over highland hills"
     >
-      <path
-        d="M 38,68 C 22,68 12,58 14,45 C 16,34 27,27 38,28 C 42,16 54,8 68,9 C 76,3 89,3 98,9 C 109,15 115,25 114,35 C 120,31 128,30 135,32 C 146,35 154,44 154,54 C 165,56 171,66 168,75 C 165,83 156,88 146,88 L 36,88 C 25,88 18,79 21,69"
-        strokeWidth="1.4"
-      />
-      <path d="M 42,28 C 50,18 64,15 76,18" strokeWidth="0.9" />
-      <path d="M 76,13 C 88,9 100,13 106,22" strokeWidth="0.9" />
-      <path d="M 108,38 C 118,35 130,37 136,44" strokeWidth="0.85" />
-      <path d="M 28,50 C 37,43 50,43 58,50" strokeWidth="0.85" />
-      <path d="M 64,48 C 76,40 92,41 102,49" strokeWidth="0.85" />
-      <g strokeWidth="0.7">
-        <line x1="25" y1="64" x2="156" y2="64" strokeDasharray="14 4 8 4" />
-        <line x1="22" y1="70" x2="162" y2="70" />
-        <line x1="21" y1="76" x2="162" y2="76" strokeDasharray="20 4 10 4" />
-        <line x1="24" y1="82" x2="158" y2="82" />
-      </g>
-      <g strokeWidth="0.95">
+      {/* Floating cumulus cloud */}
+      <motion.g
+        animate={{ y: [-1.8, 1.8, -1.8] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <path
+          d="M 38,68 C 22,68 12,58 14,45 C 16,34 27,27 38,28 C 42,16 54,8 68,9 C 76,3 89,3 98,9 C 109,15 115,25 114,35 C 120,31 128,30 135,32 C 146,35 154,44 154,54 C 165,56 171,66 168,75 C 165,83 156,88 146,88 L 36,88 C 25,88 18,79 21,69"
+          strokeWidth="1.4"
+        />
+        <path d="M 42,28 C 50,18 64,15 76,18" strokeWidth="0.9" />
+        <path d="M 76,13 C 88,9 100,13 106,22" strokeWidth="0.9" />
+        <path d="M 108,38 C 118,35 130,37 136,44" strokeWidth="0.85" />
+        <path d="M 28,50 C 37,43 50,43 58,50" strokeWidth="0.85" />
+        <path d="M 64,48 C 76,40 92,41 102,49" strokeWidth="0.85" />
+        <g strokeWidth="0.7">
+          <line x1="25" y1="64" x2="156" y2="64" strokeDasharray="14 4 8 4" />
+          <line x1="22" y1="70" x2="162" y2="70" />
+          <line x1="21" y1="76" x2="162" y2="76" strokeDasharray="20 4 10 4" />
+          <line x1="24" y1="82" x2="158" y2="82" />
+        </g>
+      </motion.g>
+      {/* Falling diagonal rain showers */}
+      <motion.g
+        strokeWidth="0.95"
+        animate={{ x: [1.5, -2.5], y: [-2, 4], opacity: [0.35, 1, 0.25] }}
+        transition={{ duration: 1.9, repeat: Infinity, ease: 'linear' }}
+      >
         <line x1="36" y1="92" x2="26" y2="118" />
         <line x1="50" y1="92" x2="39" y2="122" />
         <line x1="64" y1="92" x2="54" y2="119" />
@@ -108,14 +141,26 @@ export function RaincloudSvg({ className = 'w-44 h-auto' }: { className?: string
         <line x1="120" y1="92" x2="110" y2="118" />
         <line x1="134" y1="92" x2="124" y2="120" />
         <line x1="146" y1="92" x2="137" y2="115" />
-      </g>
-      <g strokeWidth="0.55" strokeDasharray="6 4">
+      </motion.g>
+      <motion.g
+        strokeWidth="0.55"
+        strokeDasharray="6 4"
+        animate={{ x: [1.5, -2.5], y: [-2, 4], opacity: [0.2, 0.9, 0.2] }}
+        transition={{ duration: 1.9, delay: 0.95, repeat: Infinity, ease: 'linear' }}
+      >
         <line x1="43" y1="94" x2="33" y2="120" />
         <line x1="71" y1="94" x2="61" y2="121" />
         <line x1="99" y1="94" x2="89" y2="121" />
         <line x1="127" y1="94" x2="117" y2="119" />
-      </g>
-      <path d="M 10,132 Q 46,112 86,125 Q 124,111 170,132" strokeWidth="1.25" />
+      </motion.g>
+      <motion.path
+        d="M 10,132 Q 46,112 86,125 Q 124,111 170,132"
+        strokeWidth="1.25"
+        initial={{ pathLength: 0, opacity: 0.4 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      />
       <path d="M 24,132 Q 60,121 98,131" strokeWidth="0.7" />
       <path d="M 108,130 Q 138,122 162,132" strokeWidth="0.7" />
     </svg>
@@ -134,40 +179,52 @@ export function EucalyptusSvg({ className = 'w-36 h-auto' }: { className?: strin
       role="img"
       aria-label="Copperplate botanical engraving of a eucalyptus sprig"
     >
-      <path d="M 88,198 C 90,154 96,102 104,28" strokeWidth="2.0" />
-      <path d="M 91,198 C 92,155 98,104 105,34" strokeWidth="0.85" />
-      <g>
-        <path d="M 89,166 C 60,174 30,158 24,132 C 48,118 78,132 90,160" strokeWidth="1.4" />
-        <path d="M 88,163 C 66,154 46,144 27,134" strokeWidth="0.95" />
-        <line x1="72" y1="156" x2="62" y2="164" strokeWidth="0.7" />
-        <line x1="58" y1="149" x2="46" y2="158" strokeWidth="0.7" />
-        <line x1="44" y1="142" x2="34" y2="150" strokeWidth="0.7" />
-      </g>
-      <g>
-        <path d="M 93,146 C 122,152 152,136 158,110 C 134,96 104,110 94,140" strokeWidth="1.4" />
-        <path d="M 94,143 C 115,134 135,124 155,112" strokeWidth="0.95" />
-        <line x1="112" y1="135" x2="122" y2="143" strokeWidth="0.7" />
-        <line x1="126" y1="128" x2="138" y2="136" strokeWidth="0.7" />
-      </g>
-      <g strokeWidth="1.1">
-        <path d="M 90,126 L 74,118" />
-        <path d="M 74,118 L 68,113 L 65,120 L 72,123 Z" />
-        <path d="M 97,104 L 114,96" />
-        <path d="M 114,96 L 120,91 L 123,98 L 116,101 Z" />
-      </g>
-      <g>
-        <path d="M 94,114 C 66,120 38,104 34,80 C 56,66 84,80 95,108" strokeWidth="1.35" />
-        <path d="M 94,111 C 74,102 54,92 37,82" strokeWidth="0.9" />
-      </g>
-      <g>
-        <path d="M 98,90 C 125,94 150,80 154,56 C 132,44 108,58 99,84" strokeWidth="1.35" />
-        <path d="M 99,87 C 118,78 136,68 151,58" strokeWidth="0.9" />
-      </g>
-      <g>
-        <path d="M 100,62 C 76,66 54,54 51,34 C 70,22 92,34 101,56" strokeWidth="1.3" />
-        <path d="M 103,42 C 122,44 139,33 141,16 C 125,7 108,18 104,37" strokeWidth="1.25" />
-        <path d="M 104,28 C 100,14 109,4 119,4 C 125,14 118,26 104,29" strokeWidth="1.2" />
-      </g>
+      <motion.g
+        style={{ transformOrigin: '88px 198px' }}
+        animate={{ rotate: [-1.4, 1.6, -1.4] }}
+        transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <motion.path
+          d="M 88,198 C 90,154 96,102 104,28"
+          strokeWidth="2.0"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <path d="M 91,198 C 92,155 98,104 105,34" strokeWidth="0.85" />
+        <g>
+          <path d="M 89,166 C 60,174 30,158 24,132 C 48,118 78,132 90,160" strokeWidth="1.4" />
+          <path d="M 88,163 C 66,154 46,144 27,134" strokeWidth="0.95" />
+          <line x1="72" y1="156" x2="62" y2="164" strokeWidth="0.7" />
+          <line x1="58" y1="149" x2="46" y2="158" strokeWidth="0.7" />
+          <line x1="44" y1="142" x2="34" y2="150" strokeWidth="0.7" />
+        </g>
+        <g>
+          <path d="M 93,146 C 122,152 152,136 158,110 C 134,96 104,110 94,140" strokeWidth="1.4" />
+          <path d="M 94,143 C 115,134 135,124 155,112" strokeWidth="0.95" />
+          <line x1="112" y1="135" x2="122" y2="143" strokeWidth="0.7" />
+          <line x1="126" y1="128" x2="138" y2="136" strokeWidth="0.7" />
+        </g>
+        <g strokeWidth="1.1">
+          <path d="M 90,126 L 74,118" />
+          <path d="M 74,118 L 68,113 L 65,120 L 72,123 Z" />
+          <path d="M 97,104 L 114,96" />
+          <path d="M 114,96 L 120,91 L 123,98 L 116,101 Z" />
+        </g>
+        <g>
+          <path d="M 94,114 C 66,120 38,104 34,80 C 56,66 84,80 95,108" strokeWidth="1.35" />
+          <path d="M 94,111 C 74,102 54,92 37,82" strokeWidth="0.9" />
+        </g>
+        <g>
+          <path d="M 98,90 C 125,94 150,80 154,56 C 132,44 108,58 99,84" strokeWidth="1.35" />
+          <path d="M 99,87 C 118,78 136,68 151,58" strokeWidth="0.9" />
+        </g>
+        <g>
+          <path d="M 100,62 C 76,66 54,54 51,34 C 70,22 92,34 101,56" strokeWidth="1.3" />
+          <path d="M 103,42 C 122,44 139,33 141,16 C 125,7 108,18 104,37" strokeWidth="1.25" />
+          <path d="M 104,28 C 100,14 109,4 119,4 C 125,14 118,26 104,29" strokeWidth="1.2" />
+        </g>
+      </motion.g>
     </svg>
   );
 }
@@ -184,32 +241,45 @@ export function JojobaSvg({ className = 'w-28 h-auto' }: { className?: string })
       role="img"
       aria-label="Copperplate botanical engraving of Golden Jojoba leaves and seed capsules"
     >
-      {/* Main curving desert twig */}
-      <path d="M 22,118 C 52,102 82,78 134,34" strokeWidth="1.7" />
-      <path d="M 26,120 C 56,104 86,80 135,38" strokeWidth="0.75" />
+      {/* Main curving desert twig + swaying leaves */}
+      <motion.g
+        style={{ transformOrigin: '22px 118px' }}
+        animate={{ rotate: [-1.1, 1.3, -1.1] }}
+        transition={{ duration: 6.8, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <motion.path
+          d="M 22,118 C 52,102 82,78 134,34"
+          strokeWidth="1.7"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <path d="M 26,120 C 56,104 86,80 135,38" strokeWidth="0.75" />
 
-      {/* Left paired leathery jojoba leaves */}
-      <g>
-        <path d="M 56,97 C 32,88 18,66 26,48 C 44,44 62,64 60,92" strokeWidth="1.35" />
-        <path d="M 55,93 C 44,77 35,63 29,51" strokeWidth="0.85" />
-        <line x1="45" y1="78" x2="35" y2="79" strokeWidth="0.65" />
-        <line x1="39" y1="68" x2="29" y2="68" strokeWidth="0.65" />
-        <line x1="48" y1="74" x2="54" y2="66" strokeWidth="0.65" />
-      </g>
-      <g>
-        <path d="M 88,73 C 70,56 64,34 78,20 C 96,22 104,46 92,69" strokeWidth="1.3" />
-        <path d="M 88,69 C 84,52 81,38 79,24" strokeWidth="0.85" />
-        <line x1="84" y1="51" x2="75" y2="45" strokeWidth="0.65" />
-        <line x1="86" y1="43" x2="93" y2="37" strokeWidth="0.65" />
-      </g>
+        {/* Left paired leathery jojoba leaves */}
+        <g>
+          <path d="M 56,97 C 32,88 18,66 26,48 C 44,44 62,64 60,92" strokeWidth="1.35" />
+          <path d="M 55,93 C 44,77 35,63 29,51" strokeWidth="0.85" />
+          <line x1="45" y1="78" x2="35" y2="79" strokeWidth="0.65" />
+          <line x1="39" y1="68" x2="29" y2="68" strokeWidth="0.65" />
+          <line x1="48" y1="74" x2="54" y2="66" strokeWidth="0.65" />
+        </g>
+        <g>
+          <path d="M 88,73 C 70,56 64,34 78,20 C 96,22 104,46 92,69" strokeWidth="1.3" />
+          <path d="M 88,69 C 84,52 81,38 79,24" strokeWidth="0.85" />
+          <line x1="84" y1="51" x2="75" y2="45" strokeWidth="0.65" />
+          <line x1="86" y1="43" x2="93" y2="37" strokeWidth="0.65" />
+        </g>
 
-      {/* Right lower leaf */}
-      <g>
-        <path d="M 110,55 C 128,48 150,55 158,72 C 142,84 120,76 112,59" strokeWidth="1.3" />
-        <path d="M 114,58 C 129,62 142,66 154,71" strokeWidth="0.85" />
-        <line x1="129" y1="62" x2="136" y2="55" strokeWidth="0.65" />
-        <line x1="136" y1="64" x2="128" y2="71" strokeWidth="0.65" />
-      </g>
+        {/* Right lower leaf */}
+        <g>
+          <path d="M 110,55 C 128,48 150,55 158,72 C 142,84 120,76 112,59" strokeWidth="1.3" />
+          <path d="M 114,58 C 129,62 142,66 154,71" strokeWidth="0.85" />
+          <line x1="129" y1="62" x2="136" y2="55" strokeWidth="0.65" />
+          <line x1="136" y1="64" x2="128" y2="71" strokeWidth="0.65" />
+        </g>
+      </motion.g>
 
       {/* Primary acorn-like jojoba capsule with 3-valved calyx */}
       <g>
@@ -223,17 +293,23 @@ export function JojobaSvg({ className = 'w-28 h-auto' }: { className?: string })
         <line x1="88" y1="101" x2="91" y2="119" strokeWidth="0.7" />
       </g>
 
-      {/* Secondary split jojoba pod + golden oil droplet */}
+      {/* Secondary split jojoba pod + glistening golden oil droplet */}
       <g>
         <path d="M 118,86 C 110,94 109,110 118,120 C 127,122 135,114 134,102 C 132,92 125,86 118,86 Z" strokeWidth="1.35" />
         <path d="M 114,91 C 119,102 121,111 119,120" strokeWidth="0.85" />
         <path d="M 122,90 C 127,99 128,109 125,118" strokeWidth="0.7" />
-        <path
-          d="M 148,104 C 148,104 141,113 141,118 C 141,122 144.1,125 148,125 C 151.9,125 155,122 155,118 C 155,113 148,104 148,104 Z"
-          stroke="#C86D1F"
-          strokeWidth="1.25"
-        />
-        <line x1="146" y1="115" x2="146" y2="121" stroke="#C86D1F" strokeWidth="0.8" />
+        <motion.g
+          style={{ transformOrigin: '148px 115px' }}
+          animate={{ scale: [0.95, 1.07, 0.95], opacity: [0.8, 1, 0.8] }}
+          transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <path
+            d="M 148,104 C 148,104 141,113 141,118 C 141,122 144.1,125 148,125 C 151.9,125 155,122 155,118 C 155,113 148,104 148,104 Z"
+            stroke="#C86D1F"
+            strokeWidth="1.25"
+          />
+          <line x1="146" y1="115" x2="146" y2="121" stroke="#C86D1F" strokeWidth="0.8" />
+        </motion.g>
       </g>
 
       {/* Stippling */}
@@ -260,20 +336,35 @@ export function MarulaSvg({ className = 'w-28 h-auto' }: { className?: string })
       aria-label="Copperplate botanical engraving of Virgin Marula fruit, leaves, and nut"
     >
       {/* Branch stem */}
-      <path d="M 18,46 C 58,34 106,30 160,36" strokeWidth="1.7" />
+      <motion.path
+        d="M 18,46 C 58,34 106,30 160,36"
+        strokeWidth="1.7"
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+      />
       <path d="M 24,48 C 62,37 108,33 154,38" strokeWidth="0.7" />
 
-      {/* Compound marula leaflets along upper right */}
-      <g>
+      {/* Compound marula leaflets fluttering in breeze */}
+      <motion.g
+        style={{ transformOrigin: '96px 32px' }}
+        animate={{ rotate: [-1.8, 1.8, -1.8] }}
+        transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 96,32 C 110,18 128,14 148,16" strokeWidth="1.1" />
         <path d="M 106,26 C 102,16 110,8 120,11 C 122,19 114,26 106,26 Z" strokeWidth="1.15" />
         <path d="M 124,20 C 122,10 132,5 140,10 C 140,18 131,22 124,20 Z" strokeWidth="1.15" />
         <path d="M 140,16 C 144,8 156,7 161,14 C 156,21 146,21 140,16 Z" strokeWidth="1.15" />
         <path d="M 118,24 C 124,29 135,28 139,20" strokeWidth="1.0" />
-      </g>
+      </motion.g>
 
-      {/* Primary plump marula fruit */}
-      <g>
+      {/* Primary plump marula fruit hanging from stem */}
+      <motion.g
+        style={{ transformOrigin: '64px 37px' }}
+        animate={{ rotate: [-1.4, 1.4, -1.4] }}
+        transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 64,37 C 66,46 66,52 65,57" strokeWidth="1.2" />
         <ellipse cx="64" cy="84" rx="25" ry="28" strokeWidth="1.5" />
         {/* Curved shading hatches */}
@@ -281,25 +372,32 @@ export function MarulaSvg({ className = 'w-28 h-auto' }: { className?: string })
         <path d="M 52,65 C 50,80 52,96 59,107" strokeWidth="0.7" />
         <path d="M 78,66 C 83,76 84,88 80,99" strokeWidth="0.65" />
         <path d="M 60,57 C 64,60 68,60 71,57" strokeWidth="0.9" />
-      </g>
+      </motion.g>
 
       {/* Second smaller marula fruit */}
-      <g>
+      <motion.g
+        style={{ transformOrigin: '112px 33px' }}
+        animate={{ rotate: [1.5, -1.5, 1.5] }}
+        transition={{ duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 112,33 C 114,44 115,52 114,60" strokeWidth="1.15" />
         <ellipse cx="114" cy="80" rx="19" ry="22" strokeWidth="1.4" />
         <path d="M 101,69 C 99,78 100,88 106,96" strokeWidth="0.7" />
         <path d="M 107,65 C 105,76 107,89 112,98" strokeWidth="0.65" />
-      </g>
+      </motion.g>
 
       {/* Cracked Marula nut & ochre oil drop */}
       <g>
         <path d="M 134,114 C 128,104 134,94 146,96 C 156,98 160,109 154,118 C 148,125 138,123 134,114 Z" strokeWidth="1.35" />
         <circle cx="142" cy="107" r="3.2" strokeWidth="0.9" />
         <circle cx="149" cy="111" r="2.8" strokeWidth="0.9" />
-        <path
+        <motion.path
           d="M 92,112 C 92,112 87,119 87,123 C 87,126 89.2,128.5 92,128.5 C 94.8,128.5 97,126 97,123 C 97,119 92,112 92,112 Z"
           stroke="#C86D1F"
           strokeWidth="1.25"
+          style={{ transformOrigin: '92px 120px' }}
+          animate={{ scale: [0.94, 1.08, 0.94], opacity: [0.75, 1, 0.75] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         />
       </g>
 
@@ -326,19 +424,30 @@ export function ArganSvg({ className = 'w-28 h-auto' }: { className?: string }) 
       aria-label="Copperplate botanical engraving of Moroccan Argan twig, thorns, leaves, and fruit"
     >
       {/* Gnarled argan branch + characteristic thorns */}
-      <path d="M 20,98 C 52,82 96,62 152,42" strokeWidth="1.8" />
+      <motion.path
+        d="M 20,98 C 52,82 96,62 152,42"
+        strokeWidth="1.8"
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+      />
       <path d="M 48,84 L 40,66" strokeWidth="1.25" />
       <path d="M 104,59 L 112,42" strokeWidth="1.25" />
 
-      {/* Narrow clustered lanceolate leaves */}
-      <g>
+      {/* Narrow clustered lanceolate leaves swaying gently */}
+      <motion.g
+        style={{ transformOrigin: '66px 76px' }}
+        animate={{ rotate: [-1.5, 1.7, -1.5] }}
+        transition={{ duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 64,77 C 52,58 54,34 68,18 C 76,34 76,58 66,76" strokeWidth="1.25" />
         <path d="M 65,73 C 64,54 66,36 68,21" strokeWidth="0.75" />
         <path d="M 68,75 C 74,54 84,34 96,24 C 94,44 82,64 69,75" strokeWidth="1.2" />
         <path d="M 69,72 C 78,54 86,39 94,27" strokeWidth="0.7" />
         <path d="M 122,52 C 134,34 150,24 166,22 C 158,38 142,50 124,53" strokeWidth="1.2" />
         <path d="M 125,51 C 139,40 151,31 163,24" strokeWidth="0.7" />
-      </g>
+      </motion.g>
 
       {/* Pointed spindle-shaped argan fruits */}
       <g>
@@ -354,11 +463,24 @@ export function ArganSvg({ className = 'w-28 h-auto' }: { className?: string }) 
       {/* Cross-section kernel revealing inner argan nut + ochre drop */}
       <g>
         <path d="M 52,102 C 42,108 42,122 54,126 C 66,127 73,115 66,105 C 62,100 56,99 52,102 Z" strokeWidth="1.35" />
-        <ellipse cx="56" cy="113" rx="6" ry="4" transform="rotate(-18 56 113)" stroke="#C86D1F" strokeWidth="1.15" />
-        <path
+        <motion.ellipse
+          cx="56"
+          cy="113"
+          rx="6"
+          ry="4"
+          transform="rotate(-18 56 113)"
+          stroke="#C86D1F"
+          strokeWidth="1.15"
+          animate={{ opacity: [0.65, 1, 0.65] }}
+          transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.path
           d="M 148,100 C 148,100 142,108 142,113 C 142,117 144.7,120 148,120 C 151.3,120 154,117 154,113 C 154,108 148,100 148,100 Z"
           stroke="#C86D1F"
           strokeWidth="1.2"
+          style={{ transformOrigin: '148px 111px' }}
+          animate={{ scale: [0.94, 1.07, 0.94], opacity: [0.75, 1, 0.75] }}
+          transition={{ duration: 3.1, repeat: Infinity, ease: 'easeInOut' }}
         />
       </g>
 
@@ -384,36 +506,61 @@ export function SweetAlmondSvg({ className = 'w-28 h-auto' }: { className?: stri
       aria-label="Copperplate botanical engraving of Sweet Almond blossom, serrated leaves, and almonds"
     >
       {/* Branch */}
-      <path d="M 16,108 C 56,88 102,60 152,24" strokeWidth="1.65" />
+      <motion.path
+        d="M 16,108 C 56,88 102,60 152,24"
+        strokeWidth="1.65"
+        initial={{ pathLength: 0 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+      />
 
-      {/* Serrated lanceolate leaves */}
-      <g>
+      {/* Serrated lanceolate leaves swaying gently */}
+      <motion.g
+        style={{ transformOrigin: '48px 91px' }}
+        animate={{ rotate: [-1.4, 1.6, -1.4] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 46,92 C 30,68 32,38 50,20 C 60,40 60,68 48,91" strokeWidth="1.3" />
         <path d="M 47,87 C 46,64 47,42 50,24" strokeWidth="0.8" />
         <line x1="47" y1="68" x2="39" y2="58" strokeWidth="0.65" />
         <line x1="48" y1="54" x2="40" y2="45" strokeWidth="0.65" />
         <line x1="48" y1="60" x2="55" y2="51" strokeWidth="0.65" />
-      </g>
-      <g>
+      </motion.g>
+      <motion.g
+        style={{ transformOrigin: '112px 54px' }}
+        animate={{ rotate: [1.4, -1.2, 1.4] }}
+        transition={{ duration: 6.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 110,52 C 128,44 150,48 164,62 C 148,74 126,70 112,55" strokeWidth="1.25" />
         <path d="M 115,54 C 131,56 146,59 160,62" strokeWidth="0.75" />
-      </g>
+      </motion.g>
 
-      {/* 5-petaled almond blossom with ochre stamens */}
-      <g transform="translate(82,38)">
+      {/* 5-petaled almond blossom with pulsing ochre stamens */}
+      <motion.g
+        transform="translate(82,38)"
+        style={{ transformOrigin: '0px 0px' }}
+        animate={{ rotate: [-2.5, 2.5, -2.5] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <path d="M 0,-5 C -6,-18 6,-18 0,-5" strokeWidth="1.15" />
         <path d="M 5,-2 C 18,-8 20,4 5,2" strokeWidth="1.15" />
         <path d="M 3,4 C 12,16 0,20 -2,5" strokeWidth="1.15" />
         <path d="M -3,4 C -14,16 -20,4 -5,2" strokeWidth="1.15" />
         <path d="M -5,-2 C -18,-8 -10,-18 -2,-5" strokeWidth="1.15" />
-        <g stroke="#C86D1F" strokeWidth="0.9">
+        <motion.g
+          stroke="#C86D1F"
+          strokeWidth="0.9"
+          animate={{ opacity: [0.65, 1, 0.65] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        >
           <line x1="0" y1="0" x2="0" y2="-8" />
           <line x1="0" y1="0" x2="7" y2="-4" />
           <line x1="0" y1="0" x2="5" y2="6" />
           <line x1="0" y1="0" x2="-6" y2="5" />
           <line x1="0" y1="0" x2="-7" y2="-4" />
-        </g>
-      </g>
+        </motion.g>
+      </motion.g>
 
       {/* Classic teardrop sweet almonds with pitted shell hatching */}
       <g>
@@ -449,10 +596,21 @@ export function VitaminESvg({ className = 'w-28 h-auto' }: { className?: string 
       role="img"
       aria-label="Copperplate botanical and apothecary engraving of wheat-germ stalks, sunflower seed, and Vitamin E pipette"
     >
-      {/* Arching botanical wheat-germ stalks & sheathing leaves */}
-      <g>
+      {/* Arching botanical wheat-germ stalks & sheathing leaves swaying gently */}
+      <motion.g
+        style={{ transformOrigin: '38px 124px' }}
+        animate={{ rotate: [-1.5, 1.8, -1.5] }}
+        transition={{ duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
         {/* Main arching culm & secondary culm */}
-        <path d="M 38,124 C 42,96 52,66 72,34" strokeWidth="1.5" />
+        <motion.path
+          d="M 38,124 C 42,96 52,66 72,34"
+          strokeWidth="1.5"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        />
         <path d="M 41,124 C 45,98 54,70 72,38" strokeWidth="0.65" />
         <path d="M 28,124 C 30,104 34,86 44,64" strokeWidth="1.2" />
 
@@ -495,7 +653,7 @@ export function VitaminESvg({ className = 'w-28 h-auto' }: { className?: string 
             <path d="M 0,-15 C -1,-21 -3,-25 -5,-29" strokeWidth="0.6" />
           </g>
         ))}
-      </g>
+      </motion.g>
 
       {/* Apothecary glass dropper pipette with ribbed collar & oil meniscus */}
       <g>
@@ -520,29 +678,55 @@ export function VitaminESvg({ className = 'w-28 h-auto' }: { className?: string 
         <line x1="129" y1="46" x2="134" y2="46" strokeWidth="0.75" />
         <line x1="127" y1="54" x2="134" y2="54" strokeWidth="0.75" />
         <line x1="129" y1="62" x2="134" y2="62" strokeWidth="0.75" />
-        {/* Golden Tocopherol oil level inside tip */}
-        <path d="M 121,67 Q 127,70 133,67" stroke="#C86D1F" strokeWidth="1.1" />
-        <path d="M 123,74 L 131,74" stroke="#C86D1F" strokeWidth="0.7" />
-        <path d="M 124,80 L 130,80" stroke="#C86D1F" strokeWidth="0.7" />
+        {/* Shimmering golden Tocopherol oil level inside tip */}
+        <motion.g
+          animate={{ opacity: [0.65, 1, 0.65] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <path d="M 121,67 Q 127,70 133,67" stroke="#C86D1F" strokeWidth="1.1" />
+          <path d="M 123,74 L 131,74" stroke="#C86D1F" strokeWidth="0.7" />
+          <path d="M 124,80 L 130,80" stroke="#C86D1F" strokeWidth="0.7" />
+        </motion.g>
       </g>
 
-      {/* Suspended Vitamin E antioxidant droplet & concentric preservation ripples */}
+      {/* Suspended Vitamin E antioxidant droplet & expanding concentric preservation ripple */}
       <g>
-        <path
-          d="M 127,96 C 127,96 119,106.5 119,112 C 119,116.5 122.6,120 127,120 C 131.4,120 135,116.5 135,112 C 135,106.5 127,96 127,96 Z"
+        <motion.g
+          style={{ transformOrigin: '127px 108px' }}
+          animate={{ scale: [0.95, 1.07, 0.95], y: [0, 1.5, 0] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <path
+            d="M 127,96 C 127,96 119,106.5 119,112 C 119,116.5 122.6,120 127,120 C 131.4,120 135,116.5 135,112 C 135,106.5 127,96 127,96 Z"
+            stroke="#C86D1F"
+            strokeWidth="1.5"
+          />
+          <path d="M 123.5,109 C 122.5,112 123.5,115.5 126.5,116.5" stroke="#C86D1F" strokeWidth="0.9" />
+          {/* Radiating antioxidant protection ticks */}
+          <motion.g
+            stroke="#C86D1F"
+            strokeWidth="0.8"
+            animate={{ opacity: [0.35, 0.95, 0.35] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <line x1="112" y1="111" x2="105" y2="111" />
+            <line x1="142" y1="111" x2="149" y2="111" />
+            <line x1="114" y1="102" x2="108" y2="97" />
+            <line x1="140" y1="102" x2="146" y2="97" />
+          </motion.g>
+        </motion.g>
+        {/* Expanding concentric ripple beneath droplet */}
+        <motion.ellipse
+          cx="127"
+          cy="124"
+          rx="14"
+          ry="2.2"
           stroke="#C86D1F"
-          strokeWidth="1.5"
+          strokeWidth="0.75"
+          style={{ transformOrigin: '127px 124px' }}
+          animate={{ scale: [0.8, 1.18, 0.8], opacity: [0.85, 0.2, 0.85] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <path d="M 123.5,109 C 122.5,112 123.5,115.5 126.5,116.5" stroke="#C86D1F" strokeWidth="0.9" />
-        {/* Radiating antioxidant protection ticks */}
-        <g stroke="#C86D1F" strokeWidth="0.8" opacity="0.85">
-          <line x1="112" y1="111" x2="105" y2="111" />
-          <line x1="142" y1="111" x2="149" y2="111" />
-          <line x1="114" y1="102" x2="108" y2="97" />
-          <line x1="140" y1="102" x2="146" y2="97" />
-        </g>
-        {/* Subtle ripple beneath droplet */}
-        <ellipse cx="127" cy="124" rx="14" ry="2.2" stroke="#C86D1F" strokeWidth="0.75" opacity="0.75" />
       </g>
 
       {/* Hatched sunflower seed (natural tocopherol source) at base */}
@@ -582,7 +766,7 @@ export function MonogramSealSvg({ className = 'w-28 h-28' }: { className?: strin
       </defs>
       <circle cx="90" cy="90" r="85" fill="#F5F1E8" stroke="#1C1B1B" strokeWidth="2.6" />
       <circle cx="90" cy="90" r="79" fill="none" stroke="#1C1B1B" strokeWidth="1.1" />
-      <circle
+      <motion.circle
         cx="90"
         cy="90"
         r="74"
@@ -591,6 +775,9 @@ export function MonogramSealSvg({ className = 'w-28 h-28' }: { className?: strin
         strokeWidth="1.2"
         strokeDasharray="1.8 4.2"
         strokeLinecap="round"
+        style={{ transformOrigin: '90px 90px' }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
       />
       <circle cx="90" cy="90" r="50" fill="none" stroke="#1C1B1B" strokeWidth="1.1" />
       <text
@@ -1147,31 +1334,58 @@ export function StudioMedia({
   photoId,
   alt,
   className = 'w-full h-full object-cover',
+  priority = false,
+  sizes = '(min-width: 1024px) 46vw, 96vw',
 }: {
   photoId: GalleryPhotoId;
   alt: string;
   className?: string;
+  priority?: boolean;
+  sizes?: string;
 }) {
   const { customPhotos } = usePula();
   const [imgFailed, setImgFailed] = useState(false);
 
   const galleryEntry = GALLERY_ITEMS.find((item) => item.id === photoId);
-  const src = customPhotos[photoId] || galleryEntry?.imageSrc;
+  const customSrc = customPhotos[photoId];
+  const src = customSrc || galleryEntry?.imageFallbackSrc || galleryEntry?.imageSrc;
+  const webpSrcSet =
+    !customSrc && galleryEntry
+      ? galleryEntry.imageSrcSm
+        ? `${galleryEntry.imageSrcSm} 480w, ${galleryEntry.imageSrc} ${galleryEntry.width || 1200}w`
+        : galleryEntry.imageSrc
+      : undefined;
 
   useEffect(() => {
     setImgFailed(false);
   }, [src, photoId]);
 
   if (src && !imgFailed) {
-    return (
+    const imgEl = (
       <img
         src={src}
         alt={alt}
+        width={galleryEntry?.width}
+        height={galleryEntry?.height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding={priority ? 'sync' : 'async'}
+        fetchPriority={priority ? 'high' : 'auto'}
         referrerPolicy="no-referrer"
         onError={() => setImgFailed(true)}
         className={className}
       />
     );
+
+    if (webpSrcSet) {
+      return (
+        <picture className="block w-full h-full">
+          <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />
+          {imgEl}
+        </picture>
+      );
+    }
+
+    return imgEl;
   }
 
   return <StudioArtworkSvg photoId={photoId} />;
